@@ -14,7 +14,7 @@ Exporter / Importer
 
 ::
 
-    >>> self.loginAsPortalOwner()
+    >>> portal = layer['portal']
     >>> rtool = getToolByName(portal, 'portal_workflow')
     >>> exporter = importer = queryMultiAdapter((rtool, DummySetupEnviron()),
     ...                                   IBody, name=u'workflows.progress.xml')
