@@ -1,0 +1,134 @@
+EEA Progress Bar Export/Import
+==============================
+XML Adapters to be used within GenericSetup profiles
+
+::
+
+    >>> from zope.component import queryMultiAdapter
+    >>> from Products.GenericSetup.interfaces import IBody
+    >>> from Products.GenericSetup.testing import DummySetupEnviron
+    >>> from Products.CMFCore.utils import getToolByName
+
+Exporter / Importer
+-------------------
+
+::
+
+    >>> self.loginAsPortalOwner()
+    >>> rtool = getToolByName(portal, 'portal_workflow')
+    >>> exporter = importer = queryMultiAdapter((rtool, DummySetupEnviron()),
+    ...                                   IBody, name=u'workflows.progress.xml')
+    >>> exporter
+    <eea.progressbar.exportimport.progress.WorkflowToolXMLAdapter object at ...>
+
+
+By default there is no progress defined for workflow states
+
+::
+
+    >>> print exporter.body
+    <?xml version="1.0"?>
+    ...
+    <object name="one_state_workflow" meta_type="Workflow">
+      <object name="published" meta_type="Workflow State"/>
+    </object>
+    ...
+
+Let's set some progress
+
+::
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_workflow">
+    ...  <object name="one_state_workflow">
+    ...   <object name="published">
+    ...    <property name="progress">70</property>
+    ...   </object>
+    ...  </object>
+    ... </object>'''
+
+    >>> print exporter.body
+    <?xml version="1.0"?>
+    ...
+    <object name="one_state_workflow" meta_type="Workflow">
+      <object name="published" meta_type="Workflow State">
+        <property name="progress">70</property>
+      </object>
+    </object>
+    ...
+
+Override
+--------
+In order to prevent accidentally imports that can mess up manual customizations,
+you have to add *override* attribute within property line. So if you change
+progress value within the xml file, nothing should happen until
+you add the override attribute.
+
+::
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_workflow">
+    ...  <object name="one_state_workflow">
+    ...   <object name="published">
+    ...    <property name="progress">35</property>
+    ...   </object>
+    ...  </object>
+    ... </object>'''
+
+    >>> print exporter.body
+    <?xml version="1.0"?>
+    ...
+    <object name="one_state_workflow" meta_type="Workflow">
+      <object name="published" meta_type="Workflow State">
+        <property name="progress">70</property>
+      </object>
+    </object>
+    ...
+
+Now, let's add the override attribute. This should be used only for upgrade
+steps profiles. Don't use it within the default profile, unless you know
+what you're doing
+
+::
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_workflow">
+    ...  <object name="one_state_workflow">
+    ...   <object name="published">
+    ...    <property name="progress" override="True">35</property>
+    ...   </object>
+    ...  </object>
+    ... </object>'''
+
+    >>> print exporter.body
+    <?xml version="1.0"?>
+    ...
+    <object name="one_state_workflow" meta_type="Workflow">
+      <object name="published" meta_type="Workflow State">
+        <property name="progress">35</property>
+      </object>
+    </object>
+    ...
+
+Remove
+------
+You can also remove the progress attribute
+
+::
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_workflow">
+    ...  <object name="one_state_workflow">
+    ...   <object name="published">
+    ...    <property name="progress" remove="True" />
+    ...   </object>
+    ...  </object>
+    ... </object>'''
+
+    >>> print exporter.body
+    <?xml version="1.0"?>
+    ...
+    <object name="one_state_workflow" meta_type="Workflow">
+      <object name="published" meta_type="Workflow State"/>
+    </object>
+    ...

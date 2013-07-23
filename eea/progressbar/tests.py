@@ -1,7 +1,9 @@
+""" Tests
+"""
 import unittest
 
-#from zope.testing import doctestunit
-#from zope.component import testing
+from zope.testing import doctestunit
+from zope.component import testing
 from Testing import ZopeTestCase as ztc
 
 from Products.Five import fiveconfigure
@@ -13,32 +15,43 @@ import eea.progressbar
 
 
 class TestCase(ptc.PloneTestCase):
-
+    """ Test case
+    """
     class layer(PloneSite):
-
+        """ Layer
+        """
         @classmethod
         def setUp(cls):
+            """ Setu
+            """
             fiveconfigure.debug_mode = True
             ztc.installPackage(eea.progressbar)
             fiveconfigure.debug_mode = False
 
         @classmethod
         def tearDown(cls):
+            """ Tear dow
+            """
             pass
 
 
 def test_suite():
+    """ Suite
+    """
     return unittest.TestSuite([
 
         # Unit tests
-        #doctestunit.DocFileSuite(
-        #    'README.txt', package='eea.progressbar',
-        #    setUp=testing.setUp, tearDown=testing.tearDown),
+        doctestunit.DocFileSuite(
+            'README.txt', package='eea.progressbar',
+            setUp=testing.setUp, tearDown=testing.tearDown),
 
-        #doctestunit.DocTestSuite(
-        #    module='eea.progressbar.mymodule',
-        #    setUp=testing.setUp, tearDown=testing.tearDown),
+        doctestunit.DocFileSuite(
+            'docs/exportimport.txt', package='eea.progressbar',
+            setUp=testing.setUp, tearDown=testing.tearDown),
 
+        doctestunit.DocTestSuite(
+            module='eea.progressbar.interfaces',
+            setUp=testing.setUp, tearDown=testing.tearDown),
 
         # Integration tests that use PloneTestCase
         #ztc.ZopeDocFileSuite(

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<object name="portal_css">
+  <stylesheet id="readiness.css" />
+  <stylesheet id="++resource++eea.progressbar.css" />
+</object>

@@ -1,0 +1,37 @@
+<h1 tal:replace="structure context/manage_page_header" />
+<h1 tal:replace="structure context/manage_tabs" />
+
+<h2>Workflow state progress</h2>
+
+<a href="../../manage_progress">Back to progress overview</a>
+
+<p>Define how much (in %) in the publishing process is complete if a document is in this state</p>
+
+
+<form action="manage_progress" method="POST">
+  <table style="width: 100%">
+    <tr>
+      <th align="right" style="width: 5em">% Done</th>
+      <td>
+        <table style="width: 100%">
+          <tr>
+            <td style="padding:none; border: 1px dotted silver">
+              <hr style="color:#c00; background-color:#BAE0BA; height:15px; border:none;
+                         margin:0;" align="left" tal:attributes="width python:'%s%%' % (context.progress if getattr(context, 'progress', None) else 0)" />
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td style="width: 6em">
+        <input type="number" name="progress:int" min="0" max="100"
+          tal:attributes="value context/progress|python:0" />
+        <span>%</span>
+      </td>
+      <td style="width: 4em">
+        <input type="submit" name="submit" value="Update" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+<h1 tal:replace="structure context/manage_page_footer" />

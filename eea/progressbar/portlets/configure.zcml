@@ -1,0 +1,21 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
+  >
+
+  <include package="plone.app.portlets" file="permissions.zcml" />
+
+  <plone:portlet
+    name="portlets.ProgressMonitoring"
+    interface=".progress.IProgressPortlet"
+    assignment=".progress.Assignment"
+    renderer=".progress.Renderer"
+    addview=".progress.AddForm"
+    editview=".progress.EditForm"
+    edit_permission="plone.app.portlets.ManagePortlets"
+    view_permission="zope2.View"
+    />
+
+</configure>

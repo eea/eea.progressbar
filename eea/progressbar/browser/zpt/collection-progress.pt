@@ -1,0 +1,35 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  tal:omit-tag=""
+  i18n:domain="eea"
+  tal:define="
+    info view/info;
+    progress info/progress;
+    done info/done;
+    total info/total;
+    closed info/closed;
+    opened info/opened;
+    ">
+
+<div class="progressbar">
+    <div class="progressbar-step progressbar-closed" tal:attributes="
+        style python:'width:%s%%' % progress;
+        title python:'%d%% closed' % progress;">
+    </div>
+    <div class="progressbar-step progressbar-next" tal:attributes="
+        style python:'width:%s%%' % (done - progress);
+        title python: '%d%% done' % done;">
+    </div>
+    <div class="progressbar-step" tal:attributes="
+        style python:'width:%s%%' % (100 - (done - progress) - progress);
+        title python: '%d%% remaining' % (100 - done)">
+    </div>
+</div>
+
+<div class="progressbar-label">
+    <span tal:content="string:${info/total} items" />
+    (<span class="progressbar-label-closed" tal:content="string:${info/closed} closed" /> -
+    <span class="progressbar-label-opened" tal:content="string:${info/opened} opened" />)
+</div>
+
+</html>

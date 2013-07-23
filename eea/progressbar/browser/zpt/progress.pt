@@ -1,0 +1,21 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  tal:omit-tag=""
+  i18n:domain="eea"
+  tal:define="
+    info view/info;
+    progress info/progress">
+
+<div class="progressbar">
+    <tal:step tal:repeat="step view/table">
+      <div tal:define="workflow python:step[0]; done python:step[1]; width python:step[2]"
+      class="progressbar-step" tal:attributes="
+        class python:('progressbar-step progressbar-current state-%s' % view.state) if (done <= progress) else 'progressbar-step';
+        title string:$workflow - $done%;
+        style python:'width: %s%%' % width">
+        <div class="progressbar-arrow-down"></div>
+        </div>
+    </tal:step>
+</div>
+
+</html>

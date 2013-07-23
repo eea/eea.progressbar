@@ -1,0 +1,22 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="eea">
+
+  <browser:page
+    for="eea.progressbar.interfaces.IWorkflowState"
+    name="manage_progress"
+    class=".browser.ZMIStateProgressEdit"
+    template="manage_stateprogress.pt"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
+    for="eea.progressbar.interfaces.IWorkflow"
+    name="manage_progress"
+    class=".browser.ZMIWorkflowProgressEdit"
+    template="manage_progress.pt"
+    permission="cmf.ManagePortal"
+    />
+
+</configure>

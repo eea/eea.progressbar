@@ -1,0 +1,26 @@
+<configure
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="eea">
+
+  <browser:page
+    for="eea.progressbar.interfaces.IBaseObject"
+    name="progress.bar"
+    class=".app.browser.ProgressBarView"
+    template="zpt/progress.pt"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    for="eea.progressbar.interfaces.ICollection"
+    name="progress.bar"
+    class=".app.browser.CollectionProgressBarView"
+    template="zpt/collection-progress.pt"
+    permission="zope2.View"
+    />
+
+  <browser:resource
+    name="eea.progressbar.css"
+    file="css/view.css"
+   />
+
+</configure>

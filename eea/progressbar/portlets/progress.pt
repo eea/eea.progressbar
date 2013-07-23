@@ -1,0 +1,25 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  tal:omit-tag=""
+  i18n:domain="eea">
+
+<dl class="portlet portletRecent">
+
+    <dt class="portletHeader" tal:condition="view/data/label|nothing">
+        <span class="portletTopLeft"></span>
+        <a tal:content="view/data/label"
+          tal:attributes="href string:${view/context/absolute_url}/content_status_history"/>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem">
+        <tal:progress replace="structure view/context/@@progress.bar" />
+    </dd>
+
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>
+</html>

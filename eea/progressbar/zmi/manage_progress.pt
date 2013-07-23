@@ -1,0 +1,47 @@
+<h1 tal:replace="structure context/manage_page_header" />
+<h1 tal:replace="structure context/manage_tabs" />
+
+<h2>Workflow progress overview</h2>
+<p>Overview of workflow states progress</p>
+
+<tal:states define="states view/states">
+  <div style="border: 1px dotted #ccc; width: 100%">
+    <div tal:repeat="state states" style="border-right: 1px dotted #ccc">
+      <form style="margin: 0" tal:define="
+        key python:state[0];
+        value python:state[1];
+        odd repeat/state/odd;
+        klass python: odd and 'row-normal' or 'row-hilite';"
+      tal:attributes="action string:states/$key/manage_progress">
+        <table style="width: 100%;" cellpadding="0" cellspacing="0">
+          <tr tal:attributes="class klass">
+            <th style="width: 20em; text-align: left">
+              <a tal:attributes="href string:states/$key/manage_progress" tal:content="key" />
+            </th>
+            <td>
+              <table style="width: 100%">
+                <tr>
+                  <td style="padding:none; ">
+                    <hr style="color:#c00; background-color:#BAE0BA; height:15px; border:none;
+                               margin:0;" align="left" tal:attributes="width python:'%s%%' % (value.progress if getattr(value, 'progress', None) else 0)" />
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td style="text-align: center; width: 6em;">
+              <input type="number"  min="0" max="100" name="progress:int" tal:attributes="value value/progress|python:0" />
+              <span>%</span>
+            </td>
+            <td style="width: 4em">
+              <input type="hidden" name="redirect" tal:attributes="value string:${context/absolute_url}/manage_progress" />
+              <input type="submit" name="submit" value="Update" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</tal:states>
+
+
+<h1 tal:replace="structure context/manage_page_footer" />
