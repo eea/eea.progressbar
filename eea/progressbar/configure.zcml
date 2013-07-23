@@ -9,6 +9,8 @@
   <include package=".api" />
   <include package=".browser" />
   <include package=".exportimport" />
+  <include package=".portlets" />
   <include package=".upgrades" />
+  <include package=".zmi" />
 
 </configure>

@@ -13,7 +13,9 @@
     </dt>
 
     <dd class="portletItem">
-        <tal:progress replace="structure view/context/@@progress.bar" />
+        <tal:progress
+            condition="exists:view/context/@@progress.bar"
+            replace="structure view/context/@@progress.bar" />
     </dd>
 
     <dd class="portletFooter">
