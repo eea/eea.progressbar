@@ -1,6 +1,11 @@
 ================
 EEA Progress Bar
 ================
+.. image:: http://ci.eionet.europa.eu/job/eea.progressbar-www/badge/icon
+  :target: http://ci.eionet.europa.eu/job/eea.progressbar-www/lastBuild
+.. image:: http://ci.eionet.europa.eu/job/eea.progressbar-plone4/badge/icon
+  :target: http://ci.eionet.europa.eu/job/eea.progressbar-plone4/lastBuild
+
 A system that visually display a progress bar in the publishing process of a
 document according with the workflow state in which the document is.
 
