@@ -57,3 +57,16 @@
 .progressbar .state-published {
     background-color: #BAE0BA;
 }
+
+/* Listing */
+.collection-listing {
+    width: 100%;
+}
+
+.listing-header-progress {
+    width: 40%;
+}
+
+.listing-body-progress .progressbar-arrow-down {
+    display: none;
+}

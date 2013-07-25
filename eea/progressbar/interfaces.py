@@ -2,7 +2,9 @@
 """
 from zope.interface import Interface
 from zope import schema
+from Products.ZCatalog.interfaces import ICatalogBrain as IZCatalogBrain
 from eea.progressbar.config import EEAMessageFactory as _
+from plone.app.collection.interfaces import ICollection as IPloneCollection
 #
 # Marker interfaces
 #
@@ -22,9 +24,14 @@ class IBaseObject(Interface):
     """ Marker interface for Archetypes or Dexterity objects
     """
 
-class ICollection(Interface):
-    """ Marker interface for plone.app.collection and ATTopic
+class ICollection(IPloneCollection):
+    """ Marker interface for plone.app.collection
     """
+
+class ICatalogBrain(IZCatalogBrain):
+    """ Marker interface for Catalog Brains
+    """
+
 #
 # Adapters
 #

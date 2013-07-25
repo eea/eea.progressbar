@@ -1,0 +1,10 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  i18n_domain="eea">
+
+  <adapter
+    factory=".catalog.ProgressCatalogListingObject"
+    for="eea.progressbar.interfaces.ICatalogBrain"
+    />
+
+</configure>

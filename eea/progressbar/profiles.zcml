@@ -15,6 +15,11 @@
     />
 
   <genericsetup:importStep
+    name="eea.progressbar.various"
+    title="EEA Progress Bar Setup" description="Setup EEA Progress Bar"
+    handler="eea.progressbar.setuphandlers.setupVarious" />
+
+  <genericsetup:importStep
     name="workflow.progress.xml"
     title="Workflow progress monitoring"
     description="Progress monitoring based on workflow states"
