@@ -8,14 +8,20 @@
 
 <div class="progressbar">
     <tal:step tal:repeat="step view/table">
-      <div tal:define="workflow python:step[0]; done python:step[1]; width python:step[2]"
+      <div tal:define="
+        odd repeat/step/odd;
+        odd python:'odd' if (odd or progress >= 100) else 'even';
+        workflow python:step[0];
+        done python:step[1];
+        width python:step[2]"
       class="progressbar-step" tal:attributes="
-        class python:('progressbar-step progressbar-current state-%s' % view.state) if (done <= progress) else 'progressbar-step';
-        title string:$workflow - $done%;
+        class python:('progressbar-step progressbar-current state-%s %s' % (view.state, odd)) if (done <= progress) else 'progressbar-step %s' % odd;
+        data-tip string:$workflow - $done%;
         style python:'width: %s%%' % width">
         <div class="progressbar-arrow-down"></div>
         </div>
     </tal:step>
+    <div class="progress-value" tal:content="progress">30</div>
 </div>
 
 </html>

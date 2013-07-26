@@ -8,6 +8,10 @@
     <dt class="portletHeader" tal:condition="view/data/label|nothing">
         <span class="portletTopLeft"></span>
         <a tal:content="view/data/label"
+          tal:condition="exists:view/context/tabular_view"
+          tal:attributes="href string:${view/context/absolute_url}/tabular_view"/>
+        <a tal:content="view/data/label"
+          tal:condition="not:exists:view/context/tabular_view"
           tal:attributes="href string:${view/context/absolute_url}/content_status_history"/>
         <span class="portletTopRight"></span>
     </dt>

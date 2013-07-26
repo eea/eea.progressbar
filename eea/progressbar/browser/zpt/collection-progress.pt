@@ -12,17 +12,17 @@
     ">
 
 <div class="progressbar">
-    <div class="progressbar-step progressbar-closed" tal:attributes="
+    <div class="progressbar-step progressbar-closed odd" tal:attributes="
         style python:'width:%s%%' % progress;
-        title python:'%d%% closed' % progress;">
+        data-tip python:'%d%% closed' % progress;">
     </div>
-    <div class="progressbar-step progressbar-next" tal:attributes="
+    <div class="progressbar-step progressbar-next odd" tal:attributes="
         style python:'width:%s%%' % (done - progress);
-        title python: '%d%% done' % done;">
+        data-tip python: '%d%% done' % done;">
     </div>
-    <div class="progressbar-step" tal:attributes="
+    <div class="progressbar-step odd" tal:attributes="
         style python:'width:%s%%' % (100 - (done - progress) - progress);
-        title python: '%d%% remaining' % (100 - done)">
+        data-tip python: '%d%% remaining' % (100 - done)">
     </div>
 </div>
 
