@@ -14,11 +14,11 @@
 <div class="progressbar">
     <div class="progressbar-step progressbar-closed odd" tal:attributes="
         style python:'width:%s%%' % progress;
-        data-tip python:'%d%% closed' % progress;">
+        data-tip python:'%d%% completed' % progress;">
     </div>
     <div class="progressbar-step progressbar-next odd" tal:attributes="
         style python:'width:%s%%' % (done - progress);
-        data-tip python: '%d%% done' % done;">
+        data-tip python: '%d%% in progress' % done;">
     </div>
     <div class="progressbar-step odd" tal:attributes="
         style python:'width:%s%%' % (100 - (done - progress) - progress);
@@ -28,8 +28,8 @@
 
 <div class="progressbar-label">
     <span tal:content="string:${info/total} items" />
-    (<span class="progressbar-label-closed" tal:content="string:${info/closed} closed" /> -
-    <span class="progressbar-label-opened" tal:content="string:${info/opened} opened" />)
+    (<span class="progressbar-label-closed" tal:content="string:${info/closed} completed" /> -
+    <span class="progressbar-label-opened" tal:content="string:${info/opened} in progress" />)
 </div>
 
 </html>

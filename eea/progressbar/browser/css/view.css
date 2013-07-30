@@ -10,6 +10,7 @@
     height: 100%;
     background: #eee;
     position: relative;
+    box-shadow: 0px 0px 10px #fff;
 }
 
 .progressbar-step::before {
@@ -46,7 +47,7 @@
 }
 
 .progressbar .even {
-    opacity: 0.5;
+    opacity: 1.0;
 }
 
 .progressbar .even:hover {

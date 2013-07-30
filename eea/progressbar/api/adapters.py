@@ -86,9 +86,6 @@ class CollectionWorkflowProgress(WorkflowProgress):
 
         results = getattr(self.context, 'results', None)
         if not results:
-            results = getattr(self.context, 'queryCatalog', None)
-
-        if not results:
             return 0
 
         progress = 0
