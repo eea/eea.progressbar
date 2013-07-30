@@ -115,5 +115,5 @@
 }
 
 .listing-header-progress {
-    width: 40%;
+    min-width: 40%;
 }
