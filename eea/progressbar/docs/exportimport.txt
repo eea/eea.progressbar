@@ -15,8 +15,8 @@ Exporter / Importer
 ::
 
     >>> portal = layer['portal']
-    >>> rtool = getToolByName(portal, 'portal_workflow')
-    >>> exporter = importer = queryMultiAdapter((rtool, DummySetupEnviron()),
+    >>> wftool = getToolByName(portal, 'portal_workflow')
+    >>> exporter = importer = queryMultiAdapter((wftool, DummySetupEnviron()),
     ...                                   IBody, name=u'workflows.progress.xml')
     >>> exporter
     <eea.progressbar.exportimport.progress.WorkflowToolXMLAdapter object at ...>

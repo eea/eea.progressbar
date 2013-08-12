@@ -1,4 +1,11 @@
 """ Custom interfaces
+
+    >>> from zope.component import queryAdapter
+    >>> from eea.progressbar.interfaces import IWorkflowProgress
+
+    >>> portal = layer['portal']
+    >>> sandbox = portal._getOb('sandbox')
+
 """
 from zope.interface import Interface
 from zope import schema
@@ -36,7 +43,72 @@ class ICatalogBrain(IZCatalogBrain):
 # Adapters
 #
 class IWorkflowProgress(Interface):
-    """ These adapters provides progress information for an object
+    """
+    These adapters provides progress information for an object
+
+    By default, if you don't manually define any progress via ZMI
+    the system tries to guess the progress using a very simple algorithm:
+
+      - private = 33%
+      - pending = 66%
+      - published = 100%
+
+
+        >>> IWorkflowProgress(sandbox).hasProgress
+        False
+
+        >>> IWorkflowProgress(sandbox).progress
+        33
+
+        >>> portal.portal_workflow.doActionFor(sandbox, 'submit')
+        >>> IWorkflowProgress(sandbox).progress
+        66
+
+        >>> portal.portal_workflow.doActionFor(sandbox, 'publish')
+        >>> IWorkflowProgress(sandbox).progress
+        100
+
+    You can also get a list of steps and their percentage:
+
+
+        >>> IWorkflowProgress(sandbox).steps
+        [('private', 33), ('pending', 66), ('published', 100)]
+
+    And % done (on a simple item it's the same as progress). This is useful
+    within Collections
+
+        >>> IWorkflowProgress(sandbox).done
+        100
+
+    You can always change progress values per state via ZMI:
+
+        >>> wf = portal.portal_workflow.simple_publication_workflow
+        >>> wf.states.published.progress = 90
+
+        >>> IWorkflowProgress(sandbox).hasProgress
+        True
+
+        >>> IWorkflowProgress(sandbox).progress
+        90
+
+    Changing at least one state will disable the auto-detection mechanism. So
+    don't forget to manually set progress for all possible states within your
+    workflow:
+
+        >>> portal.portal_workflow.doActionFor(sandbox, 'retract')
+        >>> IWorkflowProgress(sandbox).progress
+        0
+
+        >>> portal.portal_workflow.doActionFor(sandbox, 'submit')
+        >>> IWorkflowProgress(sandbox).progress
+        0
+
+        >>> IWorkflowProgress(sandbox).done
+        0
+
+        >>> IWorkflowProgress(sandbox).steps
+        [('pending', 0), ('private', 0), ('published', 90)]
+
     """
     progress = schema.Int(
         title=_(u"Progress"),

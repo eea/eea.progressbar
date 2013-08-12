@@ -7,16 +7,55 @@ from Products.CMFCore.utils import getToolByName
 from eea.progressbar.interfaces import IWorkflowProgress
 
 class WorkflowProgress(object):
-    """ Abstract adapter for workflow progress. This will be used as a fallback
+    """
+    Abstract adapter for workflow progress. This will be used as a fallback
     adapter if the API can't find a more specific adapter for your workflow
+
     """
     implements(IWorkflowProgress)
 
     def __init__(self, context):
         self.context = context
+        self._hasProgress = None
         self._progress = None
         self._done = None
         self._steps = None
+
+    @property
+    def hasProgress(self):
+        """ Is progress updated
+        """
+        if self._hasProgress is not None:
+            return self._hasProgress
+
+        wftool = getToolByName(self.context, 'portal_workflow')
+        workflows = wftool.getWorkflowsFor(self.context)
+        for wf in workflows:
+            for state in wf.states.values():
+                progress = getattr(state, 'progress', None)
+                if progress:
+                    self._hasProgress = True
+                    return self._hasProgress
+
+        self._hasProgress = False
+        return self._hasProgress
+
+    def guessProgress(self, state):
+        """ Guess progress from state
+        """
+        if 'private' in state.lower():
+            return 33
+        elif 'pending' in state.lower():
+            return 66
+        elif 'published' in state.lower():
+            return 100
+        elif 'visible' in state.lower():
+            return 100
+        elif 'internal' in state.lower():
+            return 100
+        elif 'external' in state.lower():
+            return 100
+        return 0
 
     @property
     def progress(self):
@@ -28,12 +67,23 @@ class WorkflowProgress(object):
         self._progress = 0
         wftool = getToolByName(self.context, 'portal_workflow')
         state = wftool.getInfoFor(self.context, 'review_state')
+
+        # No progress defined
+        if not self.hasProgress:
+            self._progress = self.guessProgress(state)
+            return self._progress
+
+        # Progress defined via ZMI
         workflows = wftool.getWorkflowsFor(self.context)
         for wf in workflows:
             state = wf.states.get(state)
             if not state:
                 continue
-            self._progress = getattr(state, 'progress', 0)
+            progress = getattr(state, 'progress', None)
+            if progress is not None:
+                self._progress = progress
+                break
+
         return self._progress
 
     @property
@@ -52,18 +102,23 @@ class WorkflowProgress(object):
         if self._steps is not None:
             return self._steps
 
+        hasProgress = self.hasProgress
+
         def compare(a, b):
             """ Sort
             """
-            a_progress = getattr(a[1], 'progress', None) or 0
-            b_progress = getattr(b[1], 'progress', None) or 0
+            a_progress = ((getattr(a[1], 'progress', None) or 0) if
+                          hasProgress else self.guessProgress(a[0]))
+            b_progress = ((getattr(b[1], 'progress', None) or 0) if
+                          hasProgress else self.guessProgress(b[0]))
+
             return cmp(a_progress, b_progress)
 
         self._steps = []
         wftool = getToolByName(self.context, 'portal_workflow')
         for wf in wftool.getWorkflowsFor(self.context):
-            self._steps = [
-                (name, getattr(item, 'progress', 0))
+            self._steps = [(name, getattr(item, 'progress', 0)
+                            if hasProgress else self.guessProgress(name))
                 for name, item in sorted(wf.states.items(), cmp=compare)]
             break
         return self._steps

@@ -4,9 +4,9 @@ from plone.testing import z2
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 from plone.app.testing import PloneSandboxLayer
-from plone.app.testing import applyProfile
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import FunctionalTesting
+from Products.CMFCore.utils import getToolByName
 
 class EEAFixture(PloneSandboxLayer):
     """ EEA Testing Policy
@@ -28,10 +28,17 @@ class EEAFixture(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         """ Setup Plone
         """
-        applyProfile(portal, 'eea.progressbar:default')
+        self.applyProfile(portal, 'eea.progressbar:default')
+
+        # Default workflow
+        wftool = portal['portal_workflow']
+        wftool.setDefaultChain('simple_publication_workflow')
 
         # Login as manager
         setRoles(portal, TEST_USER_ID, ['Manager'])
+
+        # Create testing environment
+        sandbox = portal.invokeFactory("Folder", "sandbox", title="Sandbox")
 
 EEAFIXTURE = EEAFixture()
 FUNCTIONAL_TESTING = FunctionalTesting(bases=(EEAFIXTURE,),
