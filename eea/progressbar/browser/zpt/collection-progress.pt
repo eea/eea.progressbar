@@ -18,7 +18,7 @@
     </div>
     <div class="progressbar-step progressbar-next odd" tal:attributes="
         style python:'width:%s%%' % (done - progress);
-        data-tip python: '%d%% in progress' % done;">
+        data-tip python: '%d%% total progress' % done;">
     </div>
     <div class="progressbar-step odd" tal:attributes="
         style python:'width:%s%%' % (100 - (done - progress) - progress);

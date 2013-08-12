@@ -141,6 +141,11 @@ class CollectionWorkflowProgress(WorkflowProgress):
                 doc = brain.getObject()
             else:
                 doc = brain
+
+            # Avoid recursion errors
+            if IUUID(doc) == IUUID(self.context):
+                continue
+
             adapter = queryAdapter(doc, IWorkflowProgress)
             if not adapter:
                 continue

@@ -35,6 +35,7 @@ setup(name='eea.progressbar',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'plone.app.collection > 1.0.10'
           # -*- Extra requirements: -*-
       ],
       entry_points="""
