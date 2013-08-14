@@ -40,6 +40,10 @@ Getting started
 4. Or add a Collection, add Progress column for tabular view and enable tabular
    view for this Collection.
 
+Dependencies
+============
+- plone.app.collection >= 1.0.11
+
 Source code
 ===========
 
