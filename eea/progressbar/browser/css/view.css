@@ -38,19 +38,23 @@
     z-index: 99990;
 }
 
-.progressbar .odd {
+.progressbar .progress-odd {
     opacity: 1.0;
+    padding: 0;
+    margin: 0;
 }
 
-.progressbar .odd:hover {
+.progressbar .progress-odd:hover {
     opacity: 0.8;
 }
 
-.progressbar .even {
+.progressbar .progress-even {
     opacity: 1.0;
+    padding: 0;
+    margin: 0;
 }
 
-.progressbar .even:hover {
+.progressbar .progress-even:hover {
     opacity: 0.8;
 }
 

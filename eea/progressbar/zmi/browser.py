@@ -1,6 +1,7 @@
 """ Browser controllers
 """
 from Products.Five.browser import BrowserView
+from Products.CMFPlone.utils import base_hasattr
 
 class ZMIStateProgressEdit(BrowserView):
     """ ZMI edit for state progress monitoring
@@ -35,8 +36,10 @@ class ZMIWorkflowProgressEdit(BrowserView):
         def compare(a, b):
             """ Sort
             """
-            a_progress = getattr(a[1], 'progress', None) or 0
-            b_progress = getattr(b[1], 'progress', None) or 0
+            a_progress = (a[1].progress if
+                          base_hasattr(a[1], 'progress') else 0)
+            b_progress = (b[1].progress if
+                          base_hasattr(b[1], 'progress') else 0)
             return cmp(a_progress, b_progress)
 
         items = self.context.states.items()

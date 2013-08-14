@@ -4,6 +4,7 @@ from zope.interface import implements
 from zope.component import queryAdapter
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
 from eea.progressbar.interfaces import IWorkflowProgress
 
 class WorkflowProgress(object):
@@ -32,7 +33,8 @@ class WorkflowProgress(object):
         workflows = wftool.getWorkflowsFor(self.context)
         for wf in workflows:
             for state in wf.states.values():
-                progress = getattr(state, 'progress', None)
+                progress = (state.progress if base_hasattr(state, 'progress')
+                            else None)
                 if progress:
                     self._hasProgress = True
                     return self._hasProgress
@@ -79,7 +81,8 @@ class WorkflowProgress(object):
             state = wf.states.get(state)
             if not state:
                 continue
-            progress = getattr(state, 'progress', None)
+            progress = (state.progress if base_hasattr(state, 'progress')
+                        else None)
             if progress is not None:
                 self._progress = progress
                 break
@@ -107,9 +110,11 @@ class WorkflowProgress(object):
         def compare(a, b):
             """ Sort
             """
-            a_progress = ((getattr(a[1], 'progress', None) or 0) if
+            a_progress = ((a[1].progress
+                           if base_hasattr(a[1], 'progress') else  0) if
                           hasProgress else self.guessProgress(a[0]))
-            b_progress = ((getattr(b[1], 'progress', None) or 0) if
+            b_progress = ((b[1].progress
+                           if base_hasattr(b[1], 'progress') else 0) if
                           hasProgress else self.guessProgress(b[0]))
 
             return cmp(a_progress, b_progress)
@@ -117,8 +122,9 @@ class WorkflowProgress(object):
         self._steps = []
         wftool = getToolByName(self.context, 'portal_workflow')
         for wf in wftool.getWorkflowsFor(self.context):
-            self._steps = [(name, getattr(item, 'progress', 0)
-                            if hasProgress else self.guessProgress(name))
+            self._steps = [(
+                name, (item.progress if base_hasattr(item, 'progress') else 0))
+                if hasProgress else (name, self.guessProgress(name))
                 for name, item in sorted(wf.states.items(), cmp=compare)]
             break
         return self._steps

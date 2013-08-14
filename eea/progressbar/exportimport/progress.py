@@ -3,6 +3,7 @@
 from zope.component import queryMultiAdapter
 from Products.GenericSetup.utils import XMLAdapterBase
 from Products.GenericSetup.interfaces import IBody
+from Products.CMFPlone.utils import base_hasattr
 from eea.progressbar.interfaces import IWorkflowTool
 from eea.progressbar.interfaces import IWorkflow, IWorkflowState
 from eea.progressbar.config import PROGRESSFILE
@@ -80,7 +81,8 @@ class WorkflowStateXMLAdapter(XMLAdapterBase):
         """Export the object as a DOM node.
         """
         node = self._getObjectNode('object')
-        progress = getattr(self.context, 'progress', None)
+        progress = (self.context.progress if
+                    base_hasattr(self.context, 'progress') else None)
         if progress is None:
             return node
 

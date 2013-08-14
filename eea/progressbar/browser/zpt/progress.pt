@@ -10,7 +10,7 @@
     <tal:step tal:repeat="step view/table">
       <div tal:define="
         odd repeat/step/odd;
-        odd python:'odd' if (odd or progress >= 100) else 'even';
+        odd python:'progress-odd' if (odd or progress >= 100) else 'progress-even';
         workflow python:step[0];
         done python:step[1];
         width python:step[2]"
