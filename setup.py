@@ -1,12 +1,14 @@
 """ Installer
 """
-from setuptools import setup, find_packages
 import os
+from setuptools import setup, find_packages
 
-version = '1.0'
+NAME = 'eea.progressbar'
+PATH = NAME.split('.') + ['version.txt']
+VERSION = open(os.path.join(*PATH)).read().strip()
 
-setup(name='eea.progressbar',
-      version=version,
+setup(name=NAME,
+      version=VERSION,
       description="Progress bar based on current document review_state",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
