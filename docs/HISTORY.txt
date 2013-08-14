@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.1-dev - (unreleased)
+----------------------
+
 1.0 - (2013-08-14)
 ------------------
 * Initial release [voineali refs #14901]:
