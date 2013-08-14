@@ -21,6 +21,7 @@ Main features
   according with the workflow state in which the document is.
 - Visually display a computed progress bar for Collections according with
   the children / query results items progress
+- Visually display progress bars for items within Collection tabular view
 
 Install
 =======
@@ -35,6 +36,9 @@ Getting started
 
 1. Go to *ZMI > portal_workflows > Contents Tab* and select your workflow
 2. Click on *Progress monitoring Tab* and update *% done* for each state
+3. Go to Plone Site > Working space and add a Progress monitoring portlet
+4. Or add a Collection, add Progress column for tabular view and enable tabular
+   view for this Collection.
 
 Source code
 ===========

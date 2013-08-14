@@ -3,6 +3,9 @@ Changelog
 
 1.0-dev (unreleased)
 --------------------
-* Initial release
-  - Progress bar portlet for portal objects
-  - Progress bar portlet for collections based on children/query results progress
+* Initial release [voineali refs #14901]:
+
+ - Progress bar portlet for portal objects
+ - Progress bar portlet for collections based on children/query results progress
+ - Progress column for Collection table view
+
