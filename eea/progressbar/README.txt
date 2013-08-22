@@ -17,7 +17,7 @@ Getting started
 
 1. Go to *ZMI > portal_workflows > Contents Tab* and select your workflow
 2. Click on *Progress monitoring Tab* and update *% done* for each state
-3. Go to Portal > Manage portlets and add a Progress monitoring portlet
+3. Go to Portal > Manage portlets and add a Progress bar portlet
 
 Authors
 =======

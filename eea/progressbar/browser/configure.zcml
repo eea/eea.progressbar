@@ -3,16 +3,18 @@
   i18n_domain="eea">
 
   <browser:page
-    for="eea.progressbar.interfaces.IBaseObject"
     name="progress.bar"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    for="eea.progressbar.interfaces.IBaseObject"
     class=".app.view.ProgressBarView"
     template="zpt/progress.pt"
     permission="zope2.View"
     />
 
   <browser:page
-    for="eea.progressbar.interfaces.ICollection"
     name="progress.bar"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    for="eea.progressbar.interfaces.ICollection"
     class=".app.view.CollectionProgressBarView"
     template="zpt/collection-progress.pt"
     permission="zope2.View"
@@ -22,5 +24,14 @@
     name="eea.progressbar.css"
     file="css/view.css"
    />
+
+  <browser:viewlet
+    name="eea.progressbar"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    manager="plone.app.layout.viewlets.interfaces.IContentViews"
+    insert-after="plone.contentviews"
+    class=".app.viewlet.ProgressBar"
+    permission="zope2.View"
+    />
 
 </configure>

@@ -1,0 +1,3 @@
+<div class="progressbar-viewlet">
+  <tal:progress condition="exists:view/context/@@progress.bar" replace="structure view/context/@@progress.bar" />
+</div>

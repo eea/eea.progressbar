@@ -14,6 +14,14 @@
     provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 
+  <genericsetup:registerProfile
+    name="uninstall"
+    title="EEA ProgressBar (uninstall)"
+    directory="profiles/uninstall"
+    description="Uninstalls the eea.progressbar package"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
   <genericsetup:importStep
     name="eea.progressbar.various"
     title="EEA Progress Bar Setup" description="Setup EEA Progress Bar"

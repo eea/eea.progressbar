@@ -38,6 +38,12 @@ class ICollection(IPloneCollection):
 class ICatalogBrain(IZCatalogBrain):
     """ Marker interface for Catalog Brains
     """
+#
+# Browser layer
+#
+class IProgressBarLayer(Interface):
+    """ Browser layer for eea.progressbar
+    """
 
 #
 # Adapters

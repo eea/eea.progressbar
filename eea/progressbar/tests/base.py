@@ -6,7 +6,6 @@ from plone.app.testing import setRoles
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import FunctionalTesting
-from Products.CMFCore.utils import getToolByName
 
 class EEAFixture(PloneSandboxLayer):
     """ EEA Testing Policy
@@ -38,7 +37,7 @@ class EEAFixture(PloneSandboxLayer):
         setRoles(portal, TEST_USER_ID, ['Manager'])
 
         # Create testing environment
-        sandbox = portal.invokeFactory("Folder", "sandbox", title="Sandbox")
+        portal.invokeFactory("Folder", "sandbox", title="Sandbox")
 
 EEAFIXTURE = EEAFixture()
 FUNCTIONAL_TESTING = FunctionalTesting(bases=(EEAFIXTURE,),

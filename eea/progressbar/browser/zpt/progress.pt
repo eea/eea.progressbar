@@ -21,7 +21,7 @@
         <div class="progressbar-arrow-down"></div>
         </div>
     </tal:step>
-    <div class="progress-value" tal:content="progress">30</div>
+    <span class="progress-value" tal:content="progress">30</span>
 </div>
 
 </html>

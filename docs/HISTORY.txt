@@ -3,6 +3,12 @@ Changelog
 
 1.1-dev - (unreleased)
 ----------------------
+* Upgrade step: Within "Plone > Site setup > Add-ons" click on
+  upgrade button available for eea.progressbar
+* Feature: Added eea.progressbar viewlet near state menu
+  [voineali refs #15662]
+* Feature: Added uninstall profile in order to cleanly remove this add-on
+  [voineali]
 
 1.0 - (2013-08-14)
 ------------------
@@ -10,4 +16,3 @@ Changelog
  - Progress bar portlet for portal objects
  - Progress bar portlet for collections based on children/query results progress
  - Progress column for Collection table view
-

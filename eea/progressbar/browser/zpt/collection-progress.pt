@@ -20,7 +20,7 @@
         style python:'width:%s%%' % int(done - progress);
         data-tip python: '%d%% total progress' % done;">
     </div>
-    <div class="progressbar-step progress-odd" tal:attributes="
+    <div class="progressbar-step progressbar-remaining progress-odd" tal:attributes="
         style python:'width:%s%%' % int(100 - (done - progress) - progress);
         data-tip python: '%d%% remaining' % (100 - done)">
     </div>

@@ -1,4 +1,4 @@
-""" Progress monitoring portlets
+""" Progress bar portlets
 """
 from zope import schema
 from zope.formlib import form
@@ -10,7 +10,7 @@ from Products.CMFCore.utils import getToolByName
 from eea.progressbar.config import EEAMessageFactory as _
 
 class IProgressPortlet(IPortletDataProvider):
-    """ Progress monitoring portlet
+    """ Progress bar portlet
     """
     label = schema.TextLine(
         title=_(u"Porlet title"),
@@ -32,13 +32,13 @@ class Assignment(base.Assignment):
     def title(self):
         """ Get portlet title
         """
-        return self.label or u'Progress monitoring'
+        return self.label or u'Progress bar'
 
 class AddForm(base.AddForm):
     """ Add portlet
     """
     form_fields = form.Fields(IProgressPortlet)
-    label = _(u"Add Progress monitoring portlet")
+    label = _(u"Add Progress bar portlet")
     description = _(u"This portlet shows workflow progress information")
 
     def create(self, data):
@@ -50,7 +50,7 @@ class EditForm(base.EditForm):
     """ Portlet edit
     """
     form_fields = form.Fields(IProgressPortlet)
-    label = _(u"Edit Progress monitoring portlet")
+    label = _(u"Edit Progress bar portlet")
     description = _(u"This portlet shows workflow progress information")
 
 class Renderer(base.Renderer):

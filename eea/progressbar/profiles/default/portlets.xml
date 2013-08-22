@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <portlets>
-  <portlet
+  <portlet title="Progress Bar"
     addview="portlets.ProgressMonitoring"
-      title="Progress Monitoring"
-      description="A portlet which shows workflow progress information" >
+    description="A portlet which shows workflow progress information" >
     <for interface="plone.app.portlets.interfaces.IColumn" />
     <for interface="plone.app.portlets.interfaces.IDashboard" />
   </portlet>
