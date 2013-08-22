@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.2-dev - (unreleased)
+----------------------
+
 1.1 - (2013-08-22)
 ------------------
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
