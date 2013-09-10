@@ -13,10 +13,11 @@
         odd python:'progress-odd' if (odd or progress >= 100) else 'progress-even';
         workflow python:step[0];
         done python:step[1];
-        width python:step[2]"
+        width python:step[2];
+        title python:step[3]"
       class="progressbar-step" tal:attributes="
         class python:('progressbar-step progressbar-current state-%s %s' % (view.state, odd)) if (done <= progress) else 'progressbar-step %s' % odd;
-        data-tip string:$workflow - $done%;
+        data-tip string:$title - $done%;
         style python:'width: %s%%' % width">
         <div class="progressbar-arrow-down"></div>
         </div>

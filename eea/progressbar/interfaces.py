@@ -78,7 +78,7 @@ class IWorkflowProgress(Interface):
 
 
         >>> IWorkflowProgress(sandbox).steps
-        [('private', 33), ('pending', 66), ('published', 100)]
+        [('private', 33, 'Private'), ...('published', 100, 'Published')]
 
     And % done (on a simple item it's the same as progress). This is useful
     within Collections
@@ -113,7 +113,7 @@ class IWorkflowProgress(Interface):
         0
 
         >>> IWorkflowProgress(sandbox).steps
-        [('pending', 0), ('private', 0), ('published', 90)]
+        [('pending', 0, 'Pending review'), ... ('published', 90, 'Published')]
 
     """
     progress = schema.Int(

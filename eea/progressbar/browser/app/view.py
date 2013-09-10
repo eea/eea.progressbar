@@ -48,10 +48,13 @@ class ProgressBarView(BrowserView):
         """ Compute visual progress bar
         """
         current = 0
-        for state, progress in self.info.steps:
+        for term in self.info.steps:
+            state = term[0]
+            progress = term[1]
+            title = term[2]
             width = progress - current
             current = progress
-            yield state, progress, width
+            yield state, progress, width, title
 
 class CollectionProgressBarView(ProgressBarView):
     """ Progress bar for collections
@@ -63,7 +66,10 @@ class CollectionProgressBarView(ProgressBarView):
         info = self.info
         table = [info.closed, info.opened, info.total]
         current = 0
-        for index, (state, progress) in enumerate(self.info.steps):
+        for index, term in enumerate(self.info.steps):
+            progress = term[1]
+            state = term[0]
+            title = term[2]
             width = progress - current
             current = progress
-            yield state, table[index], width
+            yield state, table[index], width, title

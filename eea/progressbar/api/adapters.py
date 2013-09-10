@@ -97,9 +97,14 @@ class WorkflowProgress(object):
 
     @property
     def steps(self):
-        """ Return a list with steps and % done like:
+        """ Return a SimpleVocabulary like tuple with steps and % done like:
 
-        [('private', 0), ('pending': 50), ('visible': 50), (published, 100)]
+        (
+          ('private', 0, 'Private'),
+          ('pending': 50, 'Pending'),
+          ('visible': 50, 'Public Draft'),
+          ('published', 100, 'Public')
+        )
 
         """
         if self._steps is not None:
@@ -122,10 +127,14 @@ class WorkflowProgress(object):
         self._steps = []
         wftool = getToolByName(self.context, 'portal_workflow')
         for wf in wftool.getWorkflowsFor(self.context):
-            self._steps = [(
-                name, (item.progress if base_hasattr(item, 'progress') else 0))
-                if hasProgress else (name, self.guessProgress(name))
-                for name, item in sorted(wf.states.items(), cmp=compare)]
+            for name, item in sorted(wf.states.items(), cmp=compare):
+                title = item.title if base_hasattr(item, 'title') else name
+                if hasProgress:
+                    progress = (item.progress if
+                                base_hasattr(item, 'progress') else 0)
+                else:
+                    progress = self.guessProgress(name)
+                self._steps.append((name, progress, title))
             break
         return self._steps
 
@@ -220,11 +229,15 @@ class CollectionWorkflowProgress(WorkflowProgress):
     def steps(self):
         """ Return a list with steps and % done like:
 
-        [('closed', 33), ('done': 63), ('total': 100), (published, 100)]
+        (
+          ('closed', 33, 'Closed'),
+          ('done': 63, 'Done'),
+          ('total': 100, 'Total'),
+        )
 
         """
-        return [
-            ('closed', self.progress),
-            ('done', self.done),
-            ('total', 100),
-        ]
+        return (
+            ('closed', self.progress, 'Closed'),
+            ('done', self.done, 'Done'),
+            ('total', 100, 'Total')
+        )
