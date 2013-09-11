@@ -24,3 +24,4 @@ class ProgressCatalogListingObject(CatalogContentListingObject):
         """
         if name == u'progress':
             return self.progress
+        return super(ProgressCatalogListingObject, self).__getattr__(name)
