@@ -12,6 +12,7 @@ class ProgressBarView(BrowserView):
         super(ProgressBarView, self).__init__(context, request)
         self._info = None
         self._state = None
+        self._state_title = None
 
     @property
     def state(self):
@@ -21,6 +22,16 @@ class ProgressBarView(BrowserView):
             wftool = getToolByName(self.context, 'portal_workflow')
             self._state = wftool.getInfoFor(self.context, 'review_state')
         return self._state
+
+    @property
+    def state_title(self):
+        """ Current state title
+        """
+        if self._state_title is None:
+            wftool = getToolByName(self.context, 'portal_workflow')
+            self._state_title = wftool.getTitleForStateOnType(
+                self.state, self.context.portal_type)
+        return self._state_title
 
     @property
     def info(self):

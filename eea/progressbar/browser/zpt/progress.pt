@@ -14,10 +14,11 @@
         workflow python:step[0];
         done python:step[1];
         width python:step[2];
-        title python:step[3]"
+        title python:step[3] if (done > progress) else view.state_title;
+        title python:'%s - %s%%' % (title, done if (done > progress) else progress)"
       class="progressbar-step" tal:attributes="
         class python:('progressbar-step progressbar-current state-%s %s' % (view.state, odd)) if (done <= progress) else 'progressbar-step %s' % odd;
-        data-tip string:$title - $done%;
+        data-tip title;
         style python:'width: %s%%' % width">
         <div class="progressbar-arrow-down"></div>
         </div>
