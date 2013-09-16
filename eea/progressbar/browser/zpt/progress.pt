@@ -6,6 +6,7 @@
     info view/info;
     progress info/progress">
 
+<div class="eea-progressbar" tal:attributes="data-baseurl string:${context/absolute_url}">
 <div class="progressbar">
     <tal:step tal:repeat="step view/table">
       <div tal:define="
@@ -24,6 +25,7 @@
         </div>
     </tal:step>
     <span class="progress-value" tal:content="progress">30</span>
+</div>
 </div>
 
 </html>

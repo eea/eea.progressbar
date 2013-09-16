@@ -25,6 +25,11 @@
     file="css/view.css"
    />
 
+  <browser:resource
+    name="eea.progressbar.js"
+    file="js/view.js"
+   />
+
   <browser:viewlet
     name="eea.progressbar"
     layer="eea.progressbar.interfaces.IProgressBarLayer"

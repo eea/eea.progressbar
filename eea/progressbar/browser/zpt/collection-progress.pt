@@ -11,6 +11,8 @@
     opened info/opened;
     ">
 
+<div class="eea-progressbar" tal:attributes="data-baseurl string:${context/absolute_url}">
+
 <div class="progressbar">
     <div class="progressbar-step progressbar-closed progress-odd" tal:attributes="
         style python:'width:%s%%' % int(progress);
@@ -30,6 +32,8 @@
     <span tal:content="string:${info/total} items" />
     (<span class="progressbar-label-closed" tal:content="string:${info/closed} completed" /> -
     <span class="progressbar-label-opened" tal:content="string:${info/opened} in progress" />)
+</div>
+
 </div>
 
 </html>
