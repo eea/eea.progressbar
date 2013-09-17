@@ -20,6 +20,15 @@
     permission="zope2.View"
     />
 
+  <browser:viewlet
+    name="eea.progressbar"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    manager="plone.app.layout.viewlets.interfaces.IContentViews"
+    insert-after="plone.contentviews"
+    class=".app.viewlet.ProgressBar"
+    permission="zope2.View"
+    />
+
   <browser:resource
     name="eea.progressbar.css"
     file="css/view.css"
@@ -30,13 +39,8 @@
     file="js/view.js"
    />
 
-  <browser:viewlet
-    name="eea.progressbar"
-    layer="eea.progressbar.interfaces.IProgressBarLayer"
-    manager="plone.app.layout.viewlets.interfaces.IContentViews"
-    insert-after="plone.contentviews"
-    class=".app.viewlet.ProgressBar"
-    permission="zope2.View"
-    />
+  <browser:resourceDirectory
+    name="eea.progressbar.images"
+    directory="./img" />
 
 </configure>

@@ -1,3 +1,4 @@
-<div class="progressbar-viewlet">
-  <tal:progress condition="exists:view/context/@@progress.bar" replace="structure view/context/@@progress.bar" />
-</div>
+<fieldset class="progressbar-viewlet" tal:condition="view/available">
+  <legend tal:content="python:'%s - %s%%' % (view.progressbar.state_title, view.progressbar.info.done)">Workflow progress</legend>
+  <tal:progress replace="structure python:view.progressbar()" />
+</fieldset>

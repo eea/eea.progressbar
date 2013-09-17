@@ -10,6 +10,10 @@ Changelog
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
   upgrade button available for eea.progressbar
   [voineali refs #16721]
+* Feature: Added possibility to show/hide progress bar viewlet per content-type
+  via Plone ControlPanel and also to show/hide it per object instance via Plone
+  edit form
+  [voineali refs #16721]
 * Feature: Hanlde eea.workflow async workflow change
   [voineali refs #16721]
 * Bug fix: Use workflow state title instead of state id for

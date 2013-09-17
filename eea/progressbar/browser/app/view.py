@@ -4,6 +4,7 @@ from zope.component import queryAdapter
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from eea.progressbar.interfaces import IWorkflowProgress
+from eea.progressbar.config import EEAMessageFactory as _
 
 class ProgressBarView(BrowserView):
     """ Progress bar
@@ -84,3 +85,10 @@ class CollectionProgressBarView(ProgressBarView):
             width = progress - current
             current = progress
             yield state, table[index], width, title
+
+
+    @property
+    def state_title(self):
+        """ Current state title
+        """
+        return _('Total progress')

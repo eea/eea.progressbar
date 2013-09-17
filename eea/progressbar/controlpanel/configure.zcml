@@ -1,0 +1,18 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="eea">
+
+  <browser:page
+    name="progressbar-controlpanel"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".settings.ControlPanel"
+    permission="cmf.ManagePortal"
+    />
+
+  <adapter
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    provides=".interfaces.ISettings"
+    factory=".settings.ControlPanelAdapter" />
+
+</configure>

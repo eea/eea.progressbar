@@ -10,9 +10,9 @@
     profile="eea.progressbar:default">
 
     <genericsetup:upgradeDepends
-      title="Import steps with changes: jsregistry"
+      title="Import steps with changes: jsregistry viewlets plone.app.registry controlpanel"
       import_profile="eea.progressbar:default"
-      import_steps="jsregistry"
+      import_steps="jsregistry viewlets plone.app.registry controlpanel"
       />
 
   </genericsetup:upgradeSteps>

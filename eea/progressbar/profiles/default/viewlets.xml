@@ -2,7 +2,7 @@
 <object>
   <order manager="plone.contentviews" skinname="*">
     <viewlet name="plone.contentviews" />
-    <viewlet name="eea.progressbar" />
     <viewlet name="plone.contentactions" />
+    <viewlet name="eea.progressbar" />
   </order>
 </object>

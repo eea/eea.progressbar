@@ -1,0 +1,18 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
+  i18n_domain="eea">
+
+  <adapter
+    for="eea.progressbar.interfaces.IBaseObject"
+    provides="archetypes.schemaextender.interfaces.ISchemaExtender"
+    factory=".schema.EEASchemaExtender"
+    />
+
+  <adapter
+    for="eea.progressbar.interfaces.ICollection"
+    provides="archetypes.schemaextender.interfaces.ISchemaExtender"
+    factory=".schema.EEASchemaExtender"
+    />
+
+</configure>

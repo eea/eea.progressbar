@@ -136,6 +136,18 @@
 .progressbar-viewlet {
     float: right;
     padding: 0.2em 0.24em 0 0;
+    width: 100%;
+    border: 1px dotted #ccc;
+    border-radius: 10px;
+}
+
+.progressbar-viewlet legend {
+    text-align: right;
+    padding: 0 0.5em;
+}
+
+.progressbar-viewlet .eea-progressbar {
+    padding: 1em;
 }
 
 .progressbar-viewlet .progressbar {
@@ -143,7 +155,6 @@
 }
 
 .progressbar-viewlet .progressbar-label {
-    display: none;
 }
 
 .progressbar {

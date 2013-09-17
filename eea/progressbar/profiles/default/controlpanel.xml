@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel">
+
+  <configlet
+    title="Progress Bar Settings"
+    action_id="eea.progressbar.settings"
+    icon_expr="string:$portal_url/++resource++eea.progressbar.images/icon.png"
+    appId="eea.progressbar"
+    category="Products"
+    condition_expr=""
+    url_expr="string:$portal_url/@@progressbar-controlpanel"
+    visible="True">
+      <permission>Manage portal</permission>
+  </configlet>
+
+</object>
