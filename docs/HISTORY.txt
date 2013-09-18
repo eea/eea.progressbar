@@ -3,6 +3,9 @@ Changelog
 
 1.3-dev - (unreleased)
 ----------------------
+* Upgrade step: (optional) Manually update progressbar viewlet visibility per
+  content-type within Site Setup > Progress Bar Settings
+  [voineali refs #16759]
 * Upgrade step: (optional) Manually reorder JS / CSS resources
   (++resource++eea.progressbar.js, ++resource++eea.progressbar.css) within ZMI >
   portal_javascripts / portal_css in order to optimize requests per page.
@@ -13,7 +16,7 @@ Changelog
 * Feature: Added possibility to show/hide progress bar viewlet per content-type
   via Plone ControlPanel and also to show/hide it per object instance via Plone
   edit form
-  [voineali refs #16721]
+  [voineali refs #16759]
 * Feature: Hanlde eea.workflow async workflow change
   [voineali refs #16721]
 * Bug fix: Use workflow state title instead of state id for

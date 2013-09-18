@@ -1,0 +1,91 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-09-18 07:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: eea\n"
+
+#: ../../progressbar/interfaces.py:128
+msgid "% Done"
+msgstr ""
+
+#: ../../progressbar/interfaces.py:137
+msgid "A list of workflow steps with percetage"
+msgstr ""
+
+#: ../../progressbar/portlets/progress.py:41
+msgid "Add Progress bar portlet"
+msgstr ""
+
+#: ../../progressbar/portlets/progress.py:53
+msgid "Edit Progress bar portlet"
+msgstr ""
+
+#: ../../progressbar/controlpanel/interfaces.py:11
+msgid "Enable progressbar viewlet"
+msgstr ""
+
+#: ../../progressbar/interfaces.py:129
+msgid "For a folderish item, this can be the sum of all itemsprogress / total items possible progress"
+msgstr ""
+
+#: ../../progressbar/interfaces.py:121
+msgid "For a folderish item, this can be the sum of all itemswith progress 100% / total items possible progress"
+msgstr ""
+
+#: ../../progressbar/subtypes/schema.py:31
+msgid "Hide Progress Bar Viewlet"
+msgstr ""
+
+#: ../../progressbar/subtypes/schema.py:32
+msgid "Hide Progress Bar viewlet for this context/page"
+msgstr ""
+
+#: ../../progressbar/portlets/progress.py:16
+msgid "Porlet title"
+msgstr ""
+
+#: ../../progressbar/interfaces.py:120
+msgid "Progress"
+msgstr ""
+
+#: ../../progressbar/controlpanel/settings.py:16
+msgid "Progress Bar Settings"
+msgstr ""
+
+#: ../../progressbar/controlpanel/settings.py:17
+msgid "Progress bar settings"
+msgstr ""
+
+#: ../../progressbar/controlpanel/interfaces.py:12
+msgid "Progressbar viewlet is visible for the following content-types"
+msgstr ""
+
+#: ../../progressbar/interfaces.py:136
+msgid "Steps"
+msgstr ""
+
+#: ../../progressbar/portlets/progress.py:42
+msgid "This portlet shows workflow progress information"
+msgstr ""
+
+#: ../../progressbar/portlets/progress.py:17
+msgid "Title of the portlet. Leave empty if you don't want to display a title for this portlet"
+msgstr ""
+
+#: ../../progressbar/browser/app/view.py:94
+msgid "Total progress"
+msgstr ""
+
