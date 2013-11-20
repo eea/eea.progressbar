@@ -1,0 +1,14 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  tal:omit-tag=""
+  i18n:domain="eea"
+  tal:define="
+    info view/info;
+    progress info/progress">
+
+<div class="eea-progresstrail" tal:attributes="data-baseurl string:${context/absolute_url}">
+<div class="progresstrail">
+  Workflow steps trail
+</div>
+</div>
+</html>

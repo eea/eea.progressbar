@@ -47,3 +47,16 @@ class ControlPanelAdapter(SchemaAdapterBase):
         """ Setter
         """
         self.settings.viewletVisibleFor = value
+
+    @property
+    def trailViewletVisibleFor(self):
+        """ Getter
+        """
+        name = u"trailViewletVisibleFor"
+        return getattr(self.settings, name, ISettings[name].default)
+
+    @trailViewletVisibleFor.setter
+    def trailViewletVisibleFor(self, value):
+        """ Setter
+        """
+        self.settings.trailViewletVisibleFor = value

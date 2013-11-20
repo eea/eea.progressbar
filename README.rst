@@ -6,8 +6,9 @@ EEA Progress Bar
 .. image:: http://ci.eionet.europa.eu/job/eea.progressbar-plone4/badge/icon
   :target: http://ci.eionet.europa.eu/job/eea.progressbar-plone4/lastBuild
 
-A system that visually display a progress bar in the publishing process of a
-document according with the workflow state in which the document is.
+A system that visually display a *workflow percentage bar* or a
+*workflow steps trail* in the publishing process of a document according with
+the workflow state in which the document is.
 
 Contents
 ========
@@ -17,11 +18,13 @@ Contents
 Main features
 =============
 
-- Visually display a progress bar in the publishing process of a document
-  according with the workflow state in which the document is.
-- Visually display a computed progress bar for Collections according with
-  the children / query results items progress
-- Visually display progress bars for items within Collection tabular view
+- Visually display a workflow *percentage bar/steps trail* in the publishing
+  process of a document according with the workflow state in which the
+  document is.
+- Visually display a computed workflow *percentage bar* for Collections
+  according with the children / query results items progress
+- Visually display workflow *percentage bars* for items within Collection
+  tabular view
 
 Install
 =======
@@ -39,6 +42,8 @@ Getting started
 3. Go to Plone Site > Working space and add a Progress bar portlet
 4. Or add a Collection, add Progress column for tabular view and enable tabular
    view for this Collection.
+5. Or go to *Site Setup > Progress Bar Settings* and enable Progress Bar
+   viewlets for your content-types.
 
 Dependencies
 ============

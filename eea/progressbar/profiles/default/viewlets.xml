@@ -4,5 +4,6 @@
     <viewlet name="plone.contentviews" />
     <viewlet name="plone.contentactions" />
     <viewlet name="eea.progressbar" />
+      <viewlet name="eea.progresstrail" />
   </order>
 </object>

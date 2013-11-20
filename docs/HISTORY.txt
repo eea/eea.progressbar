@@ -1,8 +1,14 @@
 Changelog
 =========
 
-1.4-dev - (unreleased)
+2.0-dev - (unreleased)
 ----------------------
+* Upgrade step: Within "Plone > Site setup > Add-ons" click on
+  upgrade button available for EEA Progress Bar
+* Feature: Added a new viewlet/portlet *Workflow Steps Trail*
+  [voineali refs #17491]
+* Change: Renamed viewlet/portlet *Progress Bar* to *Workflow Percentage Bar*
+  [voineali refs #17491]
 
 1.3 - (2013-09-23)
 ------------------

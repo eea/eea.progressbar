@@ -18,4 +18,15 @@
     view_permission="zope2.View"
     />
 
+  <plone:portlet
+    name="portlets.ProgressTrail"
+    interface=".trail.ITrailPortlet"
+    assignment=".trail.Assignment"
+    renderer=".trail.Renderer"
+    addview=".trail.AddForm"
+    editview=".trail.EditForm"
+    edit_permission="plone.app.portlets.ManagePortlets"
+    view_permission="zope2.View"
+    />
+
 </configure>

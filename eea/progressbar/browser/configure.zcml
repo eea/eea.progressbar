@@ -20,12 +20,29 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="progress.trail"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    for="eea.progressbar.interfaces.IBaseObject"
+    class=".app.view.ProgressTrailView"
+    template="zpt/trail.pt"
+    permission="zope2.View"
+    />
+
   <browser:viewlet
     name="eea.progressbar"
     layer="eea.progressbar.interfaces.IProgressBarLayer"
     manager="plone.app.layout.viewlets.interfaces.IContentViews"
     insert-after="plone.contentviews"
     class=".app.viewlet.ProgressBar"
+    permission="zope2.View"
+    />
+
+  <browser:viewlet
+    name="eea.progresstrail"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    manager="plone.app.layout.viewlets.interfaces.IContentViews"
+    class=".app.viewlet.ProgressTrail"
     permission="zope2.View"
     />
 

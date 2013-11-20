@@ -68,6 +68,11 @@ class ProgressBarView(BrowserView):
             current = progress
             yield state, progress, width, title
 
+class ProgressTrailView(ProgressBarView):
+    """ Workflow state trail
+    """
+
+
 class CollectionProgressBarView(ProgressBarView):
     """ Progress bar for collections
     """

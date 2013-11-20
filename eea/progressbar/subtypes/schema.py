@@ -21,15 +21,29 @@ class EEASchemaExtender(object):
     implements(ISchemaExtender, IBrowserLayerAwareExtender)
     layer = IProgressBarLayer
 
-    fields = (
+    fieldsProgress = (
         EEABooleanField(
             name='disableProgressBarViewlet',
             schemata='settings',
             default=False,
             searchable=False,
             widget=BooleanWidget(
-                label=_('Hide Progress Bar Viewlet'),
-                description=_('Hide Progress Bar viewlet for '
+                label=_('Hide Workflow Percentage Bar Viewlet'),
+                description=_('Hide Workflow Percentage Bar viewlet for '
+                              'this context/page'),
+            )
+        ),
+    )
+
+    fieldsTrail = (
+        EEABooleanField(
+            name='disableProgressTrailViewlet',
+            schemata='settings',
+            default=False,
+            searchable=False,
+            widget=BooleanWidget(
+                label=_('Hide Workflow States Trail Viewlet'),
+                description=_('Hide Workflow States Trail viewlet for '
                               'this context/page'),
             )
         ),
@@ -43,7 +57,14 @@ class EEASchemaExtender(object):
         """
         settings = queryAdapter(getSite(), ISettings)
         ctype = getattr(self.context, 'portal_type', '')
+        fields = ()
+
         allowed = settings.viewletVisibleFor or []
         if ctype in allowed:
-            return self.fields
-        return ()
+            fields += self.fieldsProgress
+
+        allowed = settings.trailViewletVisibleFor or []
+        if ctype in allowed:
+            fields += self.fieldsTrail
+
+        return fields
