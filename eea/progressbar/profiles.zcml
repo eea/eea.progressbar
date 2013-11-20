@@ -8,7 +8,7 @@
 
   <genericsetup:registerProfile
     name="default"
-    title="eea.progressbar"
+    title="EEA Progress Bar"
     directory="profiles/default"
     description="Installs the eea.progressbar package"
     provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -16,7 +16,7 @@
 
   <genericsetup:registerProfile
     name="uninstall"
-    title="EEA ProgressBar (uninstall)"
+    title="EEA Progress Bar (uninstall)"
     directory="profiles/uninstall"
     description="Uninstalls the eea.progressbar package"
     provides="Products.GenericSetup.interfaces.EXTENSION"

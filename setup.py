@@ -10,7 +10,7 @@ VERSION = open(os.path.join(*PATH)).read().strip()
 setup(name=NAME,
       version=VERSION,
       description="Progress bar based on current document review_state",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
