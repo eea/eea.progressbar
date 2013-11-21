@@ -8,7 +8,30 @@
 
 <div class="eea-progresstrail" tal:attributes="data-baseurl string:${context/absolute_url}">
 <div class="progresstrail">
-  Workflow steps trail
+  <tal:step repeat="step view/table">
+    <div tal:define="
+      odd repeat/step/odd;
+      start repeat/step/start;
+      end repeat/step/end;
+      odd python:'progress-odd' if (odd or progress >= 100) else 'progress-even';
+      state python:step[0];
+      done python:step[1];
+      width python:step[2];
+      title python:step[3];
+      description python:step[4];" tal:attributes="
+      data-title title;
+      data-description description;
+      style python:'width: %s%%' % width;
+      class python:('progresstrail-step progresstrail-current %s' % odd) if (state == view.state) else 'progresstrail-step %s' % odd;"
+      >
+      <span tal:define="
+        klass python:'progresstrail-mask';
+        klass python:klass + ' first' if start else klass;
+        klass python:klass + ' last' if end else klass;" tal:attributes="class klass"></span>
+      <span class="progresstrail-icon"></span>
+      <span class="progresstrail-body" tal:content="title"></span>
+    </div>
+  </tal:step>
 </div>
 </div>
 </html>

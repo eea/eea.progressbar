@@ -129,12 +129,14 @@ class WorkflowProgress(object):
         for wf in wftool.getWorkflowsFor(self.context):
             for name, item in sorted(wf.states.items(), cmp=compare):
                 title = item.title if base_hasattr(item, 'title') else name
+                description = (item.description or title
+                    if base_hasattr(item, 'description') else title)
                 if hasProgress:
                     progress = (item.progress if
                                 base_hasattr(item, 'progress') else 0)
                 else:
                     progress = self.guessProgress(name)
-                self._steps.append((name, progress, title))
+                self._steps.append((name, progress, title, description))
             break
         return self._steps
 

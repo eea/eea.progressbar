@@ -64,13 +64,27 @@ class ProgressBarView(BrowserView):
             state = term[0]
             progress = term[1]
             title = term[2]
+            description = term[3]
             width = progress - current
             current = progress
-            yield state, progress, width, title
+            yield state, progress, width, title, description
+
 
 class ProgressTrailView(ProgressBarView):
     """ Workflow state trail
     """
+    @property
+    def table(self):
+        """ Compute visual progress bar
+        """
+        length = len(self.info.steps)
+        width = 100 / length
+        for term in self.info.steps:
+            state = term[0]
+            progress = term[1]
+            title = term[2]
+            description = term[3]
+            yield state, progress, width, title, description
 
 
 class CollectionProgressBarView(ProgressBarView):

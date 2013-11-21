@@ -1,4 +1,4 @@
-<fieldset class="progressbar-viewlet" tal:condition="view/available">
+<fieldset class="progressbar-viewlet trail" tal:condition="view/available">
   <legend i18n:translate="">Workflow progress</legend>
   <tal:progress replace="structure python:view.progressbar()" />
 </fieldset>

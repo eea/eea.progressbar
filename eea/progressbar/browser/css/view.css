@@ -1,3 +1,9 @@
+
+/*
+** Workflow Percentace Bar
+** ***********************
+*/
+
 .progressbar {
     width: 100%;
     height: 15px;
@@ -27,7 +33,7 @@
     opacity: 0;
     transition:opacity 0.4s ease-out;
     border-radius: 5px;
-    border: 1px dotted #000;
+    border: 1px solid #ccc;
     box-shadow: 5px 5px 10px #999;
 }
 
@@ -35,6 +41,10 @@
     opacity: 1;
     bottom: 25px;
     z-index: 99990;
+}
+
+#portal-column-two .progressbar-step::before {
+    right: 0;
 }
 
 .progressbar .progress-odd {
@@ -164,4 +174,112 @@
 }
 
 .progressbar-step:last-child {
+}
+
+/*
+** Workflow Steps Trail
+** ********************
+*/
+
+.progresstrail {
+    width: 100%;
+    height: auto;
+    margin: 2em 0;
+}
+
+.progresstrail:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.progresstrail-step {
+    float: left;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    border-top: 1px solid #cccccc;
+    color: #cccccc;
+}
+
+.progresstrail-step::before {
+    content: attr(data-description);
+    width: 200px;
+    position:absolute;
+    z-index: 999;
+    bottom:9999px;
+    background:#fff;
+    color:#000;
+    padding:0.5em;
+    line-height: 24px;
+    opacity: 0;
+    transition:opacity 0.4s ease-out;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 10px #999;
+}
+
+.progresstrail-step:hover::before {
+    opacity: 1;
+    bottom: 110%;
+    z-index: 99990;
+}
+
+#portal-column-two .progresstrail-step::before {
+    right: 0;
+}
+
+.progresstrail-icon {
+    width: 0px;
+    height: 0px;
+    border: 5px solid #cccccc;
+    border-radius: 10px;
+    display: block;
+    top: -6px;
+    position: relative;
+    left: 50%;
+}
+
+.progresstrail-current {
+    color: #000000;
+}
+
+.progresstrail-current .progresstrail-icon {
+    border-color: #000000;
+}
+
+.portletItem .progresstrail-body {
+    display: none;
+}
+
+.portletItem .progresstrail-step::before {
+    content: attr(data-title);
+    bottom: 20px;
+}
+
+.progresstrail-mask {
+  position: relative;
+  top:-1px;
+  width:50%;
+  height: 1px;
+  background-color:transparent;
+  display: block;
+}
+
+.progresstrail-mask.first {
+    background: #FFFFFF;
+    left: 0;
+}
+
+.progresstrail-mask.last {
+    background: #FFFFFF;
+    left: 50%;
+}
+
+.progressbar-viewlet.trail {
+    border: none;
+}
+
+.progressbar-viewlet.trail legend {
+    display: none;
 }
