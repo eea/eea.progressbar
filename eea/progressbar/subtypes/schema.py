@@ -42,8 +42,8 @@ class EEASchemaExtender(object):
             default=False,
             searchable=False,
             widget=BooleanWidget(
-                label=_('Hide Workflow States Trail Viewlet'),
-                description=_('Hide Workflow States Trail viewlet for '
+                label=_('Hide Workflow Steps Trail Viewlet'),
+                description=_('Hide Workflow Steps Trail viewlet for '
                               'this context/page'),
             )
         ),

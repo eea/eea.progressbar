@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-09-18 07:34+0000\n"
+"POT-Creation-Date: 2013-11-22 14:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,15 +23,27 @@ msgid "A list of workflow steps with percetage"
 msgstr ""
 
 #: ../../progressbar/portlets/progress.py:41
-msgid "Add Progress bar portlet"
+msgid "Add Workflow Percentage Bar portlet"
+msgstr ""
+
+#: ../../progressbar/portlets/trail.py:41
+msgid "Add Workflow states trail portlet"
 msgstr ""
 
 #: ../../progressbar/portlets/progress.py:53
-msgid "Edit Progress bar portlet"
+msgid "Edit Workflow Percentage Bar portlet"
+msgstr ""
+
+#: ../../progressbar/portlets/trail.py:53
+msgid "Edit Workflow State Trail portlet"
 msgstr ""
 
 #: ../../progressbar/controlpanel/interfaces.py:11
-msgid "Enable progressbar viewlet"
+msgid "Enable workflow percentage bar viewlet"
+msgstr ""
+
+#: ../../progressbar/controlpanel/interfaces.py:21
+msgid "Enable workflow steps trail viewlet"
 msgstr ""
 
 #: ../../progressbar/interfaces.py:129
@@ -43,14 +55,23 @@ msgid "For a folderish item, this can be the sum of all itemswith progress 100% 
 msgstr ""
 
 #: ../../progressbar/subtypes/schema.py:31
-msgid "Hide Progress Bar Viewlet"
+msgid "Hide Workflow Percentage Bar Viewlet"
 msgstr ""
 
 #: ../../progressbar/subtypes/schema.py:32
-msgid "Hide Progress Bar viewlet for this context/page"
+msgid "Hide Workflow Percentage Bar viewlet for this context/page"
+msgstr ""
+
+#: ../../progressbar/subtypes/schema.py:45
+msgid "Hide Workflow Steps Trail Viewlet"
+msgstr ""
+
+#: ../../progressbar/subtypes/schema.py:46
+msgid "Hide Workflow Steps Trail viewlet for this context/page"
 msgstr ""
 
 #: ../../progressbar/portlets/progress.py:16
+#: ../../progressbar/portlets/trail.py:16
 msgid "Porlet title"
 msgstr ""
 
@@ -66,23 +87,32 @@ msgstr ""
 msgid "Progress bar settings"
 msgstr ""
 
-#: ../../progressbar/controlpanel/interfaces.py:12
-msgid "Progressbar viewlet is visible for the following content-types"
-msgstr ""
-
 #: ../../progressbar/interfaces.py:136
 msgid "Steps"
 msgstr ""
 
 #: ../../progressbar/portlets/progress.py:42
-msgid "This portlet shows workflow progress information"
+msgid "This portlet shows workflow progress information (%)"
+msgstr ""
+
+#: ../../progressbar/portlets/trail.py:42
+msgid "This portlet shows workflow states trail information"
 msgstr ""
 
 #: ../../progressbar/portlets/progress.py:17
+#: ../../progressbar/portlets/trail.py:17
 msgid "Title of the portlet. Leave empty if you don't want to display a title for this portlet"
 msgstr ""
 
-#: ../../progressbar/browser/app/view.py:94
+#: ../../progressbar/browser/app/view.py:113
 msgid "Total progress"
+msgstr ""
+
+#: ../../progressbar/controlpanel/interfaces.py:12
+msgid "Workflow percentage bar viewlet is visible for the following content-types"
+msgstr ""
+
+#: ../../progressbar/controlpanel/interfaces.py:22
+msgid "Workflow steps trail viewlet is visible for the following content-types"
 msgstr ""
 
