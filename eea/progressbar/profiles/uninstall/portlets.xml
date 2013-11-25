@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <portlets>
   <portlet addview="portlets.ProgressMonitoring" remove="True" />
+  <portlet addview="portlets.ProgressTrail" remove="True" />
 </portlets>

@@ -3,6 +3,8 @@ Changelog
 
 2.1-dev - (unreleased)
 ----------------------
+* Bug fix: Cleanup portlets on uninstall
+  [avoinea]
 
 2.0 - (2013-11-22)
 ------------------
