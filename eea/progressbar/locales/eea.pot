@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-22 14:51+0000\n"
+"POT-Creation-Date: 2013-12-03 18:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: eea\n"
 
-#: ../../progressbar/interfaces.py:128
+#: ../../progressbar/interfaces.py:129
 msgid "% Done"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:137
+#: ../../progressbar/interfaces.py:138
 msgid "A list of workflow steps with percetage"
 msgstr ""
 
@@ -49,11 +49,11 @@ msgstr ""
 msgid "Enable workflow steps trail viewlet"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:129
+#: ../../progressbar/interfaces.py:130
 msgid "For a folderish item, this can be the sum of all itemsprogress / total items possible progress"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:121
+#: ../../progressbar/interfaces.py:122
 msgid "For a folderish item, this can be the sum of all itemswith progress 100% / total items possible progress"
 msgstr ""
 
@@ -73,12 +73,20 @@ msgstr ""
 msgid "Hide Workflow Steps Trail viewlet for this context/page"
 msgstr ""
 
+#: ../../progressbar/controlpanel/interfaces.py:31
+msgid "Ignore states lower than equal"
+msgstr ""
+
+#: ../../progressbar/controlpanel/interfaces.py:32
+msgid "Ignore states that have a defined percentage lower than equal"
+msgstr ""
+
 #: ../../progressbar/portlets/progress.py:16
 #: ../../progressbar/portlets/trail.py:16
 msgid "Porlet title"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:120
+#: ../../progressbar/interfaces.py:121
 msgid "Progress"
 msgstr ""
 
@@ -90,7 +98,7 @@ msgstr ""
 msgid "Progress bar settings"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:136
+#: ../../progressbar/interfaces.py:137
 msgid "Steps"
 msgstr ""
 

@@ -30,7 +30,7 @@ class ISettings(Interface):
     hidedStatesPercentage = schema.Int(
         title=_(u"Ignore states lower than equal"),
         description=_(u"Ignore states that have a "
-                      u"percentage defined lower than equal"),
+                      u"defined percentage lower than equal"),
         required=False,
         default=0
     )
