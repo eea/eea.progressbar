@@ -26,3 +26,11 @@ class ISettings(Interface):
         value_type=schema.Choice(
             vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes")
     )
+
+    hidedStatesPercentage = schema.Int(
+        title=_(u"Ignore states lower than equal"),
+        description=_(u"Ignore states that have a "
+                      u"percentage defined lower than equal"),
+        required=False,
+        default=0
+    )

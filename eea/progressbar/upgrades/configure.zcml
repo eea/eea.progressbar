@@ -3,6 +3,20 @@
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
   i18n_domain="eea">
 
+  <!-- 2.0 => 2.1 -->
+  <genericsetup:upgradeSteps
+    source="2.0"
+    destination="2.1"
+    profile="eea.progressbar:default">
+
+    <genericsetup:upgradeDepends
+      title="Import steps with changes: plone.app.registry"
+      import_profile="eea.progressbar:default"
+      import_steps="plone.app.registry"
+      />
+
+  </genericsetup:upgradeSteps>
+
   <!-- 1.3 => 2.0 -->
   <genericsetup:upgradeSteps
     source="1.3"

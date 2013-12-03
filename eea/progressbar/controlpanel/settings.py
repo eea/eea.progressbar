@@ -60,3 +60,16 @@ class ControlPanelAdapter(SchemaAdapterBase):
         """ Setter
         """
         self.settings.trailViewletVisibleFor = value
+
+    @property
+    def hidedStatesPercentage(self):
+        """ Getter
+        """
+        name = u"hidedStatesPercentage"
+        return getattr(self.settings, name, ISettings[name].default)
+
+    @hidedStatesPercentage.setter
+    def hidedStatesPercentage(self, value):
+        """ Setter
+        """
+        self.settings.hidedStatesPercentage = value

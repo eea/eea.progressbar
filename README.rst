@@ -28,6 +28,9 @@ Main features
   according with the children / query results items progress
 - Visually display workflow *percentage bars* for items within Collection
   tabular view
+- Possibility to hide/exclude certain states in progress bar (by default
+  hide all states with defined percentage lower than/equal 0, configurable via
+  Site Setup > Progress Bar Settings)
 
 Install
 =======

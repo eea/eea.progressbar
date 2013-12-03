@@ -2,10 +2,12 @@
 """
 from zope.interface import implements
 from zope.component import queryAdapter
+from zope.component.hooks import getSite
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import base_hasattr
 from eea.progressbar.interfaces import IWorkflowProgress
+from eea.progressbar.controlpanel.interfaces import ISettings
 
 class WorkflowProgress(object):
     """
@@ -21,6 +23,17 @@ class WorkflowProgress(object):
         self._progress = None
         self._done = None
         self._steps = None
+        self._minProgress = None
+
+    @property
+    def minProgress(self):
+        """ Minimum progress to display
+        """
+        if not self._minProgress:
+            site = getSite()
+            settings = queryAdapter(site, ISettings)
+            self._minProgress = settings.hidedStatesPercentage
+        return self._minProgress
 
     @property
     def hasProgress(self):
@@ -136,6 +149,10 @@ class WorkflowProgress(object):
                                 base_hasattr(item, 'progress') else 0)
                 else:
                     progress = self.guessProgress(name)
+
+                if progress <= self.minProgress:
+                    continue
+
                 self._steps.append((name, progress, title, description))
             break
         return self._steps

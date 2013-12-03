@@ -3,6 +3,10 @@ Changelog
 
 2.1-dev - (unreleased)
 ----------------------
+* Upgrade step: Within "Plone > Site setup > Add-ons" click on
+  upgrade button available for EEA Progress Bar
+* Feature: Possibility to hide/exclude certain states in progress bar
+  [voineali refs #17570]
 * Bug fix: Name schema extender adapters in order to avoid overriding existing ones
   [avoinea]
 * Bug fix: Cleanup portlets on uninstall

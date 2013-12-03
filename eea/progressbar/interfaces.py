@@ -89,6 +89,7 @@ class IWorkflowProgress(Interface):
     You can always change progress values per state via ZMI:
 
         >>> wf = portal.portal_workflow.simple_publication_workflow
+        >>> wf.states.pending.progress = 60
         >>> wf.states.published.progress = 90
 
         >>> IWorkflowProgress(sandbox).hasProgress
@@ -107,13 +108,13 @@ class IWorkflowProgress(Interface):
 
         >>> portal.portal_workflow.doActionFor(sandbox, 'submit')
         >>> IWorkflowProgress(sandbox).progress
-        0
+        60
 
         >>> IWorkflowProgress(sandbox).done
-        0
+        60
 
         >>> IWorkflowProgress(sandbox).steps
-        [('pending', 0, 'Pending review',... ('published', 90, 'Published',...)]
+        [('pending', 60, 'Pending review',... ('published', 90, 'Published'...)]
 
     """
     progress = schema.Int(
