@@ -3,6 +3,8 @@ Changelog
 
 2.1-dev - (unreleased)
 ----------------------
+* Bug fix: Name schema extender adapters in order to avoid overriding existing ones
+  [avoinea]
 * Bug fix: Cleanup portlets on uninstall
   [avoinea]
 

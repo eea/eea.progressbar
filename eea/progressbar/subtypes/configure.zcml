@@ -3,13 +3,13 @@
   xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
-  <adapter
+  <adapter name="eea.progressbar"
     for="eea.progressbar.interfaces.IBaseObject"
     provides="archetypes.schemaextender.interfaces.ISchemaExtender"
     factory=".schema.EEASchemaExtender"
     />
 
-  <adapter
+  <adapter name="eea.progressbar"
     for="eea.progressbar.interfaces.ICollection"
     provides="archetypes.schemaextender.interfaces.ISchemaExtender"
     factory=".schema.EEASchemaExtender"
