@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-12-03 18:16+0000\n"
+"POT-Creation-Date: 2013-12-05 14:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,11 +71,11 @@ msgid "Hide Workflow Steps Trail viewlet for this context/page"
 msgstr ""
 
 #: ../../progressbar/controlpanel/interfaces.py:31
-msgid "Ignore states lower than equal"
+msgid "Ignore states lower than or equal to"
 msgstr ""
 
 #: ../../progressbar/controlpanel/interfaces.py:32
-msgid "Ignore states that have a defined percentage lower than equal"
+msgid "Ignore states that have a defined percentage lower than or equal to"
 msgstr ""
 
 #: ../../progressbar/portlets/progress.py:16
