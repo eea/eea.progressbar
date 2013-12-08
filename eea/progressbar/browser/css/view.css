@@ -199,24 +199,24 @@
     position: relative;
     text-align: center;
     border-top: 1px solid #cccccc;
-    color: #cccccc;
+    color: #bbbbbb;
+    font-size: 80%;
+    font-weight: bold;
 }
 
 .progresstrail-step::before {
     content: attr(data-description);
-    width: 200px;
+    width: 250px;
     position:absolute;
     z-index: 999;
     bottom:9999px;
-    background:#fff;
-    color:#000;
-    padding:0.5em;
-    line-height: 24px;
+    background: #f3f3f3;
+    color: #555;
+    padding: 1em;
+    line-height: 2;
     opacity: 0;
     transition:opacity 0.4s ease-out;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-shadow: 5px 5px 10px #999;
+    box-shadow: 2px 2px 5px #999;
 }
 
 .progresstrail-step:hover::before {
@@ -241,11 +241,11 @@
 }
 
 .progresstrail-current {
-    color: #000000;
+    color: #555;
 }
 
 .progresstrail-current .progresstrail-icon {
-    border-color: #000000;
+    border-color: #555;
 }
 
 .portletItem .progresstrail-body {
