@@ -5,6 +5,9 @@ Changelog
 ----------------------
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
   upgrade button available for EEA Progress Bar
+* Change: Replace cryptic workflow state id with state title within ZMI >
+  Progress monitoring Tab
+  [voineali refs #17669]
 * Feature: Add title and description within Workflow Steps Trail Portlet on
   mouse hover
   [voineali refs #17669]

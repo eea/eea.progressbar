@@ -10,16 +10,17 @@
       <form style="margin: 0" tal:define="
         key python:state[0];
         value python:state[1];
+        title python:value.title_or_id();
         odd repeat/state/odd;
         klass python: odd and 'row-normal' or 'row-hilite';"
       tal:attributes="action string:states/$key/manage_progress">
         <table style="width: 100%;" cellpadding="0" cellspacing="0">
           <tr tal:attributes="class klass">
-            <th style="width: 20em; text-align: left">
-              <a tal:attributes="href string:states/$key/manage_progress" tal:content="key" />
+            <th style="width: 25em; text-align: left">
+              <a tal:attributes="href string:states/$key/manage_progress; title key" tal:content="title" />
             </th>
             <td>
-              <table style="width: 100%">
+              <table style="width: 100%" tal:attributes="title key">
                 <tr>
                   <td style="padding:none; ">
                     <hr style="color:#c00; background-color:#BAE0BA; height:15px; border:none;
