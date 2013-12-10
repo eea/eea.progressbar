@@ -5,6 +5,9 @@ Changelog
 ----------------------
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
   upgrade button available for EEA Progress Bar
+* Feature: Add title and description within Workflow Steps Trail Portlet on
+  mouse hover
+  [voineali refs #17669]
 * Feature: Possibility to hide/exclude certain states in progress bar
   [voineali refs #17570]
 * Bug fix: Name schema extender adapters in order to avoid overriding existing ones

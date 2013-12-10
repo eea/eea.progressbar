@@ -253,7 +253,7 @@
 }
 
 .portletItem .progresstrail-step::before {
-    content: attr(data-title);
+    content: attr(data-titledesc);
     bottom: 20px;
 }
 

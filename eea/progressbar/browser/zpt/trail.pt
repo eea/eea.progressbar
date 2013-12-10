@@ -21,6 +21,7 @@
       description python:step[4];" tal:attributes="
       data-title title;
       data-description description;
+      data-titledesc python:u'%s%s' % (title, (u' - %s' % description) if description != title else u'');
       style python:'width: %s%%' % width;
       class python:('progresstrail-step progresstrail-current %s' % odd) if (state == view.state) else 'progresstrail-step %s' % odd;"
       >
