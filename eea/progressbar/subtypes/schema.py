@@ -16,7 +16,7 @@ class EEABooleanField(ExtensionField, BooleanField):
     """
 
 class EEASchemaExtender(object):
-    """ Schema extender for content types with data provenance
+    """ Schema extender for progress bar fields
     """
     implements(ISchemaExtender, IBrowserLayerAwareExtender)
     layer = IProgressBarLayer
