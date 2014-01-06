@@ -3,7 +3,9 @@ Changelog
 
 2.2-dev - (unreleased)
 ----------------------
-  * Change: updated docsting progress bar fields class
+* Bug fix: Refresh workflow steps trail when state is changed via AJAX
+  [voineali fixes #17758]
+* Change: updated docsting progress bar fields class
   [ghicaale refs #16666]
 
 2.1 - (2013-12-10)
