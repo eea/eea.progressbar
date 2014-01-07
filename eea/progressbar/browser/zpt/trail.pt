@@ -7,8 +7,10 @@
     progress info/progress">
 
 <div class="eea-progresstrail" tal:attributes="data-baseurl string:${context/absolute_url}">
-<div class="progresstrail">
-  <tal:step repeat="step view/table">
+<div class="progresstrail"
+ tal:define="steps python: [step for step in view.table];
+            current_idx python: [steps.index(step_no) for step_no in steps if step_no[0] == view.state][0]">
+  <tal:step repeat="step steps">
     <div tal:define="
       odd repeat/step/odd;
       start repeat/step/start;
@@ -29,7 +31,9 @@
         klass python:'progresstrail-mask';
         klass python:klass + ' first' if start else klass;
         klass python:klass + ' last' if end else klass;" tal:attributes="class klass"></span>
-      <span class="progresstrail-icon"></span>
+      <span tal:attributes="
+        class python:('progresstrail-icon eea-icon eea-icon-2x eea-icon-circle-o') if (current_idx < steps.index(step)) else 'progresstrail-icon eea-icon eea-icon-2x eea-icon-check-circle';"
+       ></span>
       <span class="progresstrail-body" tal:content="title"></span>
     </div>
   </tal:step>

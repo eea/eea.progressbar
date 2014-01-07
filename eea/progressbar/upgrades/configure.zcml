@@ -3,6 +3,20 @@
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
   i18n_domain="eea">
 
+  <!-- 2.1 => 2.2 -->
+  <genericsetup:upgradeSteps
+      source="2.1"
+      destination="2.2"
+      profile="eea.progressbar:default">
+
+      <genericsetup:upgradeStep
+          title="Add eea.icons dependency"
+          description="Add eea.icons"
+          handler="eea.progressbar.upgrades.progressbar.add_icons"
+      />
+
+  </genericsetup:upgradeSteps>
+
   <!-- 2.0 => 2.1 -->
   <genericsetup:upgradeSteps
     source="2.0"
