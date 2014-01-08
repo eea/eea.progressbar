@@ -39,6 +39,7 @@ setup(name=NAME,
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'eea.icons'
           # -*- Extra requirements: -*-
       ],
       entry_points="""
