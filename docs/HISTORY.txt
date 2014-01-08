@@ -3,8 +3,10 @@ Changelog
 
 2.2-dev - (unreleased)
 ----------------------
+* Change: Fixed tests after the addition of eea.icons
+  [olimpiu #17711]
 * Feature: Add font awesome icons for Workflow Steps Trail Progress Bar
-  [olimpiu ##17711]
+  [olimpiu #17711]
 * Bug fix: Refresh workflow steps trail when state is changed via AJAX
   [voineali fixes #17758]
 * Change: updated docsting progress bar fields class
