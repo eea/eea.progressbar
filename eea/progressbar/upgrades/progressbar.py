@@ -1,3 +1,5 @@
+""" eea.progressbar upgrades
+"""
 from Products.CMFCore.utils import getToolByName
 
 
