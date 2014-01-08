@@ -8,8 +8,9 @@
 
 <div class="eea-progresstrail" tal:attributes="data-baseurl string:${context/absolute_url}">
 <div class="progresstrail"
- tal:define="steps python: [step for step in view.table];
-            current_idx python: [steps.index(step_no) for step_no in steps if step_no[0] == view.state][0]">
+ tal:define="steps python: list(view.table);
+            idx python: [steps.index(state) for state in steps if state[0] == view.state];
+            current_idx python: idx[0] if len(idx) > 0 else 0">
   <tal:step repeat="step steps">
     <div tal:define="
       odd repeat/step/odd;
