@@ -187,6 +187,14 @@
     margin: 2em 0;
 }
 
+.progresstrail .eea-icon {
+    display: block;
+    top: -6px;
+    position: relative;
+    line-height: 10px;
+    font-size: 2em;
+}
+
 .progresstrail:after {
     content: "";
     clear: both;
@@ -229,23 +237,37 @@
     right: 0;
 }
 
-.progresstrail-icon {
-    display: block;
-    top: -7px;
-    position: relative;
-    line-height: 0.55em;
-}
-
 .progresstrail-current {
     color: #555;
 }
 
-.eea-icon:before {
+.progresstrail .eea-icon:before {
     background: white;
 }
 
-.progresstrail-current .progresstrail-icon {
-    border-color: #555;
+[class*="state-trail-"]:before {
+    content: "\f10c";
+}
+
+.trail-checked:before {
+    color: green;
+}
+
+.trail-first:before {
+    content: "\f10c";
+}
+
+.trail-last:before {
+    content: "\f10c";
+}
+
+.trail-current:before {
+    color: #555;
+    content: "\f111";
+}
+
+.trail-done:before {
+    content: "\f058";
 }
 
 .portletItem .progresstrail-body {

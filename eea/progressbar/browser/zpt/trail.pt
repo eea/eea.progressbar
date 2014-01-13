@@ -10,7 +10,7 @@
 <div class="progresstrail"
  tal:define="steps python: list(view.table);
             idx python: [steps.index(state) for state in steps if state[0] == view.state];
-            current_idx python: idx[0] if len(idx) > 0 else 0">
+            current_idx python: idx[0] if len(idx) > 0 else -1">
   <tal:step repeat="step steps">
     <div tal:define="
       odd repeat/step/odd;
@@ -32,9 +32,23 @@
         klass python:'progresstrail-mask';
         klass python:klass + ' first' if start else klass;
         klass python:klass + ' last' if end else klass;" tal:attributes="class klass"></span>
-      <span tal:attributes="
-        class python:('progresstrail-icon eea-icon eea-icon-2x eea-icon-circle-o') if (current_idx < steps.index(step)) else 'progresstrail-icon eea-icon eea-icon-2x eea-icon-check-circle';"
-       ></span>
+      <span tal:define="
+        percent python: str(done);
+        after python: current_idx < steps.index(step);
+        current_step python: current_idx == steps.index(step);
+        base_class python: ('eea-icon state-trail-%s' % percent);
+        current_class python: '%s %s' % (base_class, 'trail-current');
+        checked_class python: '%s %s' % (base_class, 'trail-checked');
+        first_class python: '%s %s' % (base_class, 'trail-first');
+        last_class python: '%s %s' % (base_class, 'trail-last');
+        klass python: base_class if after else checked_class;
+        klass python: current_class if current_step and current_idx > 0 else klass;
+        klass python: first_class if start else klass;
+        klass python: '%s %s' % (first_class, 'trail-checked') if start and current_idx > 0 else klass;
+        klass python: '%s %s' % (first_class, 'trail-current') if start and current_step and current_idx == 0 else klass;
+        klass python: last_class if end else klass;
+        klass python: '%s %s %s' % (base_class, 'trail-done', 'trail-checked') if end and current_step else klass;"
+        tal:attributes="class klass"></span>
       <span class="progresstrail-body" tal:content="title"></span>
     </div>
   </tal:step>

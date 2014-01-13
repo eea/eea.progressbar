@@ -3,7 +3,8 @@ Changelog
 
 2.2-dev - (unreleased)
 ----------------------
-* Change: Fixed tests after the addition of eea.icons
+* Change: Added custom css classes for each state in Workflow Steps Trail
+  Progress bar.
   [olimpiu #17711]
 * Feature: Add font awesome icons for Workflow Steps Trail Progress Bar
   [olimpiu #17711]
