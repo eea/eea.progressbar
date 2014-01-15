@@ -243,20 +243,3 @@ class CollectionWorkflowProgress(WorkflowProgress):
 
         self._done = progress / (total or 1)
         return self._done
-
-    @property
-    def steps(self):
-        """ Return a list with steps and % done like:
-
-        (
-          ('closed', 33, 'Closed'),
-          ('done': 63, 'Done'),
-          ('total': 100, 'Total'),
-        )
-
-        """
-        return (
-            ('closed', self.progress, 'Closed'),
-            ('done', self.done, 'Done'),
-            ('total', 100, 'Total')
-        )
