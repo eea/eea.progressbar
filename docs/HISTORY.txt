@@ -3,6 +3,9 @@ Changelog
 
 2.2-dev - (unreleased)
 ----------------------
+* Bug fix: Fixed progressbar failing for Collections containing objects with no
+  workflow. Default to 'publish' state for objects with no workflow.
+  [olimpiu #17873]
 * Bug fix: Fixed Workflow Steps Trail Progress bar failing for Collections
   [olimpiu #17873]
 * Change: Added custom css classes for each state in Workflow Steps Trail

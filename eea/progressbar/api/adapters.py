@@ -1,13 +1,14 @@
 """ Progress adapters
 """
-from zope.interface import implements
-from zope.component import queryAdapter
-from zope.component.hooks import getSite
+from eea.progressbar.controlpanel.interfaces import ISettings
+from eea.progressbar.interfaces import IWorkflowProgress
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFPlone.utils import base_hasattr
-from eea.progressbar.interfaces import IWorkflowProgress
-from eea.progressbar.controlpanel.interfaces import ISettings
+from zope.component import queryAdapter
+from zope.component.hooks import getSite
+from zope.interface import implements
 
 class WorkflowProgress(object):
     """
@@ -81,7 +82,10 @@ class WorkflowProgress(object):
 
         self._progress = 0
         wftool = getToolByName(self.context, 'portal_workflow')
-        state = wftool.getInfoFor(self.context, 'review_state')
+        try:
+            state = wftool.getInfoFor(self.context, 'review_state')
+        except WorkflowException:
+            state = 'published'
 
         # No progress defined
         if not self.hasProgress:
