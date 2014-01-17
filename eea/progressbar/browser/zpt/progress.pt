@@ -17,7 +17,7 @@
         workflow python:step[0];
         done python:step[1];
         width python:step[2];
-        sep python: ' & ';
+        sep python: ' / ';
         title python:sep.join(step[3]) if (done > progress) else view.state_title;
         title python:'%s - %s%%' % (title, done if (done > progress) else progress)"
       class="progressbar-step" tal:attributes="
