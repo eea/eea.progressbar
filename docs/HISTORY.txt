@@ -3,6 +3,8 @@ Changelog
 
 2.2-dev - (unreleased)
 ----------------------
+* Feature: Handle states with same percentage
+  [olimpiu #17712]
 * Bug fix: Fixed progressbar failing for Collections containing objects with no
   workflow. Default to 'publish' state for objects with no workflow.
   [olimpiu #17873]

@@ -143,6 +143,8 @@ class WorkflowProgress(object):
 
         self._steps = []
         wftool = getToolByName(self.context, 'portal_workflow')
+        progress_steps = {}
+
         for wf in wftool.getWorkflowsFor(self.context):
             for name, item in sorted(wf.states.items(), cmp=compare):
                 title = item.title if base_hasattr(item, 'title') else name
@@ -157,7 +159,21 @@ class WorkflowProgress(object):
                 if progress <= self.minProgress:
                     continue
 
-                self._steps.append((name, progress, title, description))
+                has_progress = progress_steps.get(progress)
+
+                if has_progress:
+                    name_list = has_progress[0]
+                    title_list = has_progress[2]
+                    desc_list = has_progress[3]
+
+                    name_list.append(name)
+                    title_list.append(title)
+                    desc_list.append(description)
+                else:
+                    step = ([name, ], progress, [title, ], [description, ])
+                    self._steps.append(step)
+                    progress_steps[progress] = step
+
             break
         return self._steps
 
