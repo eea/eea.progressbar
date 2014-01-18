@@ -10,7 +10,7 @@ A system that visually display a *workflow percentage bar* or a
 *workflow steps trail* in the publishing process of a document according with
 the workflow state in which the document is.
 
-.. image:: http://eea.github.com/_images/eea.progressbar.cover.png
+.. image:: images/eea.progressbar.cover.png
    :target: http://youtu.be/a_U0tmw-4As
 
 Contents

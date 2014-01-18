@@ -17,6 +17,8 @@ Changelog
   [voineali fixes #17758]
 * Change: updated docsting progress bar fields class
   [ghicaale refs #16666]
+* Feature: adding Sphinx-generated documentation in Page Template format
+  [batradav refs #9502]
 
 2.1 - (2013-12-10)
 ------------------
