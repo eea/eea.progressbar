@@ -12,10 +12,13 @@
       <div tal:define="
         odd repeat/step/odd;
         odd python:'progress-odd' if (odd or progress >= 100) else 'progress-even';
+        state_idx python:step[0].index(view.state) if view.state in step[0] else 0;
+        state python:step[0][state_idx];
         workflow python:step[0];
         done python:step[1];
         width python:step[2];
-        title python:step[3] if (done > progress) else view.state_title;
+        sep python: ' / ';
+        title python:sep.join(step[3]) if (done > progress) else view.state_title;
         title python:'%s - %s%%' % (title, done if (done > progress) else progress)"
       class="progressbar-step" tal:attributes="
         class python:('progressbar-step progressbar-current state-%s %s' % (view.state, odd)) if (done <= progress) else 'progressbar-step %s' % odd;

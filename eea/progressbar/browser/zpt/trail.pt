@@ -9,7 +9,7 @@
 <div class="eea-progresstrail" tal:attributes="data-baseurl string:${context/absolute_url}">
 <div class="progresstrail"
  tal:define="steps python: list(view.table);
-            idx python: [steps.index(state) for state in steps if state[0] == view.state];
+            idx python: [steps.index(state) for state in steps if view.state in state[0]];
             current_idx python: idx[0] if len(idx) > 0 else -1">
   <tal:step repeat="step steps">
     <div tal:define="
@@ -17,11 +17,14 @@
       start repeat/step/start;
       end repeat/step/end;
       odd python:'progress-odd' if (odd or progress >= 100) else 'progress-even';
-      state python:step[0];
+      state_idx python:step[0].index(view.state) if view.state in step[0] else 0;
+      state python:step[0][state_idx];
       done python:step[1];
       width python:step[2];
-      title python:step[3];
-      description python:step[4];" tal:attributes="
+      sep python: ' / ';
+      title python:view.state_title if state == view.state else sep.join(step[3]);
+      description python:sep.join([step[4][state_idx]]) if state == view.state else sep.join(step[4]);"
+      tal:attributes="
       data-title title;
       data-description description;
       data-titledesc python:u'%s%s' % (title, (u' - %s' % description) if description != title else u'');
@@ -49,7 +52,7 @@
         klass python: last_class if end else klass;
         klass python: '%s %s %s' % (base_class, 'trail-done', 'trail-checked') if end and current_step else klass;"
         tal:attributes="class klass"></span>
-      <span class="progresstrail-body" tal:content="title"></span>
+        <span class="progresstrail-body" tal:content="title"></span>
     </div>
   </tal:step>
 </div>
