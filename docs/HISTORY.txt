@@ -1,6 +1,9 @@
 Changelog
 =========
 
+2.3-dev - (unreleased)
+----------------------
+
 2.2 - (2014-01-22)
 ------------------
 * Feature: Handle states with same percentage
