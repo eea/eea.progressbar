@@ -11,7 +11,7 @@ A system that visually display a *workflow percentage bar* or a
 the workflow state in which the document is.
 
 .. image:: http://eea.github.io/_images/eea.progressbar.cover.png
-   :target: http://youtu.be/a_U0tmw-4As
+   :target: http://www.youtube.com/watch?v=a_U0tmw-4As&list=PLVPSQz7ahsBwUHixUt_s0kh-vaik_NCtO&feature=share
 
 Contents
 ========
