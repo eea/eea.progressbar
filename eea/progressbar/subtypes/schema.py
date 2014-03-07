@@ -1,14 +1,13 @@
 """ Schema extender for Disable Autolinks for context/page
 """
 from zope.interface import implements
-from zope.component import queryAdapter
-from zope.component.hooks import getSite
+from zope.component import queryAdapter, queryUtility
 from Products.Archetypes.public import BooleanField, BooleanWidget
 from archetypes.schemaextender.interfaces import ISchemaExtender
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
 from archetypes.schemaextender.field import ExtensionField
 from eea.progressbar.config import EEAMessageFactory as _
-from eea.progressbar.interfaces import IProgressBarLayer
+from eea.progressbar.interfaces import IProgressBarLayer, IProgressTool
 from eea.progressbar.controlpanel.interfaces import ISettings
 
 class EEABooleanField(ExtensionField, BooleanField):
@@ -49,15 +48,33 @@ class EEASchemaExtender(object):
         ),
     )
 
+    fieldsMetadata = (
+        EEABooleanField(
+            name='disableMetadataViewletVisibleFor',
+            schemata='settings',
+            default=False,
+            searchable=False,
+            widget=BooleanWidget(
+                label=_('Hide Metadata Progress Viewlet'),
+                description=_('Hide Metadata Progress viewlet for '
+                              'this context/page'),
+            )
+        ),
+    )
+
     def __init__(self, context):
         self.context = context
 
     def getFields(self):
         """ Returns provenance list field
         """
-        settings = queryAdapter(getSite(), ISettings)
+        ptool = queryUtility(IProgressTool)
+        settings = queryAdapter(ptool, ISettings)
         ctype = getattr(self.context, 'portal_type', '')
         fields = ()
+
+        if not settings:
+            return  fields
 
         allowed = settings.viewletVisibleFor or []
         if ctype in allowed:
@@ -66,5 +83,9 @@ class EEASchemaExtender(object):
         allowed = settings.trailViewletVisibleFor or []
         if ctype in allowed:
             fields += self.fieldsTrail
+
+        allowed = settings.metadataViewletVisibleFor or []
+        if ctype in allowed:
+            fields += self.fieldsMetadata
 
         return fields

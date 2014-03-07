@@ -111,3 +111,7 @@ class CollectionProgressBarView(ProgressBarView):
         """ Current state title
         """
         return _('Total progress')
+
+class ProgressMetadataView(ProgressBarView):
+    """ Metadata progress
+    """

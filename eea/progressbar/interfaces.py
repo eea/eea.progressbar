@@ -12,6 +12,14 @@ from zope import schema
 from Products.ZCatalog.interfaces import ICatalogBrain as IZCatalogBrain
 from eea.progressbar.config import EEAMessageFactory as _
 from plone.app.collection.interfaces import ICollection as IPloneCollection
+
+# Tool
+from eea.progressbar.content.interfaces import IProgressTool
+from eea.progressbar.content.interfaces import IContentType
+
+# ControlPanel
+from eea.progressbar.controlpanel.interfaces import ISettings
+
 #
 # Marker interfaces
 #
@@ -138,3 +146,10 @@ class IWorkflowProgress(Interface):
         description=_(u"A list of workflow steps with percetage"),
         readonly=True
     )
+
+
+__all__ = [
+    IProgressTool.__name__,
+    IContentType.__name__,
+    ISettings.__name__,
+]

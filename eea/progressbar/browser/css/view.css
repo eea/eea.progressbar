@@ -305,3 +305,6 @@
 .progressbar-viewlet.trail legend {
     display: none;
 }
+
+.progressbar-viewlet.metadata legend {
+}

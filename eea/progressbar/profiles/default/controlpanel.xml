@@ -8,7 +8,7 @@
     appId="eea.progressbar"
     category="Products"
     condition_expr=""
-    url_expr="string:$portal_url/@@progressbar-controlpanel"
+    url_expr="string:$portal_url/portal_progress"
     visible="True">
       <permission>Manage portal</permission>
   </configlet>

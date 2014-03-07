@@ -12,6 +12,14 @@ def setupVarious(context):
     if context.readDataFile('eea.progressbar.txt') is None:
         return
 
+    site = context.getSite()
+
+    # Portal tool
+    tool = getToolByName(site, 'portal_progress')
+    tool.title = 'Progress Bar Settings'
+    tool.unindexObject()
+
+    # Collection
     atool = getToolByName(context, 'portal_atct')
     if not atool:
         return

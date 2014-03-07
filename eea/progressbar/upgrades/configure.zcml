@@ -3,6 +3,19 @@
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
   i18n_domain="eea">
 
+  <!-- 2.2 => 2.3 -->
+  <genericsetup:upgradeSteps
+      source="2.2"
+      destination="2.3"
+      profile="eea.progressbar:default">
+
+      <genericsetup:upgradeDepends
+        title="Import all from eea.progressbar"
+        import_profile="eea.progressbar:default"
+        />
+
+  </genericsetup:upgradeSteps>
+
   <!-- 2.1 => 2.2 -->
   <genericsetup:upgradeSteps
       source="2.1"

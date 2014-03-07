@@ -1,13 +1,19 @@
 """ Control Panel
 """
-from zope.component import queryUtility
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+from zope.component import queryUtility, getMultiAdapter
 from zope.interface import implements
+from zope.formlib import form
+from zope.schema.interfaces import IVocabularyFactory
+from plone.app.controlpanel.form import ControlPanelForm
+from plone.app.form.validators import null_validator
+from plone.registry.interfaces import IRegistry
+from plone.protect import CheckAuthenticator
+from plone.app.controlpanel.events import ConfigurationChangedEvent
+from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from eea.progressbar.controlpanel.interfaces import ISettings
 from eea.progressbar.controlpanel.interfaces import _
-from plone.app.controlpanel.form import ControlPanelForm
-from plone.registry.interfaces import IRegistry
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
-from zope.formlib import form
 
 class ControlPanel(ControlPanelForm):
     """ Diffbot API
@@ -16,6 +22,26 @@ class ControlPanel(ControlPanelForm):
     label = _(u"Progress Bar Settings")
     description = _(u"Progress bar settings")
     form_name = _(u"Progress bar settings")
+
+    @form.action(_(u'label_save', default=u'Save'), name=u'save')
+    def handle_edit_action(self, action, data):
+        CheckAuthenticator(self.request)
+        if form.applyChanges(self.context, self.form_fields, data,
+                             self.adapters):
+            self.status = _("Changes saved.")
+            notify(ConfigurationChangedEvent(self, data))
+            self._on_save(data)
+        else:
+            self.status = _("No changes made.")
+
+    @form.action(_(u'label_back', default=u'Back'),
+                 validator=null_validator,
+                 name=u'cancel')
+    def handle_cancel_action(self, action, data):
+        url = getMultiAdapter((self.context, self.request),
+                              name='absolute_url')()
+        self.request.response.redirect(url)
+        return ''
 
 class ControlPanelAdapter(SchemaAdapterBase):
     """ Form adapter
@@ -73,3 +99,29 @@ class ControlPanelAdapter(SchemaAdapterBase):
         """ Setter
         """
         self.settings.hidedStatesPercentage = value
+
+    @property
+    def metadataViewletVisibleFor(self):
+        """ Getter
+        """
+        name = u"metadataViewletVisibleFor"
+        return getattr(self.settings, name, ISettings[name].default)
+
+    @metadataViewletVisibleFor.setter
+    def metadataViewletVisibleFor(self, value):
+        """ Setter
+        """
+        self.settings.metadataViewletVisibleFor = value
+        voc = queryUtility(IVocabularyFactory,
+                        name=u'eea.progressbar.vocabulary.MetadataContentTypes')
+        existing = [item for item in voc.existing]
+        for item in value:
+            if item in existing:
+                continue
+
+            oid = item.lower().replace(' ', '-')
+            oid = self.context.invokeFactory('ProgressContentType',
+                                             id=oid, title=item)
+            child = self.context[oid]
+            child.getField('ctype').getMutator(child)(item)
+            notify(ObjectModifiedEvent(child))

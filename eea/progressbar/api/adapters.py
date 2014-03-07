@@ -1,14 +1,13 @@
 """ Progress adapters
 """
-from eea.progressbar.controlpanel.interfaces import ISettings
-from eea.progressbar.interfaces import IWorkflowProgress
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFPlone.utils import base_hasattr
-from zope.component import queryAdapter
-from zope.component.hooks import getSite
+from zope.component import queryAdapter, queryUtility
 from zope.interface import implements
+from eea.progressbar.controlpanel.interfaces import ISettings
+from eea.progressbar.interfaces import IWorkflowProgress, IProgressTool
 
 class WorkflowProgress(object):
     """
@@ -31,8 +30,8 @@ class WorkflowProgress(object):
         """ Minimum progress to display
         """
         if not self._minProgress:
-            site = getSite()
-            settings = queryAdapter(site, ISettings)
+            ptool = queryUtility(IProgressTool)
+            settings = queryAdapter(ptool, ISettings)
             self._minProgress = settings.hidedStatesPercentage
         return self._minProgress
 

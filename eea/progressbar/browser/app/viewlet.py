@@ -1,10 +1,10 @@
 """ Custom viewlets
 """
-from zope.component.hooks import getSite
-from zope.component import queryMultiAdapter, queryAdapter
+from zope.component import queryMultiAdapter, queryAdapter, queryUtility
 from plone.app.layout.viewlets import common
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.progressbar.controlpanel.interfaces import ISettings
+from eea.progressbar.interfaces import IProgressTool
 
 
 class ProgressBar(common.ViewletBase):
@@ -22,8 +22,8 @@ class ProgressBar(common.ViewletBase):
         """ Settings
         """
         if self._settings is None:
-            site = getSite()
-            self._settings = queryAdapter(site, ISettings)
+            ptool = queryUtility(IProgressTool)
+            self._settings = queryAdapter(ptool, ISettings)
         return self._settings
 
     @property
@@ -81,6 +81,39 @@ class ProgressTrail(ProgressBar):
             return False
 
         visibleFor = self.settings.trailViewletVisibleFor or []
+        ctype = getattr(self.context, 'portal_type', None)
+        if ctype in visibleFor:
+            return True
+
+        return False
+
+class MetadataProgress(ProgressBar):
+    """ Custom viewlet for metadata progress
+    """
+    render = ViewPageTemplateFile('../zpt/metadata.viewlet.pt')
+
+    @property
+    def progressbar(self):
+        """ Get progressbar for context
+        """
+        if self._progressbar is False:
+            self._progressbar = queryMultiAdapter((self.context, self.request),
+                                                  name='progress.metadata')
+        return self._progressbar
+
+    @property
+    def available(self):
+        """ Available
+        """
+        if not self.progressbar:
+            return False
+
+        disabled = getattr(self.context,
+                           "disableMetadataViewletVisibleFor", None)
+        if disabled:
+            return False
+
+        visibleFor = self.settings.metadataViewletVisibleFor or []
         ctype = getattr(self.context, 'portal_type', None)
         if ctype in visibleFor:
             return True

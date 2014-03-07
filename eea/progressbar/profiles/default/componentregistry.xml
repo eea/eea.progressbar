@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<componentregistry>
+ <utilities>
+  <utility
+   interface="eea.progressbar.interfaces.IProgressTool"
+   object="portal_progress"/>
+ </utilities>
+</componentregistry>

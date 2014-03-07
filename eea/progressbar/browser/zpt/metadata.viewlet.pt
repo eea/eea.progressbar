@@ -1,0 +1,4 @@
+<fieldset class="progressbar-viewlet metadata" tal:condition="view/available">
+  <legend i18n:translate=""><tal:type replace="context/portal_type">Portal type</tal:type> editing progress</legend>
+  <tal:progress replace="structure python:view.progressbar()" />
+</fieldset>

@@ -5,3 +5,6 @@ EEAMessageFactory = MessageFactory('eea')
 
 PROGRESSFILE = u'workflows.progress.xml'
 TOPICMETADATA = 'progress'
+
+PROJECTNAME = 'eea.progressbar'
+ADD_CONTENT_PERMISSION = 'Add portal content'

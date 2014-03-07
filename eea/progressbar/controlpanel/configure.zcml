@@ -4,14 +4,14 @@
   i18n_domain="eea">
 
   <browser:page
-    name="progressbar-controlpanel"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="settings"
+    for="eea.progressbar.interfaces.IProgressTool"
     class=".settings.ControlPanel"
     permission="cmf.ManagePortal"
     />
 
   <adapter
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    for="eea.progressbar.interfaces.IProgressTool"
     provides=".interfaces.ISettings"
     factory=".settings.ControlPanelAdapter" />
 

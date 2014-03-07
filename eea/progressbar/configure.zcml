@@ -9,12 +9,15 @@
 
   <include package=".api" />
   <include package=".browser" />
+  <include package=".content" />
   <include package=".controlpanel" />
   <include package=".exportimport" />
   <include package=".listing" />
   <include package=".portlets" />
   <include package=".subtypes" />
   <include package=".upgrades" />
+  <include package=".vocabulary" />
+  <include package=".widgets" />
   <include package=".zmi" />
 
 </configure>

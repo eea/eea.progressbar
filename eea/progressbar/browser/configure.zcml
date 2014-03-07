@@ -3,6 +3,14 @@
   i18n_domain="eea">
 
   <browser:page
+    name="view"
+    for="eea.progressbar.interfaces.IContentType"
+    class=".app.tool.ContentType"
+    template="zpt/progress.cpanel.pt"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
     name="progress.bar"
     layer="eea.progressbar.interfaces.IProgressBarLayer"
     for="eea.progressbar.interfaces.IBaseObject"
@@ -29,6 +37,15 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="progress.metadata"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    for="eea.progressbar.interfaces.IBaseObject"
+    class=".app.view.ProgressMetadataView"
+    template="zpt/metadata.pt"
+    permission="zope2.View"
+    />
+
   <browser:viewlet
     name="eea.progressbar"
     layer="eea.progressbar.interfaces.IProgressBarLayer"
@@ -43,6 +60,14 @@
     layer="eea.progressbar.interfaces.IProgressBarLayer"
     manager="plone.app.layout.viewlets.interfaces.IContentViews"
     class=".app.viewlet.ProgressTrail"
+    permission="zope2.View"
+    />
+
+  <browser:viewlet
+    name="eea.progressmetadata"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    manager="plone.app.layout.viewlets.interfaces.IContentViews"
+    class=".app.viewlet.MetadataProgress"
     permission="zope2.View"
     />
 

@@ -27,6 +27,16 @@ class ISettings(Interface):
             vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes")
     )
 
+    metadataViewletVisibleFor = schema.List(
+        title=_(u"Enable metadata progress viewlet"),
+        description=_(u"Metadata progress viewlet is visible for the "
+                      u"following content-types"),
+        required=False,
+        default=[],
+        value_type=schema.Choice(
+            vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes")
+    )
+
     hidedStatesPercentage = schema.Int(
         title=_(u"Ignore states lower than or equal to"),
         description=_(u"Ignore states that have a "

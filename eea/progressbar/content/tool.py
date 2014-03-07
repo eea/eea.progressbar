@@ -1,0 +1,19 @@
+""" Depiction tools
+"""
+from zope.interface import implements
+from Products.CMFCore.utils import UniqueObject
+from Products.ATContentTypes.content.folder import ATFolder
+from Products.Archetypes.atapi import OrderedBaseFolderSchema
+from Products.Archetypes.atapi import Schema
+from eea.progressbar.content.interfaces import IProgressTool
+
+class ProgressTool(UniqueObject, ATFolder):
+    """ Local utility to store and customize content-types schema progress
+    """
+    implements(IProgressTool)
+
+    meta_type = portal_type = 'ProgressTool'
+    archetypes_name = 'EEA Progress Bar Tool'
+    manage_options = ATFolder.manage_options
+    schema = ATFolder.schema.copy()
+    _at_rename_after_creation = False
