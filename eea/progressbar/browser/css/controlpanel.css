@@ -1,0 +1,46 @@
+#eea-progressbar-cpanel {
+  background: #eee;
+}
+
+#eea-progressbar-cpanel:after {
+  content: '.';
+  height: 0;
+  display: block;
+  clear: both;
+}
+
+#content fieldset.eea-progressbar-widget,
+.eea-progressbar-widget {
+  width: 350px;
+  float: left;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  border-style: solid;
+  margin: 0.3em;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.eea-progressbar-widget legend {
+  display: none;
+}
+
+.eea-progressbar-widget .valid, .eea-progressbar-widget .invalid {
+  padding: 1em;
+}
+
+.eea-progressbar-widget .button {
+  margin-left: 32px;
+}
+
+.eea-progressbar-widget .valid {
+  font-weight: bold;
+}
+
+.eea-progressbar-widget .invalid {
+  border-bottom: 1px solid #ccc;
+}
+
+.eea-progressbar-widget input[type=text][size] {
+  width: 100%;
+}

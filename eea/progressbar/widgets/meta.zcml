@@ -1,0 +1,16 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
+  xmlns:meta="http://namespaces.zope.org/meta">
+
+  <meta:directives namespace="http://namespaces.zope.org/progressbar">
+
+      <meta:directive
+         name="widget"
+         schema=".interfaces.IWidgetDirective"
+         handler=".meta.WidgetDirective"
+         />
+
+  </meta:directives>
+
+</configure>

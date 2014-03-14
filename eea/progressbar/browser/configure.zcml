@@ -77,8 +77,18 @@
    />
 
   <browser:resource
+    name="eea.progressbar.controlpanel.css"
+    file="css/controlpanel.css"
+   />
+
+  <browser:resource
     name="eea.progressbar.js"
     file="js/view.js"
+   />
+
+  <browser:resource
+    name="eea.progressbar.controlpanel.js"
+    file="js/controlpanel.js"
    />
 
   <browser:resourceDirectory

@@ -1,4 +1,13 @@
-<configure xmlns="http://namespaces.zope.org/zope"
+<configure
+  xmlns:progressbar="http://namespaces.zope.org/progressbar"
   i18n_domain="eea">
+
+  <progressbar:widget
+    for="eea.progressbar.interfaces.IBaseObject"
+    edit=".edit.Edit"
+    view=".view.View"
+    name="progressbar.widget"
+    permission="cmf.ManagePortal"
+    />
 
 </configure>

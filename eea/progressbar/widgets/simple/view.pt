@@ -1,0 +1,22 @@
+<div>
+
+  <div class="invalid">
+    <div>
+      <span tal:attributes="class python:view.get('iconEmpty', '')"></span>
+      <span tal:content="python:view.get('labelEmpty', '')"></span>
+    </div>
+
+    <div class="button">
+      <a tal:attributes="href python:view.get('link', '#')"
+         tal:content="python:view.get('linkLabel', 'Edit')" />
+    </div>
+  </div>
+
+  <div class="valid">
+    <div>
+      <span tal:attributes="class python:view.get('iconReady', '')"></span>
+      <span tal:content="python:view.get('labelReady', '')"></span>
+    </div>
+  </div>
+
+</div>
