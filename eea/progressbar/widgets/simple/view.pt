@@ -1,4 +1,6 @@
-<div>
+<div tal:define="render_error nocall:context/@@progressbar.widget.error;"
+  tal:attributes="class python:'custom' if view.custom else 'default'"
+  tal:on-error="structure python:render_error(error=error, fid=view.prefix)">
 
   <div class="invalid">
     <div>
@@ -17,6 +19,10 @@
       <span tal:attributes="class python:view.get('iconReady', '')"></span>
       <span tal:content="python:view.get('labelReady', '')"></span>
     </div>
+  </div>
+
+  <div class="workflow" title="Workflow states" i18n:attributes="title">
+    <span tal:content="python:', '.join(term.title for term in view.workflow())">Workflow states</span>
   </div>
 
 </div>

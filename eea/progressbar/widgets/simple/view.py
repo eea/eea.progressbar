@@ -1,54 +1,34 @@
 """ View
 """
-from Products.Five.browser import BrowserView
+from Products.Archetypes.interfaces import vocabulary
+from zope.component import queryUtility
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
+from eea.progressbar.widgets.view import ViewForm
 
-class View(BrowserView):
+class View(ViewForm):
     """ Widget view
     """
     template = ViewPageTemplateFile('view.pt')
 
-    def __init__(self, context, request):
-        super(View, self).__init__(context, request)
-        self.prefix = u''
-        self.title = u''
-        self._ready = None
-
-    @property
-    def ready(self):
-        if self._ready is None:
-            field = self.context.getField(self.prefix)
-            value = field.getAccessor(self.context)()
-            self._ready = True if value else False
-        return self._ready
-
     def default(self, name):
+        """ Default values
+        """
         return ISimpleWidgetEdit[name].default
 
-    def get(self, name, default=''):
-        """ Get widget value for name
+    def workflow(self):
+        """ Human readable workflow states
         """
-        value = self.default(name)
-        if isinstance(value, (str, unicode)):
-            value = value.format(self.title)
-        return value if value else default
+        value = self.get('states', [])
+        items = (SimpleTerm(key, key, key) for key in value)
+        vocabulary = ISimpleWidgetEdit['states'].value_type.vocabularyName
+        if not vocabulary:
+            return items
 
-    def __call__(self, *args, **kwargs):
-        form = self.request.form
-        form.update(kwargs)
+        voc = queryUtility(IVocabularyFactory, name=vocabulary)
+        if not voc:
+            return items
 
-        prefix = form.get('prefix', None)
-        if prefix:
-            self.prefix = prefix
-            self.title = prefix
-
-        title = form.get('title', None)
-        if title:
-            self.title = title
-
-        ready = form.get('ready', None)
-        if ready is not None:
-            self._ready = ready
-
-        return self.template()
+        return [term for term in voc(self.context) if term.value in value]

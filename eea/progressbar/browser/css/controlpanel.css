@@ -30,17 +30,65 @@
 }
 
 .eea-progressbar-widget .button {
-  margin-left: 32px;
+  text-align: right;
 }
 
 .eea-progressbar-widget .valid {
   font-weight: bold;
 }
 
+.eea-progressbar-widget .preview {
+  min-height: 95px;
+  padding-top: 1em;
+}
+
+
 .eea-progressbar-widget .invalid {
   border-bottom: 1px solid #ccc;
 }
 
+.eea-progressbar-widget .default {
+  background: #fff;
+}
+
+.eea-progressbar-widget .custom {
+  background: #fefaf0;
+}
+
+.eea-progressbar-widget .workflow {
+  color: green;
+  text-align: right;
+}
+
 .eea-progressbar-widget input[type=text][size] {
   width: 100%;
+}
+
+.eea-progressbar-widget .error {
+  color: red;
+  padding: 1em;
+  padding-bottom: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font-size: 100%;
+}
+
+.eea-progressbar-widget .error dl {
+  padding: 0.4em 0 0 1em;
+}
+
+.eea-progressbar-widget .error dt {
+  font-weight: bold;
+
+}
+
+.eea-progressbar-widget .error dt, .eea-progressbar-widget .error dd {
+  display: inline;
+}
+
+.eea-progressbar-widget .error dd:after {
+  content: '.';
+  display: block;
+  height: 0;
 }

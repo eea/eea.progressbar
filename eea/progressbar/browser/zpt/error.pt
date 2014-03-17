@@ -1,0 +1,15 @@
+<div
+  tal:define="error options/error|nothing"
+  class="error"
+  i18n:domain="eea">
+  <div i18n:translate="">
+    An error occurred while trying to render this widget.
+    Modify widget configuration in order to fix this issue.
+  </div>
+  <dl>
+    <dt i18n:translate="">Error type:</dt>
+    <dd tal:content="python:getattr(error, 'type', None)" />
+    <dt i18n:translate="">Error value:</dt>
+    <dd tal:content="error/value|string:" />
+  </dl>
+</div>

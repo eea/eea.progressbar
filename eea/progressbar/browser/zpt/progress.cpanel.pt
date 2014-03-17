@@ -20,8 +20,17 @@
       <fieldset tal:define="name field/getName"
         tal:attributes="id string:progress-schema-$name" class="eea-progressbar-widget">
         <legend tal:content="name">Field label</legend>
-        <tal:view replace="structure python:view.view(field)">Widget body</tal:view>
-        <tal:edit replace="structure python:view.edit(field)">Widget body</tal:edit>
+        <div class="preview">
+          <tal:view
+            define="viewform python:view.view(field)"
+            replace="structure python:viewform()">Widget body</tal:view>
+        </div>
+        <form method="post" tal:define="
+          editform python:view.edit(field);
+          name python:editform.__name__;"
+          tal:attributes="action string:${context/absolute_url}/.schema/@@$name">
+          <tal:edit replace="structure editform">Widget body</tal:edit>
+        </form>
       </fieldset>
     </tal:field>
   </div>

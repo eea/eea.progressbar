@@ -20,6 +20,9 @@ from eea.progressbar.content.interfaces import IContentType
 # ControlPanel
 from eea.progressbar.controlpanel.interfaces import ISettings
 
+# Storage
+from eea.progressbar.storage.interfaces import IStorage
+
 #
 # Marker interfaces
 #
@@ -152,4 +155,5 @@ __all__ = [
     IProgressTool.__name__,
     IContentType.__name__,
     ISettings.__name__,
+    IStorage.__name__,
 ]

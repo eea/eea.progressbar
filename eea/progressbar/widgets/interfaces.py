@@ -7,6 +7,10 @@ from zope.security import zcml
 from zope.browserpage.metadirectives import IPageDirective
 from eea.progressbar.config import EEAMessageFactory as _
 
+class IProgressStorage(Interface):
+    """ Get / update widget based progress info
+    """
+
 class IProgressWidget(Interface):
     """ Common interface to display fields within portal_progress
     """

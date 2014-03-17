@@ -17,6 +17,19 @@ class ContentType(BrowserView):
             return
 
         for field in schema.fields():
+            # Skip some fields
+            if field.getName() == 'id':
+                continue
+
+            # Skip invisible fields
+            visible = getattr(field.widget, 'visible', None)
+            if isinstance(visible, (bool, int)):
+                if not visible:
+                    continue
+            elif isinstance(visible, dict):
+                if visible.get('edit', u'visible') != u'visible':
+                    continue
+
             yield field
 
     def view(self, field):
@@ -25,9 +38,10 @@ class ContentType(BrowserView):
         ctype = getattr(self.context, '.schema', None)
         widget = queryMultiAdapter((ctype, self.request),
                                     name=u'progressbar.widget.view')
-        widget.prefix = field.getName()
-        widget.title = field.widget.label
-        return widget()
+        widget.setPrefix(field.getName())
+        widget.label = field.widget.label
+        widget.field = field
+        return widget
 
     def edit(self, field):
         """ Widget edit
@@ -35,5 +49,6 @@ class ContentType(BrowserView):
         ctype = getattr(self.context, '.schema', None)
         widget = queryMultiAdapter((ctype, self.request),
                                     name=u'progressbar.widget.edit')
-        widget.prefix = field.getName()
-        return widget()
+        widget.setPrefix(field.getName())
+        widget.field = field
+        return widget

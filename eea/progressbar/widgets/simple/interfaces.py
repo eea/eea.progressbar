@@ -12,28 +12,28 @@ class ISimpleWidgetEdit(IProgressWidgetEdit):
         title=_(u'Message (not set)'),
         description=_(u'Message to be used when property is NOT filled'),
         required=False,
-        default=u"Please set the {0} for this item"
+        default=u"Please set the {label} of this {context.portal_type}"
     )
 
     labelReady = schema.TextLine(
         title=_(u'Message (ready)'),
         description=_(u'Message to be used when property is filled'),
         required=False,
-        default=u"You added the {0}"
+        default=u"You added the {label}"
     )
 
     iconEmpty = schema.TextLine(
         title=_(u'Icon (not set)'),
         description=_(u'Icon to be used when property is NOT filled'),
         required=False,
-        default=u'eea-icon eea-icon-check-circle-o eea-icon-2x'
+        default=u'eea-icon eea-icon-edit'
     )
 
     iconReady = schema.TextLine(
         title=_(u"Icon (ready)"),
         description=_(u"Icon to be used when property is filled"),
         required=False,
-        default=u'eea-icon eea-icon-check eea-icon-2x'
+        default=u'eea-icon eea-icon-check'
     )
 
     link = schema.TextLine(
@@ -45,7 +45,7 @@ class ISimpleWidgetEdit(IProgressWidgetEdit):
     linkLabel = schema.TextLine(
         title=_(u'Edit link label'),
         description=_(u'Human readable label for edit link'),
-        default=u'Add {0}'
+        default=u'Add {label}'
     )
 
     states = schema.List(

@@ -46,6 +46,15 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="progressbar.widget.error"
+    for="eea.progressbar.interfaces.IBaseObject"
+    layer="eea.progressbar.interfaces.IProgressBarLayer"
+    class=".app.error.Error"
+    template="zpt/error.pt"
+    permission="zope2.View"
+    />
+
   <browser:viewlet
     name="eea.progressbar"
     layer="eea.progressbar.interfaces.IProgressBarLayer"

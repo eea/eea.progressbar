@@ -8,3 +8,5 @@ TOPICMETADATA = 'progress'
 
 PROJECTNAME = 'eea.progressbar'
 ADD_CONTENT_PERMISSION = 'Add portal content'
+
+ANNO_FIELDS = u'eea.progressbar.fields'
