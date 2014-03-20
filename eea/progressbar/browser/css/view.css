@@ -335,7 +335,7 @@
 }
 
 .eea-progress-metadata-bar .metadata-bar {
-  width: 95%;
+  width: 94%;
   border: 1px solid #ccc;
   height: 10px;
   float: left;
@@ -362,4 +362,18 @@
 
 .progressbar-viewlet.metadata .progress-field div {
   padding: 0.2em;
+}
+
+.progressbar-viewlet.metadata .progress-field .eea-icon {
+  float: left;
+  display: block;
+}
+
+.progressbar-viewlet.metadata .progress-field .progress-label {
+  margin-left: 25px;
+  display: block;
+}
+
+.progressbar-viewlet.metadata .progress-field .button {
+  margin-left: 25px;
 }

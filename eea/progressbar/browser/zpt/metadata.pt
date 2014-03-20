@@ -48,7 +48,7 @@
       items: '.progress-field',
       prev: '.progress-nav a.prev',
       next: '.progress-nav a.next',
-      step: 3,
+      step: divide,
       duration: 500,
       cycle: false
     });
