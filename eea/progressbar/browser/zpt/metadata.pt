@@ -4,6 +4,11 @@
   i18n:domain="eea">
 
 <div class="eea-progress-metadata" tal:attributes="data-baseurl string:${context/absolute_url}">
+  <div class="progress-nav">
+    <a class="prev" href="#">&lt;</a>
+    <a class="next" href="#">&gt;</a>
+  </div>
+
   <div class="progress-metadata">
     <div class="progress-metadata-inner">
       <tal:schema tal:repeat="widget view/schema">
@@ -13,12 +18,41 @@
   </div>
 
   <div class="eea-progress-metadata-bar" tal:define="progress view/progress">
-    <span class="metadata-value" tal:content="string:$progress%">30</span>
     <div class="metadata-bar">
         <div class="metadata-progress" tal:attributes="style python:'width: %s%%' % progress"></div>
     </div>
+    <div class="metadata-value" tal:content="string:$progress%">30</div>
   </div>
 
 </div>
+
+<script type="text/javascript" src="jquery.scrollTo.js"></script>
+<script type="text/javascript" src="jquery.serialScroll.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+    var width = $('.progress-metadata').width();
+    var divide = 2;
+    if(width >= 700){
+      divide = 3;
+    }
+    if(width >= 1000){
+      divide = 4;
+    }
+    if(width >= 1300){
+      divide = 5;
+    }
+
+    $('.progress-field').width(width / divide);
+    jQuery('.eea-progress-metadata').serialScroll({
+      target: '.progress-metadata',
+      items: '.progress-field',
+      prev: '.progress-nav a.prev',
+      next: '.progress-nav a.next',
+      step: 3,
+      duration: 500,
+      cycle: false
+    });
+  });
+</script>
 
 </html>

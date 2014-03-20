@@ -36,6 +36,18 @@ class ISimpleWidgetEdit(IProgressWidgetEdit):
         default=u'eea-icon eea-icon-check'
     )
 
+    link = schema.TextLine(
+        title=_(u'Edit link'),
+        description=_(u'Link where to edit this property'),
+        default=u'edit#fieldsetlegend-default'
+    )
+
+    linkLabel = schema.TextLine(
+        title=_(u'Edit link label'),
+        description=_(u'Human readable label for edit link'),
+        default=u'Add {label}'
+    )
+
     condition = schema.TextLine(
         title=_(u'Condition (ready)'),
         description=_(u"Tal condition to mark this as ready"),
@@ -48,18 +60,6 @@ class ISimpleWidgetEdit(IProgressWidgetEdit):
         description=_(u"Hide this if it's ready (completed)"),
         required=False,
         default=False
-    )
-
-    link = schema.TextLine(
-        title=_(u'Edit link'),
-        description=_(u'Link where to edit this property'),
-        default=u'edit#fieldsetlegend-default'
-    )
-
-    linkLabel = schema.TextLine(
-        title=_(u'Edit link label'),
-        description=_(u'Human readable label for edit link'),
-        default=u'Add {label}'
     )
 
     states = schema.List(

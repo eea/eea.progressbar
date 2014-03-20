@@ -315,11 +315,15 @@
 
 .eea-progress-metadata .progress-metadata {
   width: 100%;
-  overflow: auto;
+  height: 100px;
+  overflow: hidden;
 }
 
 .eea-progress-metadata .progress-metadata-inner {
   width: 2000%
+}
+
+.eea-progress-metadata .progress-nav {
 }
 
 .eea-progress-metadata-bar {
@@ -334,6 +338,9 @@
   width: 95%;
   border: 1px solid #ccc;
   height: 10px;
+  float: left;
+  margin-right: 0.5em;
+  border-radius: 3px;
 }
 
 .eea-progress-metadata-bar .metadata-progress {
@@ -342,7 +349,6 @@
 }
 
 .eea-progress-metadata-bar .metadata-value {
-  float: right;
   font-size: 10px;
   padding: 0;
   margin: 0;
@@ -352,5 +358,8 @@
 .progressbar-viewlet.metadata .progress-field {
   float: left;
   min-height: 40px;
-  padding: 1em;
+}
+
+.progressbar-viewlet.metadata .progress-field div {
+  padding: 0.2em;
 }
