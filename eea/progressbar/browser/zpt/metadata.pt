@@ -1,15 +1,24 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
   xmlns:metal="http://xml.zope.org/namespaces/metal"
   tal:omit-tag=""
-  i18n:domain="eea"
-  tal:define="
-    info view/info;
-    progress info/progress">
+  i18n:domain="eea">
 
 <div class="eea-progress-metadata" tal:attributes="data-baseurl string:${context/absolute_url}">
   <div class="progress-metadata">
-
+    <div class="progress-metadata-inner">
+      <tal:schema tal:repeat="widget view/schema">
+        <div tal:replace="structure widget">Widget</div>
+      </tal:schema>
+    </div>
   </div>
+
+  <div class="eea-progress-metadata-bar" tal:define="progress view/progress">
+    <span class="metadata-value" tal:content="string:$progress%">30</span>
+    <div class="metadata-bar">
+        <div class="metadata-progress" tal:attributes="style python:'width: %s%%' % progress"></div>
+    </div>
+  </div>
+
 </div>
 
 </html>

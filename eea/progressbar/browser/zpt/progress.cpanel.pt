@@ -20,10 +20,14 @@
       <fieldset tal:define="name field/getName"
         tal:attributes="id string:progress-schema-$name" class="eea-progressbar-widget">
         <legend tal:content="name">Field label</legend>
-        <div class="preview">
+        <div class="preview" tal:define="viewform python:view.view(field)">
           <tal:view
-            define="viewform python:view.view(field)"
-            replace="structure python:viewform()">Widget body</tal:view>
+            replace="structure python:viewform(ready=False)">Widget body</tal:view>
+          <tal:view
+            replace="structure python:viewform(ready=True)">Widget body</tal:view>
+          <div class="workflow" title="Workflow states" i18n:attributes="title">
+            <span tal:content="python:', '.join(term.title for term in viewform.workflow())">Workflow states</span>
+          </div>
         </div>
         <form method="post" tal:define="
           editform python:view.edit(field);

@@ -17,3 +17,13 @@ class ProgressTool(UniqueObject, ATFolder):
     manage_options = ATFolder.manage_options
     schema = ATFolder.schema.copy()
     _at_rename_after_creation = False
+
+    def get(self, portal_type, default=None):
+        """ Get child by portal_type
+        """
+        for child in self.objectValues():
+            field = child.getField('ctype')
+            value = field.getAccessor(child)()
+            if value == portal_type:
+                return child
+        return default

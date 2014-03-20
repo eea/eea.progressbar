@@ -1,9 +1,9 @@
 """ Browser controllers
 """
-from zope.component import queryAdapter
+from zope.component import queryAdapter, queryUtility, queryMultiAdapter
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
-from eea.progressbar.interfaces import IWorkflowProgress
+from eea.progressbar.interfaces import IWorkflowProgress, IProgressTool
 from eea.progressbar.config import EEAMessageFactory as _
 
 class ProgressBarView(BrowserView):
@@ -112,6 +112,48 @@ class CollectionProgressBarView(ProgressBarView):
         """
         return _('Total progress')
 
-class ProgressMetadataView(ProgressBarView):
+class ProgressMetadataView(BrowserView):
     """ Metadata progress
     """
+    def __init__(self, context, request):
+        super(ProgressMetadataView, self).__init__(context, request)
+        self._ready = 0
+        self._total = 0
+
+    @property
+    def progress(self):
+        """ % done
+        """
+        if self._total:
+            return int((1.0 * self._ready / self._total ) * 100)
+        return 100
+
+    def schema(self):
+        """ Schema
+        """
+        tool = queryUtility(IProgressTool)
+        ctype = getattr(self.context, 'portal_type', '')
+        ctype = tool.get(ctype)
+        if not ctype:
+            return
+
+        wftool = getToolByName(self.context, 'portal_workflow')
+        state = wftool.getInfoFor(self.context, 'review_state')
+
+        config = queryMultiAdapter((ctype, self.request), name=u'view')
+        for field in config.schema():
+            widget = config.view(field)
+            states = [term.value for term in widget.workflow()]
+            if u'all' not in states:
+                if state not in states:
+                    continue
+
+            ready = widget.ready(self.context)
+            if ready:
+                self._ready += 1
+
+            self._total += 1
+            if ready and widget.get('hideReady', False):
+                continue
+
+            yield widget

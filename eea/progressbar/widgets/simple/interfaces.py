@@ -36,6 +36,20 @@ class ISimpleWidgetEdit(IProgressWidgetEdit):
         default=u'eea-icon eea-icon-check'
     )
 
+    condition = schema.TextLine(
+        title=_(u'Condition (ready)'),
+        description=_(u"Tal condition to mark this as ready"),
+        required=False,
+        default=u"python:value not in ('', None, (), [])"
+    )
+
+    hideReady = schema.Bool(
+        title=_(u'Hide (ready)'),
+        description=_(u"Hide this if it's ready (completed)"),
+        required=False,
+        default=False
+    )
+
     link = schema.TextLine(
         title=_(u'Edit link'),
         description=_(u'Link where to edit this property'),

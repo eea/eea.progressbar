@@ -41,12 +41,16 @@ class ViewForm(BrowserView):
                 self._custom = False
         return self._custom
 
-    @property
-    def ready(self):
+    def ready(self, context=None):
         if self._ready is None:
-            field = self.context.getField(self.prefix)
-            value = field.getAccessor(self.context)()
-            self._ready = True if value else False
+            if not context:
+                context = self.context
+            field = context.getField(self.prefix)
+            value = field.getAccessor(context)()
+            if value in (u'', None, (), []):
+                self._ready = False
+            else:
+                self._ready = True
         return self._ready
 
     def get(self, name, default=''):
