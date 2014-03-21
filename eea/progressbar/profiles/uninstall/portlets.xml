@@ -2,4 +2,5 @@
 <portlets>
   <portlet addview="portlets.ProgressMonitoring" remove="True" />
   <portlet addview="portlets.ProgressTrail" remove="True" />
+  <portlet addview="portlets.ProgressMetadata" remove="True" />
 </portlets>

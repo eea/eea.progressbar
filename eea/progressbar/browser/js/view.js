@@ -129,7 +129,56 @@ EEA.ProgressMetadata = function(context, options){
 EEA.ProgressMetadata.prototype = {
   initialize: function(){
     var self = this;
-    console.log("ProgressMetadata Not implemented yet");
+    self.fields = self.context.find('.progress-field');
+    self.windowWidth = jQuery(window).width();
+
+    // Handle events
+    jQuery(window).resize(function(){
+      var windowWidth = jQuery(window).width();
+      if(windowWidth != self.windowWidth){
+        self.windowWidth = windowWidth;
+        self.reload();
+      }
+    });
+
+    self.reload();
+  },
+
+  reload: function(){
+    var self = this;
+    var width = self.context.find('.progress-metadata').width();
+    self.context.find('.metadata-bar').width(width - 50);
+
+    var divide = 1;
+    if(width >= 400){
+      divide = 2;
+    }
+    if(width >= 700){
+      divide = 3;
+    }
+    if(width >= 1000){
+      divide = 4;
+    }
+    if(width >= 1300){
+      divide = 5;
+    }
+
+    if(self.fields.length < divide){
+      self.context.find('.progress-nav').remove();
+      return;
+    }
+
+    self.context.find('.progress-field').width(width / divide);
+    self.context.unbind('.serialScroll');
+    self.context.serialScroll({
+      target: '.progress-metadata',
+      items: '.progress-field',
+      prev: '.progress-nav span.prev',
+      next: '.progress-nav span.next',
+      step: divide,
+      duration: 500,
+      cycle: false
+    });
   }
 };
 
@@ -142,13 +191,21 @@ jQuery.fn.EEAProgressMetadata = function(options){
 };
 
 jQuery(document).ready(function($){
+  /* Progress bar */
   var progressbars = jQuery('.eea-progressbar');
   if(progressbars.length){
     progressbars.EEAProgressBar();
   }
 
+  /* Progress trail */
   var progresstrails = jQuery('.eea-progresstrail');
   if(progresstrails.length){
     progresstrails.EEAProgressTrail();
+  }
+
+  /* Progress metadata */
+  var progressmeta = jQuery('.eea-progress-metadata');
+  if(progressmeta.length){
+    progressmeta.EEAProgressMetadata();
   }
 });

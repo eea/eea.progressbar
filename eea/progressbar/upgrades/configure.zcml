@@ -3,10 +3,10 @@
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
   i18n_domain="eea">
 
-  <!-- 2.2 => 2.3 -->
+  <!-- 2.2 => 3.0 -->
   <genericsetup:upgradeSteps
       source="2.2"
-      destination="2.3"
+      destination="3.0"
       profile="eea.progressbar:default">
 
       <genericsetup:upgradeDepends

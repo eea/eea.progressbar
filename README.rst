@@ -8,7 +8,8 @@ EEA Progress Bar
 
 A system that visually display a *workflow percentage bar* or a
 *workflow steps trail* in the publishing process of a document according with
-the workflow state in which the document is.
+the workflow state in which the document is. It also define editing progress
+(document completion) of an item with customizable labels per field.
 
 .. image:: http://eea.github.io/_images/eea.progressbar.cover.png
    :target: http://www.youtube.com/watch?v=a_U0tmw-4As&list=PLVPSQz7ahsBwUHixUt_s0kh-vaik_NCtO&feature=share
@@ -28,6 +29,7 @@ Main features
   according with the children / query results items progress
 - Visually display workflow *percentage bars* for items within Collection
   tabular view
+- Visually display *editing progress (document completion)* of an item.
 - Possibility to hide/exclude certain states in progress bar (by default
   hide all states with defined percentage lower than/equal 0, configurable via
   Site Setup > Progress Bar Settings)
@@ -48,12 +50,18 @@ Getting started
 3. Go to Plone Site > Working space and add a Progress bar portlet
 4. Or add a Collection, add Progress column for tabular view and enable tabular
    view for this Collection.
-5. Or go to *Site Setup > Progress Bar Settings* and enable Progress Bar
+5. Or go to *Site Setup > Progress Bar Settings > Edit* and enable Progress Bar
    viewlets for your content-types.
+6. Go to *Site Setup > Progress Bar Settings > Edit* and *Enable metadata
+   progress viewlet* for Page; Go to *Site Setup > Progress Bar Settings >
+   Document* and customize your *document completion* strategy for this
+   content-type and then see it in action within a Page.
 
 Dependencies
 ============
 - plone.app.collection >= 1.0.11
+- eea.jquery >= 7.7
+- eea.icons
 
 Source code
 ===========

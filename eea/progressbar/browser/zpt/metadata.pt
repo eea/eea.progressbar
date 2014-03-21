@@ -5,8 +5,8 @@
 
 <div class="eea-progress-metadata" tal:attributes="data-baseurl string:${context/absolute_url}">
   <div class="progress-nav">
-    <a class="prev" href="#">&lt;</a>
-    <a class="next" href="#">&gt;</a>
+    <span class="prev eea-icon eea-icon-chevron-left"></span>
+    <span class="next eea-icon eea-icon-chevron-right"></span>
   </div>
 
   <div class="progress-metadata">
@@ -25,32 +25,5 @@
   </div>
 
 </div>
-
-<script type="text/javascript">
-  jQuery(document).ready(function(){
-    var width = $('.progress-metadata').width();
-    var divide = 2;
-    if(width >= 700){
-      divide = 3;
-    }
-    if(width >= 1000){
-      divide = 4;
-    }
-    if(width >= 1300){
-      divide = 5;
-    }
-
-    $('.progress-field').width(width / divide);
-    jQuery('.eea-progress-metadata').serialScroll({
-      target: '.progress-metadata',
-      items: '.progress-field',
-      prev: '.progress-nav a.prev',
-      next: '.progress-nav a.next',
-      step: divide,
-      duration: 500,
-      cycle: false
-    });
-  });
-</script>
 
 </html>

@@ -29,4 +29,15 @@
     view_permission="zope2.View"
     />
 
+  <plone:portlet
+    name="portlets.ProgressMetadata"
+    interface=".metadata.IMetadataPortlet"
+    assignment=".metadata.Assignment"
+    renderer=".metadata.Renderer"
+    addview=".metadata.AddForm"
+    editview=".metadata.EditForm"
+    edit_permission="plone.app.portlets.ManagePortlets"
+    view_permission="zope2.View"
+    />
+
 </configure>

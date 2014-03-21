@@ -1,6 +1,5 @@
 """ View
 """
-from Products.Archetypes.interfaces import vocabulary
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm

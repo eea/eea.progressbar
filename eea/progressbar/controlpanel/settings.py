@@ -25,6 +25,8 @@ class ControlPanel(ControlPanelForm):
 
     @form.action(_(u'label_save', default=u'Save'), name=u'save')
     def handle_edit_action(self, action, data):
+        """ Save
+        """
         CheckAuthenticator(self.request)
         if form.applyChanges(self.context, self.form_fields, data,
                              self.adapters):
@@ -38,6 +40,8 @@ class ControlPanel(ControlPanelForm):
                  validator=null_validator,
                  name=u'cancel')
     def handle_cancel_action(self, action, data):
+        """ Cancel
+        """
         url = getMultiAdapter((self.context, self.request),
                               name='absolute_url')()
         self.request.response.redirect(url)

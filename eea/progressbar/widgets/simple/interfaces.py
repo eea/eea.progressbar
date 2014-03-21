@@ -1,7 +1,6 @@
 """ Simple widget edit schema
 """
 from zope import schema
-from zope.interface import Interface
 from eea.progressbar.widgets.interfaces import IProgressWidgetEdit
 from eea.progressbar.config import EEAMessageFactory as _
 

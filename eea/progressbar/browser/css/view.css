@@ -311,11 +311,11 @@
 }
 
 .progressbar-viewlet.metadata legend {
+  display: none;
 }
 
 .eea-progress-metadata .progress-metadata {
   width: 100%;
-  height: 100px;
   overflow: hidden;
 }
 
@@ -324,6 +324,16 @@
 }
 
 .eea-progress-metadata .progress-nav {
+  padding: 1em 0.5em 0;
+  text-align: right;
+}
+
+.eea-progress-metadata .progress-nav span {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 0.5em;
+  border-radius: 5px;
+  color: #999;
 }
 
 .eea-progress-metadata-bar {
@@ -345,7 +355,7 @@
 
 .eea-progress-metadata-bar .metadata-progress {
   height: 100%;
-  background: #8FBC8F;
+  background: #039e57;
 }
 
 .eea-progress-metadata-bar .metadata-value {
@@ -355,25 +365,39 @@
   line-height: 1;
 }
 
-.progressbar-viewlet.metadata .progress-field {
+
+.eea-progress-metadata .progress-field {
   float: left;
   min-height: 40px;
 }
 
-.progressbar-viewlet.metadata .progress-field div {
-  padding: 0.2em;
+.eea-progress-metadata .progress-field div {
+  padding: 0.5em 1em;
 }
 
-.progressbar-viewlet.metadata .progress-field .eea-icon {
+.eea-progress-metadata .progress-field .eea-icon {
   float: left;
   display: block;
 }
 
-.progressbar-viewlet.metadata .progress-field .progress-label {
+.eea-progress-metadata .invalid {
+  color: #000;
+}
+
+.eea-progress-metadata .valid {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.eea-progress-metadata .valid .eea-icon {
+  color: #039E57;
+}
+
+.eea-progress-metadata .progress-field .progress-label {
   margin-left: 25px;
   display: block;
 }
 
-.progressbar-viewlet.metadata .progress-field .button {
+.eea-progress-metadata .progress-field .button {
   margin-left: 25px;
 }

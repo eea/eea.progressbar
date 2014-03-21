@@ -5,8 +5,6 @@ from plone.app.controlpanel.widgets import MultiCheckBoxVocabularyWidget
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
 from eea.progressbar.widgets.edit import EditForm
 
-from Products.Archetypes.interfaces import  IField
-
 class Edit(EditForm):
     """ Simple widget edit form
     """

@@ -1,6 +1,5 @@
 """ EEA Relations Content Type
 """
-from zope import event
 from zope.interface import implements
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content.folder import ATFolder

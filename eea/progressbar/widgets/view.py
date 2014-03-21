@@ -31,6 +31,8 @@ class ViewForm(BrowserView):
 
     @property
     def custom(self):
+        """ Is customized
+        """
         if self._custom is None:
             storage = queryAdapter(self.parent, IStorage)
             field = storage.field(self.prefix, {})
@@ -42,6 +44,8 @@ class ViewForm(BrowserView):
         return self._custom
 
     def ready(self, context=None):
+        """ Is ready
+        """
         if self._ready is None:
             if not context:
                 context = self.context

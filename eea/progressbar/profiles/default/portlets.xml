@@ -12,4 +12,10 @@
     <for interface="plone.app.portlets.interfaces.IColumn" />
     <for interface="plone.app.portlets.interfaces.IDashboard" />
   </portlet>
+  <portlet title="Editing progress"
+    addview="portlets.ProgressMetadata"
+    description="A portlet which shows editing progress information" >
+    <for interface="plone.app.portlets.interfaces.IColumn" />
+    <for interface="plone.app.portlets.interfaces.IDashboard" />
+  </portlet>
 </portlets>
