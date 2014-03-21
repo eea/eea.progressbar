@@ -130,6 +130,12 @@ EEA.ProgressMetadata.prototype = {
   initialize: function(){
     var self = this;
     self.fields = self.context.find('.progress-field');
+    self.prevButton = self.context.find('.progress-nav span.prev');
+    self.nextButton = self.context.find('.progress-nav span.next');
+    self.first = self.context.find('.progress-field:first-child');
+    self.last = self.context.find('.progress-field:last-child');
+    self.width = 0;
+
     self.windowWidth = jQuery(window).width();
 
     // Handle events
@@ -141,25 +147,40 @@ EEA.ProgressMetadata.prototype = {
       }
     });
 
+    self.nextButton.click(function(){
+      setTimeout(function(){
+        self.next();
+        self.prev();
+      }, 510);
+    });
+
+    self.prevButton.click(function(){
+      setTimeout(function(){
+        self.prev();
+        self.next();
+      }, 510);
+    });
+
+    self.prev();
     self.reload();
   },
 
   reload: function(){
     var self = this;
-    var width = self.context.find('.progress-metadata').width();
-    self.context.find('.metadata-bar').width(width - 50);
+    self.width = self.context.find('.progress-metadata').width();
+    self.context.find('.metadata-bar').width(self.width - 50);
 
     var divide = 1;
-    if(width >= 400){
+    if(self.width >= 400){
       divide = 2;
     }
-    if(width >= 700){
+    if(self.width >= 700){
       divide = 3;
     }
-    if(width >= 1000){
+    if(self.width >= 1000){
       divide = 4;
     }
-    if(width >= 1300){
+    if(self.width >= 1300){
       divide = 5;
     }
 
@@ -168,7 +189,7 @@ EEA.ProgressMetadata.prototype = {
       return;
     }
 
-    self.context.find('.progress-field').width(width / divide);
+    self.context.find('.progress-field').width(self.width / divide);
     self.context.unbind('.serialScroll');
     self.context.serialScroll({
       target: '.progress-metadata',
@@ -179,6 +200,27 @@ EEA.ProgressMetadata.prototype = {
       duration: 500,
       cycle: false
     });
+  },
+
+  next: function(){
+    var self = this;
+    var left = self.last.position().left;
+    console.log(left, self.width);
+    if(left < self.width){
+      self.nextButton.addClass('end');
+    }else{
+      self.nextButton.removeClass('end');
+    }
+  },
+
+  prev: function(){
+    var self = this;
+    var left = self.first.position().left;
+    if(left > 0){
+      self.prevButton.addClass('end');
+    }else{
+      self.prevButton.removeClass('end');
+    }
   }
 };
 

@@ -393,6 +393,11 @@
   color: #039E57;
 }
 
+.eea-progress-metadata span.end {
+  background: #eee;
+  color: #ccc;
+}
+
 .eea-progress-metadata .progress-field .progress-label {
   margin-left: 25px;
   display: block;
