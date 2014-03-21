@@ -106,6 +106,40 @@ jQuery.fn.EEAProgressTrail = function(options){
   });
 };
 
+/** Metadata Progress (document completion) viewlet
+ *
+ * @param context
+ * @param options
+ * @constructor
+ */
+EEA.ProgressMetadata = function(context, options){
+  var self = this;
+  self.context = context;
+  self.settings = {
+
+  };
+
+  if(options){
+    jQuery.extend(self.settings, options);
+  }
+
+  self.initialize();
+};
+
+EEA.ProgressMetadata.prototype = {
+  initialize: function(){
+    var self = this;
+    console.log("ProgressMetadata Not implemented yet");
+  }
+};
+
+jQuery.fn.EEAProgressMetadata = function(options){
+  return this.each(function(){
+    var context = jQuery(this);
+    var adapter = new EEA.ProgressMetadata(context, options);
+    context.data('EEAProgressMetadata', adapter);
+  });
+};
 
 jQuery(document).ready(function($){
   var progressbars = jQuery('.eea-progressbar');

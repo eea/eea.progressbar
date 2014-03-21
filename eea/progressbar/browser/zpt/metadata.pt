@@ -26,8 +26,6 @@
 
 </div>
 
-<script type="text/javascript" src="jquery.scrollTo.js"></script>
-<script type="text/javascript" src="jquery.serialScroll.js"></script>
 <script type="text/javascript">
   jQuery(document).ready(function(){
     var width = $('.progress-metadata').width();

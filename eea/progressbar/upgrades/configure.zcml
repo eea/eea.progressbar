@@ -14,6 +14,11 @@
         import_profile="eea.progressbar:default"
         />
 
+      <genericsetup:upgradeDepends
+        title="Import eea.jquery: 21-serialscroll"
+        import_profile="eea.jquery:21-serialscroll"
+        />
+
   </genericsetup:upgradeSteps>
 
   <!-- 2.1 => 2.2 -->

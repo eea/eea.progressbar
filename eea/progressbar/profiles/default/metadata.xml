@@ -3,5 +3,6 @@
   <version>2.3</version>
   <dependencies>
     <dependency>profile-eea.icons:default</dependency>
+    <dependency>profile-eea.jquery:21-serialscroll</dependency>
   </dependencies>
 </metadata>
