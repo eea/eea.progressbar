@@ -17,8 +17,10 @@ class EEAFixture(PloneSandboxLayer):
         """
         import eea.progressbar
         import eea.icons
+        import eea.jquery
         self.loadZCML(package=eea.progressbar)
         self.loadZCML(package=eea.icons)
+        self.loadZCML(package=eea.jquery)
         z2.installProduct(app, 'eea.progressbar')
 
     def tearDownZope(self, app):
