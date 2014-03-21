@@ -3,6 +3,9 @@ Changelog
 
 3.0-dev - (unreleased)
 ----------------------
+* Upgrade step: Within "Plone > Site setup > Add-ons" click on
+  upgrade button available for EEA Progress Bar
+  [voineali refs #17713]
 * Feature: Added Editing progress (document completion) viewlet/portlet based
   on item schema fields completion
   [voineali refs #17713]
