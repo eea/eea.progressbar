@@ -38,12 +38,14 @@ class ISimpleWidgetEdit(IProgressWidgetEdit):
     link = schema.TextLine(
         title=_(u'Edit link'),
         description=_(u'Link where to edit this property'),
+        required=False,
         default=u'edit#fieldsetlegend-default'
     )
 
     linkLabel = schema.TextLine(
         title=_(u'Edit link label'),
         description=_(u'Human readable label for edit link'),
+        required=False,
         default=u'Add {label}'
     )
 

@@ -1,5 +1,11 @@
+#content {
+  background: #F5F5F5;
+  font-size: inherit;
+}
+
 #eea-progressbar-cpanel {
-  background: #eee;
+  margin: 0 auto;
+  padding: 1em 0;
 }
 
 #eea-progressbar-cpanel:after {
@@ -11,57 +17,43 @@
 
 #content fieldset.eea-progressbar-widget,
 .eea-progressbar-widget {
-  width: 350px;
-  float: left;
-  border: 1px solid #ccc;
-  border-bottom: 2px solid #ccc;
-  border-style: solid;
-  margin: 0.3em;
-  background: #fff;
-  border-radius: 3px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
 }
 
 .eea-progressbar-widget legend {
   display: none;
 }
 
-.eea-progressbar-widget .valid, .eea-progressbar-widget .invalid {
-  padding: 1em;
-}
-
 .eea-progressbar-widget .button {
-  text-align: right;
 }
 
 .eea-progressbar-widget .valid {
   font-weight: bold;
 }
 
-.eea-progressbar-widget .preview {
-  min-height: 95px;
-  padding-top: 1em;
+.eea-progressbar-widget.default {
 }
 
-
-.eea-progressbar-widget .invalid {
-  border-bottom: 1px solid #ccc;
+.eea-progressbar-widget.custom {
 }
 
-.eea-progressbar-widget .default {
-  background: #fff;
+.buttons a, .buttons a:visited {
+  color: #346F83 !important;
 }
 
-.eea-progressbar-widget .custom {
-  background: #fefaf0;
+.eea-progressbar-widget .buttons a {
+  visibility: hidden;
 }
 
-.eea-progressbar-widget .workflow {
-  color: green;
-  text-align: right;
+.eea-progressbar-widget:hover .buttons a {
+  visibility: visible;
 }
 
 .eea-progressbar-widget input[type=text][size] {
-  width: 100%;
+  min-width: 100%;
 }
 
 .eea-progressbar-widget .error {
@@ -91,4 +83,75 @@
   content: '.';
   display: block;
   height: 0;
+}
+
+.progress-field .eea-icon {
+  float: left;
+  display: block;
+}
+
+.progress-field .button {
+  margin-left: 25px;
+}
+
+.progress-field {
+  border: 1px solid #ccc;
+  border-top: none;
+  border-bottom: none;
+  padding: 0.5em 1em;
+  background: #fff;
+}
+
+.progress-field:first-child {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px dotted #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.progress-field:nth-child(2) {
+  border-bottom: 1px dotted #ccc;
+}
+
+.progress-field.buttons {
+  text-align: center;
+  cursor: pointer;
+  color: #427597;
+  border-bottom: 2px solid #ccc;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-top: 0;
+  font-size: 85%;
+}
+
+.progress-field.workflow {
+  color: green;
+  text-align: right;
+  padding: 0 1em;
+  font-size: 75%;
+}
+
+.progress-label {
+  margin-left: 25px;
+  display: block;
+}
+
+#content .eea-progressbar-widget form fieldset {
+  margin: 0 0.4em;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-top: none;
+  background: #fcfcfc;
+}
+
+.eea-progressbar-widget #actionsView {
+  text-align: right;
+}
+
+.eea-progressbar-widget input[type=submit] {
+  padding: 0.5em;
+  background: #FFF;
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  border-bottom: 2px solid #CCC;
 }

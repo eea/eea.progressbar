@@ -88,7 +88,7 @@ class ProgressTrail(ProgressBar):
         return False
 
 class MetadataProgress(ProgressBar):
-    """ Custom viewlet for metadata progress
+    """ Custom viewlet for editing progress
     """
     render = ViewPageTemplateFile('../zpt/metadata.viewlet.pt')
 

@@ -28,8 +28,8 @@ class ISettings(Interface):
     )
 
     metadataViewletVisibleFor = schema.List(
-        title=_(u"Enable metadata progress viewlet"),
-        description=_(u"Metadata progress viewlet is visible for the "
+        title=_(u"Enable editing progress viewlet"),
+        description=_(u"Editing progress viewlet is visible for the "
                       u"following content-types"),
         required=False,
         default=[],

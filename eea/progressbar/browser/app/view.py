@@ -113,7 +113,7 @@ class CollectionProgressBarView(ProgressBarView):
         return _('Total progress')
 
 class ProgressMetadataView(BrowserView):
-    """ Metadata progress
+    """ Editing progress
     """
     def __init__(self, context, request):
         super(ProgressMetadataView, self).__init__(context, request)

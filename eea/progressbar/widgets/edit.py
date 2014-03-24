@@ -48,21 +48,21 @@ class EditForm(SubPageForm):
             form=self, data=self._data, adapters=self.adapters,
             ignore_request=ignore_request)
 
-    @formAction(_('Save'), condition=haveInputWidgets)
-    def save(self, action, data):
-        """ Handle save action
-        """
-        storage = queryAdapter(self.parent, IStorage)
-        storage.edit_field(self.prefix, **data)
-
-        return self.nextUrl
-
     @formAction(_('Reset'), condition=haveInputWidgets)
     def reset(self, action, data):
         """ Handle save action
         """
         storage = queryAdapter(self.parent, IStorage)
         storage.delete_field(self.prefix)
+
+        return self.nextUrl
+
+    @formAction(_('Save'), condition=haveInputWidgets)
+    def save(self, action, data):
+        """ Handle save action
+        """
+        storage = queryAdapter(self.parent, IStorage)
+        storage.edit_field(self.prefix, **data)
 
         return self.nextUrl
 

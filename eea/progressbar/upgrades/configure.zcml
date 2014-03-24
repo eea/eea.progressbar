@@ -19,6 +19,11 @@
         import_profile="eea.jquery:21-serialscroll"
         />
 
+      <genericsetup:upgradeDepends
+        title="Import eea.jquery: 22-masonry"
+        import_profile="eea.jquery:22-masonry"
+        />
+
   </genericsetup:upgradeSteps>
 
   <!-- 2.1 => 2.2 -->

@@ -106,7 +106,7 @@ jQuery.fn.EEAProgressTrail = function(options){
   });
 };
 
-/** Metadata Progress (document completion) viewlet
+/** Editing Progress (document completion) viewlet
  *
  * @param context
  * @param options
@@ -204,9 +204,11 @@ EEA.ProgressMetadata.prototype = {
 
   next: function(){
     var self = this;
+    if(!self.last.length){
+      return;
+    }
     var left = self.last.position().left;
-    console.log(left, self.width);
-    if(left < self.width){
+    if(left < self.width - 10){
       self.nextButton.addClass('end');
     }else{
       self.nextButton.removeClass('end');
@@ -215,8 +217,11 @@ EEA.ProgressMetadata.prototype = {
 
   prev: function(){
     var self = this;
+    if(!self.first.length){
+      return;
+    }
     var left = self.first.position().left;
-    if(left > 0){
+    if(left > -10){
       self.prevButton.addClass('end');
     }else{
       self.prevButton.removeClass('end');

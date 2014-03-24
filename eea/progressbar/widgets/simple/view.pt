@@ -1,5 +1,5 @@
-<div tal:define="render_error nocall:context/@@progressbar.widget.error|python:lambda error, fid: ''"
-  tal:attributes="class python:'progress-field custom' if view.custom else 'progress-field default'"
+<div class="progress-field"
+  tal:define="render_error nocall:context/@@progressbar.widget.error|python:lambda error, fid: ''"
   tal:on-error="structure python:render_error(error=error, fid=view.prefix)">
 
   <div class="invalid" tal:condition="not:view/ready">

@@ -4,5 +4,6 @@
   <dependencies>
     <dependency>profile-eea.icons:default</dependency>
     <dependency>profile-eea.jquery:21-serialscroll</dependency>
+    <dependency>profile-eea.jquery:22-masonry</dependency>
   </dependencies>
 </metadata>

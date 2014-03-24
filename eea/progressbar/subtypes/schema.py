@@ -55,8 +55,8 @@ class EEASchemaExtender(object):
             default=False,
             searchable=False,
             widget=BooleanWidget(
-                label=_('Hide Metadata Progress Viewlet'),
-                description=_('Hide Metadata Progress viewlet for '
+                label=_('Hide Editing Progress Viewlet'),
+                description=_('Hide Editing Progress viewlet for '
                               'this context/page'),
             )
         ),
