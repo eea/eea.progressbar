@@ -34,27 +34,14 @@ class ViewForm(BrowserView):
         """ Is customized
         """
         if self._custom is None:
-            storage = queryAdapter(self.parent, IStorage)
-            field = storage.field(self.prefix, {})
-            value = field.get('states', None)
-            if value is not None:
-                self._custom = True
-            else:
-                self._custom = False
+            self._custom = False
         return self._custom
 
     def ready(self, context=None):
         """ Is ready
         """
         if self._ready is None:
-            if not context:
-                context = self.context
-            field = context.getField(self.prefix)
-            value = field.getAccessor(context)()
-            if value in (u'', None, (), []):
-                self._ready = False
-            else:
-                self._ready = True
+            self._ready = False
         return self._ready
 
     def get(self, name, default=''):

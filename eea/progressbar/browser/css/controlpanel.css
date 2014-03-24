@@ -1,6 +1,6 @@
 #content {
   background: #F5F5F5;
-  font-size: inherit;
+  font-size: 12px;
 }
 
 #eea-progressbar-cpanel {
@@ -30,8 +30,8 @@
 .eea-progressbar-widget .button {
 }
 
-.eea-progressbar-widget .valid {
-  font-weight: bold;
+.eea-progressbar-widget .valid .eea-icon {
+  color: #039E57;
 }
 
 .eea-progressbar-widget.default {
@@ -121,14 +121,13 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding-top: 0;
-  font-size: 85%;
 }
 
 .progress-field.workflow {
   color: green;
   text-align: right;
   padding: 0 1em;
-  font-size: 75%;
+  font-size: 85%;
 }
 
 .progress-label {

@@ -64,6 +64,7 @@ EEA.ProgressToolWidget.prototype = {
     self.button = self.context.find('.buttons a');
 
     self.context.width(self.width);
+    self.context.find('textarea').attr('rows', 3);
 
     // Events
     self.button.click(function(evt){

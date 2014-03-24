@@ -7,14 +7,14 @@ from eea.progressbar.config import EEAMessageFactory as _
 class ISimpleWidgetEdit(IProgressWidgetEdit):
     """ Simple widget
     """
-    labelEmpty = schema.TextLine(
+    labelEmpty = schema.Text(
         title=_(u'Message (not set)'),
         description=_(u'Message to be used when property is NOT filled'),
         required=False,
         default=u"Please set the {label} of this {context.portal_type}"
     )
 
-    labelReady = schema.TextLine(
+    labelReady = schema.Text(
         title=_(u'Message (ready)'),
         description=_(u'Message to be used when property is filled'),
         required=False,
@@ -35,21 +35,21 @@ class ISimpleWidgetEdit(IProgressWidgetEdit):
         default=u'eea-icon eea-icon-check'
     )
 
-    link = schema.TextLine(
+    link = schema.Text(
         title=_(u'Edit link'),
         description=_(u'Link where to edit this property'),
         required=False,
         default=u'edit#fieldsetlegend-default'
     )
 
-    linkLabel = schema.TextLine(
+    linkLabel = schema.Text(
         title=_(u'Edit link label'),
         description=_(u'Human readable label for edit link'),
         required=False,
         default=u'Add {label}'
     )
 
-    condition = schema.TextLine(
+    condition = schema.Text(
         title=_(u'Condition (ready)'),
         description=_(u"Tal condition to mark this as ready"),
         required=False,
