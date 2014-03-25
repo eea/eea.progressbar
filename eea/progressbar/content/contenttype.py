@@ -10,7 +10,7 @@ from eea.progressbar.config import EEAMessageFactory as _
 EditSchema = ATFolder.schema.copy() + atapi.Schema((
     atapi.StringField('ctype',
         schemata="default",
-        vocabulary_factory='eea.progressbar.vocabulary.MetadataContentTypes',
+        vocabulary_factory='plone.app.vocabularies.ReallyUserFriendlyTypes',
         required=True,
         widget=atapi.SelectionWidget(
             label=_('Portal type'),

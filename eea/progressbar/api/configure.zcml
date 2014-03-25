@@ -19,6 +19,11 @@
     <implements interface="eea.progressbar.interfaces.IBaseObject" />
   </class>
 
+  <class class="plone.dexterity.content.Container"
+    zcml:condition="installed plone.dexterity">
+    <implements interface="eea.progressbar.interfaces.IBaseObject" />
+  </class>
+
   <class class="plone.app.collection.collection.Collection">
     <implements interface="eea.progressbar.interfaces.ICollection" />
   </class>

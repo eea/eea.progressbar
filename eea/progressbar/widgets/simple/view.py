@@ -82,8 +82,10 @@ class View(ViewForm):
         if self._condition is None:
             if not context:
                 context = self.context
-            field = context.getField(self.prefix)
-            value = field.getAccessor(context)()
+            field = (context.getField(self.prefix)
+                     if getattr(context, 'getField', None) else None)
+            value = (field.getAccessor(context)() if field
+                     else getattr(context, self.prefix, None))
             condition = self.get('condition')
             engine = TrustedEngine
             zopeContext = TrustedZopeContext(engine, {

@@ -11,6 +11,7 @@ from plone.app.form.validators import null_validator
 from plone.registry.interfaces import IRegistry
 from plone.protect import CheckAuthenticator
 from plone.app.controlpanel.events import ConfigurationChangedEvent
+from plone.app.controlpanel.widgets import MultiCheckBoxVocabularyWidget
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from eea.progressbar.controlpanel.interfaces import ISettings
 from eea.progressbar.controlpanel.interfaces import _
@@ -19,6 +20,13 @@ class ControlPanel(ControlPanelForm):
     """ Diffbot API
     """
     form_fields = form.FormFields(ISettings)
+    form_fields[
+      'viewletVisibleFor'].custom_widget = MultiCheckBoxVocabularyWidget
+    form_fields[
+      'trailViewletVisibleFor'].custom_widget = MultiCheckBoxVocabularyWidget
+    form_fields[
+      'metadataViewletVisibleFor'].custom_widget = MultiCheckBoxVocabularyWidget
+
     label = _(u"Progress Bar Settings")
     description = _(u"Progress bar settings")
     form_name = _(u"Progress bar settings")
