@@ -63,8 +63,20 @@ class IWidgetDirective(IPageDirective):
         required=False,
         )
 
+    edit_permission = zcml.Permission(
+        title=_(u"Edit Permission"),
+        description=_(u"The permission needed to edit this widget."),
+        required=False,
+        )
+
+    view_permission = zcml.Permission(
+        title=_(u"View Permission"),
+        description=_(u"The permission needed to view this widget."),
+        required=False,
+        )
+
     permission = zcml.Permission(
         title=_(u"Permission"),
-        description=_(u"The permission needed to use the view."),
-        required=False,
+        description=_(u"The permission needed to use the view or edit"),
+        required=False
         )

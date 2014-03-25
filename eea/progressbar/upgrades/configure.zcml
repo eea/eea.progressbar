@@ -24,6 +24,11 @@
         import_profile="eea.jquery:22-masonry"
         />
 
+      <genericsetup:upgradeDepends
+        title="Import collective.js.jqueryui"
+        import_profile="collective.js.jqueryui:default"
+        />
+
   </genericsetup:upgradeSteps>
 
   <!-- 2.1 => 2.2 -->

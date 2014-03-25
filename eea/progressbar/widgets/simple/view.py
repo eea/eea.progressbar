@@ -14,6 +14,11 @@ class View(ViewForm):
     """
     template = ViewPageTemplateFile('view.pt')
 
+    def __init__(self, context, request):
+        super(View, self).__init__(context, request)
+        self._workflow = None
+        self._condition = None
+
     def default(self, name):
         """ Default values
         """
@@ -33,26 +38,13 @@ class View(ViewForm):
                 self._custom = False
         return self._custom
 
-    def condition(self, context=None):
-        """ Get condition
+    @property
+    def hidden(self):
+        """ Is this hidden?
         """
-        if not context:
-            context = self.context
-        field = context.getField(self.prefix)
-        value = field.getAccessor(context)()
-        condition = self.get('condition')
-        engine = TrustedEngine
-        zopeContext = TrustedZopeContext(engine, {
-            'context': context,
-            'request': self.request,
-            'field': field,
-            'value': value
-        })
-        expression = engine.compile(condition)
-        result = zopeContext.evaluate(expression)
-        if callable(result):
-            result = result()
-        return result
+        if self._hidden is None:
+            self._hidden = False if self.workflow() else True
+        return self._hidden
 
     def ready(self, context=None):
         """ Is ready
@@ -64,14 +56,45 @@ class View(ViewForm):
     def workflow(self):
         """ Human readable workflow states
         """
-        value = self.get('states', [])
-        items = (SimpleTerm(key, key, key) for key in value)
-        vocabulary = ISimpleWidgetEdit['states'].value_type.vocabularyName
-        if not vocabulary:
-            return items
+        if self._workflow is None:
+            value = self.get('states', [])
+            self._workflow = (SimpleTerm(key, key, key) for key in value)
+            if self._workflow:
+                self._hidden = False
+            else:
+                self._hidden = True
 
-        voc = queryUtility(IVocabularyFactory, name=vocabulary)
-        if not voc:
-            return items
+            vocabulary = ISimpleWidgetEdit['states'].value_type.vocabularyName
+            if not vocabulary:
+                return self._workflow
 
-        return [term for term in voc(self.context) if term.value in value]
+            voc = queryUtility(IVocabularyFactory, name=vocabulary)
+            if not voc:
+                return self._workflow
+
+            self._workflow = [term for term in voc(self.context)
+                              if term.value in value]
+        return self._workflow
+
+    def condition(self, context=None):
+        """ Get condition
+        """
+        if self._condition is None:
+            if not context:
+                context = self.context
+            field = context.getField(self.prefix)
+            value = field.getAccessor(context)()
+            condition = self.get('condition')
+            engine = TrustedEngine
+            zopeContext = TrustedZopeContext(engine, {
+                'context': context,
+                'request': self.request,
+                'field': field,
+                'value': value
+            })
+            expression = engine.compile(condition)
+            result = zopeContext.evaluate(expression)
+            if callable(result):
+                result = result()
+            self._condition = result
+        return self._condition

@@ -43,19 +43,25 @@ def WidgetDirective(_context, name=u"progressbar.widget",
                     view=None,
                     edit=None,
                     permission=None,
+                    edit_permission=None,
+                    view_permission=None,
                     for_=Interface,
                     layer=IDefaultBrowserLayer):
     """ Progress bar widget
     """
 
     view_name = name + '.view'
-    page(_context=_context, name=view_name, permission=permission,
+    if not view_permission:
+        view_permission = permission
+    page(_context=_context, name=view_name, permission=view_permission,
          for_=for_, layer=layer, class_=view)
 
     ProgressbarWidgets._views[name] = name
 
     edit_name = name + '.edit'
-    page(_context=_context, name=edit_name, permission=permission,
+    if not edit_permission:
+        edit_permission = permission
+    page(_context=_context, name=edit_name, permission=edit_permission,
          for_=for_, layer=layer, class_=edit)
 
     ProgressbarWidgets._edits[name] = name

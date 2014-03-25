@@ -18,6 +18,7 @@ class ViewForm(BrowserView):
         self.prefix = u''
         self._custom = None
         self._ready = None
+        self._hidden = None
 
     def setPrefix(self, prefix):
         """ Prefix
@@ -36,6 +37,14 @@ class ViewForm(BrowserView):
         if self._custom is None:
             self._custom = False
         return self._custom
+
+    @property
+    def hidden(self):
+        """ Is this hidden
+        """
+        if self._hidden is None:
+            self._hidden = False
+        return self._hidden
 
     def ready(self, context=None):
         """ Is ready

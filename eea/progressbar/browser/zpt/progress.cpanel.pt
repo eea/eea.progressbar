@@ -15,33 +15,10 @@
 
 <body>
 <div id="content" metal:fill-slot="prefs_configlet_main">
-  <div id="eea-progressbar-cpanel">
-    <tal:field tal:repeat="field view/schema">
-      <fieldset tal:define="
-        name field/getName;
-        viewform python:view.view(field);
-        editform python:view.edit(field);
-        editname python:editform.__name__;
-        " tal:attributes="
-        id string:progress-schema-$name;
-        class python: 'eea-progressbar-widget custom' if viewform.custom else 'eea-progressbar-widget default'">
-        <legend tal:content="name">Field label</legend>
-        <div class="preview">
-          <tal:view replace="structure python:viewform(ready=False)">Widget body</tal:view>
-          <tal:view replace="structure python:viewform(ready=True)">Widget body</tal:view>
-          <div class="progress-field workflow" title="Workflow states" i18n:attributes="title" tal:define="
-            workflows python:viewform.workflow()" tal:condition="workflows">
-            <span tal:content="python:', '.join(term.title for term in workflows)">Workflow states</span>
-          </div>
-        </div>
-        <div class="progress-field buttons">
-          <a tal:attributes="href string:${context/absolute_url}/.schema/@@$editname" i18n:translate="">Customize</a>
-        </div>
-        <form method="post" tal:attributes="action string:${context/absolute_url}/.schema/@@$editname">
-          <tal:edit replace="structure editform">Widget body</tal:edit>
-        </form>
-      </fieldset>
-    </tal:field>
+  <div id="eea-progressbar-cpanel" tal:attributes="data-url string:${context/absolute_url}/${view/__name__}">
+    <tal:fields tal:repeat="field view/schema">
+      <tal:field replace="structure python:view.controlpanel(field)" />
+    </tal:fields>
   </div>
 </div>
 </body>

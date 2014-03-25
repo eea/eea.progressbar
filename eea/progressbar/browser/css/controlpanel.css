@@ -8,6 +8,10 @@
   padding: 1em 0;
 }
 
+#eea-progressbar-cpanel .ui-state-highlight {
+  opacity: 0.7;
+}
+
 #eea-progressbar-cpanel:after {
   content: '.';
   height: 0;
@@ -37,7 +41,23 @@
 .eea-progressbar-widget.default {
 }
 
-.eea-progressbar-widget.custom {
+#content .eea-progressbar-widget.custom form fieldset,
+#content .eea-progressbar-widget.custom .progress-field {
+  background: #EFE;
+}
+
+#content .eea-progressbar-widget.hidden {
+  display: block;
+}
+
+#content .eea-progressbar-widget.hidden form fieldset,
+#content .eea-progressbar-widget.hidden .progress-field {
+  background: #F5F5F5;
+}
+
+#content .eea-progressbar-widget.changed form fieldset,
+#content .eea-progressbar-widget.changed .progress-field {
+  background: #ffe;
 }
 
 .buttons a, .buttons a:visited {
@@ -100,6 +120,7 @@
   border-bottom: none;
   padding: 0.5em 1em;
   background: #fff;
+  cursor: crosshair;
 }
 
 .progress-field:first-child {

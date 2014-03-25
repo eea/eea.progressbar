@@ -1,11 +1,12 @@
 """ Progress storage annotations
 """
-from persistent.dict import PersistentDict
 from persistent.list import PersistentList
+from persistent.dict import PersistentDict
 from zope.interface import implements
 from zope.annotation.interfaces import IAnnotations
 from eea.progressbar.storage.interfaces import IStorage
 from eea.progressbar.config import ANNO_FIELDS
+ANNO_ORDER = ANNO_FIELDS + u'.order'
 
 class Storage(object):
     """ Save/Get progress info
@@ -22,24 +23,36 @@ class Storage(object):
         anno = IAnnotations(self.context)
         fields = anno.get(ANNO_FIELDS, None)
         if fields is None:
-            fields = anno[ANNO_FIELDS] = PersistentList()
+            fields = anno[ANNO_FIELDS] = PersistentDict()
         return fields
+
+    def _order(self):
+        """ Fields order
+        """
+        anno = IAnnotations(self.context)
+        order = anno.get(ANNO_ORDER, None)
+        if order is None:
+            order = anno[ANNO_ORDER] = PersistentList()
+        return order
 
     @property
     def fields(self):
         """ Fields
         """
         anno = IAnnotations(self.context)
-        return anno.get(ANNO_FIELDS, [])
+        return anno.get(ANNO_FIELDS, {})
+
+    @property
+    def order(self):
+        """ Order
+        """
+        anno = IAnnotations(self.context)
+        return anno.get(ANNO_ORDER, [])
 
     def field(self, name, default=None):
         """ Return field by given key
         """
-        for field in self.fields:
-            if field.get('name', '') != name:
-                continue
-            return field
-        return default
+        return self.fields.get(name, default)
 
     def add_field(self, name, **kwargs):
         """ Add new field
@@ -50,8 +63,8 @@ class Storage(object):
         config = self._fields()
         kwargs.update({'name': name})
         field = PersistentDict(kwargs)
-        config.append(field)
-        return field.get('name', '')
+        config[name] = field
+        return name
 
     def edit_field(self, name, **kwargs):
         """ Edit field properties
@@ -65,14 +78,16 @@ class Storage(object):
         """ Delete field by given name
         """
         config = self._fields()
-        for index, field in enumerate(config):
-            if field.get('name', '') == name:
-                config.pop(index)
-                return name
-        raise KeyError(name)
+        return config.pop(name)
 
     def delete_fields(self):
         """ Delete all fields
         """
         anno = IAnnotations(self.context)
-        anno[ANNO_FIELDS] = PersistentList()
+        anno[ANNO_FIELDS] = PersistentDict()
+
+    def reorder(self, order=()):
+        """ Reorder fields
+        """
+        anno = IAnnotations(self.context)
+        anno[ANNO_ORDER] = PersistentList(order)

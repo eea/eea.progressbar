@@ -55,6 +55,10 @@ class EditForm(SubPageForm):
         storage = queryAdapter(self.parent, IStorage)
         storage.edit_field(self.prefix, **data)
 
+        name = action.__name__.encode('utf-8')
+        value = self.request.form.get(name, '')
+        if value == 'ajax':
+            return _(u"Changes saved")
         return self.nextUrl
 
     @formAction(_('Reset'), condition=haveInputWidgets)
@@ -64,6 +68,10 @@ class EditForm(SubPageForm):
         storage = queryAdapter(self.parent, IStorage)
         storage.delete_field(self.prefix)
 
+        name = action.__name__.encode('utf-8')
+        value = self.request.form.get(name, '')
+        if value == 'ajax':
+            return _(u"Changes saved")
         return self.nextUrl
 
     @property
