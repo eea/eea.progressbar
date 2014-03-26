@@ -1,11 +1,13 @@
 """ XML Adapter
 """
+import logging
 from zope import schema
 from zope.component import queryMultiAdapter, queryAdapter
 from Products.GenericSetup.utils import XMLAdapterBase
 from Products.GenericSetup.interfaces import IBody
 from eea.progressbar.interfaces import IProgressTool
 from eea.progressbar.interfaces import ISettings
+logger = logging.getLogger('eea.progressbar')
 
 class ProgressToolXMLAdapter(XMLAdapterBase):
     """ Generic setup export/import xml adapter
@@ -75,7 +77,11 @@ class ProgressToolXMLAdapter(XMLAdapterBase):
                     value = self._getNodeText(child)
                     value = value.decode('utf-8')
                     value = (not purge) and value or u''
-                setattr(settings, name, value)
+                try:
+                    setattr(settings, name, value)
+                except Exception, err:
+                    logger.exception(err)
+                    continue
 
             # Handle objects
             elif child.nodeName == 'object':

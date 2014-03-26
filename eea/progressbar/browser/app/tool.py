@@ -37,6 +37,9 @@ class ContentType(BrowserView):
         schema = getattr(ctype, 'Schema', lambda: None)
         schema = schema()
 
+        if not schema:
+            return
+
         fields = schema.fields()
         storage = queryAdapter(self.context, IStorage)
         order = storage.order if storage else []
