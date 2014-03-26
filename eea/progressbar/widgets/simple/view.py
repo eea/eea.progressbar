@@ -1,10 +1,12 @@
 """ View
 """
+from zope.interface import implements
 from zope.component import queryUtility, queryAdapter
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.pagetemplate.engine import TrustedEngine, TrustedZopeContext
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetView
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
 from eea.progressbar.widgets.view import ViewForm
 from eea.progressbar.interfaces import IStorage
@@ -12,6 +14,7 @@ from eea.progressbar.interfaces import IStorage
 class View(ViewForm):
     """ Widget view
     """
+    implements(ISimpleWidgetView)
     template = ViewPageTemplateFile('view.pt')
 
     def __init__(self, context, request):

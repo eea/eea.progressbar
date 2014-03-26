@@ -1,4 +1,9 @@
-""" Interfaces
+""" Control Panel Interfaces
+
+    >>> from zope.component import queryUtility, queryAdapter
+    >>> from eea.progressbar.interfaces import IProgressTool
+    >>> from eea.progressbar.interfaces import ISettings
+
 """
 from zope.interface import Interface
 from zope import schema
@@ -6,6 +11,40 @@ from eea.progressbar.config import EEAMessageFactory as _
 
 class ISettings(Interface):
     """ Alchemy settings
+
+        >>> ptool = queryUtility(IProgressTool)
+        >>> settings = queryAdapter(ptool, ISettings)
+        >>> settings
+        <eea.progressbar.controlpanel.settings.ControlPanelAdapter object at...>
+
+        >>> settings.viewletVisibleFor
+        [u'Document', u'Collection', u'Folder', u'News Item', u'Event']
+
+        >>> settings.viewletVisibleFor = [u'Folder']
+        >>> settings.viewletVisibleFor
+        [u'Folder']
+
+        >>> settings.trailViewletVisibleFor
+        [u'Document', u'Collection', u'Folder', u'News Item', u'Event']
+
+        >>> settings.trailViewletVisibleFor = [u'Document']
+        >>> settings.trailViewletVisibleFor
+        [u'Document']
+
+        >>> settings.metadataViewletVisibleFor
+        []
+
+        >>> settings.metadataViewletVisibleFor = [u'Event']
+        >>> settings.metadataViewletVisibleFor
+        [u'Event']
+
+        >>> settings.hidedStatesPercentage
+        0
+
+        >>> settings.hidedStatesPercentage = -1
+        >>> settings.hidedStatesPercentage
+        -1
+
     """
     viewletVisibleFor = schema.List(
         title=_(u"Enable workflow percentage bar viewlet"),

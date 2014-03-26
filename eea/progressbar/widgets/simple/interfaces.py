@@ -1,11 +1,25 @@
 """ Simple widget edit schema
 """
 from zope import schema
+from eea.progressbar.widgets.interfaces import IProgressWidgetView
 from eea.progressbar.widgets.interfaces import IProgressWidgetEdit
 from eea.progressbar.config import EEAMessageFactory as _
 
+class ISimpleWidgetView(IProgressWidgetView):
+    """ Simple widget view
+    """
+
+    def workflow():
+        """ Human readable workflow states
+        """
+
+    def condition(context):
+        """ Condition to establish if widget state is ready or not
+        """
+
+
 class ISimpleWidgetEdit(IProgressWidgetEdit):
-    """ Simple widget
+    """ Simple widget edit
     """
     labelEmpty = schema.Text(
         title=_(u'Message (not set)'),

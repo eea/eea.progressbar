@@ -7,10 +7,6 @@ from zope.security import zcml
 from zope.browserpage.metadirectives import IPageDirective
 from eea.progressbar.config import EEAMessageFactory as _
 
-class IProgressStorage(Interface):
-    """ Get / update widget based progress info
-    """
-
 class IProgressWidget(Interface):
     """ Common interface to display fields within portal_progress
     """
@@ -22,6 +18,47 @@ class IProgressWidgetEdit(IProgressWidget):
 class IProgressWidgetView(IProgressWidget):
     """ Common interface for widget in view mode
     """
+    prefix = schema.TextLine(
+        title=_(u'Prefix'),
+        description=_(u"Usually a schema field name")
+    )
+
+    custom = schema.Bool(
+        title=_(u"Custom"),
+        description=_(u"Is this widget customized?"),
+        readonly=True
+    )
+
+    hidden = schema.Bool(
+        title=_(u"Hidden"),
+        description=_(u"Is this widget hidden?"),
+        readonly=True
+    )
+
+    def setPrefix(prefix):
+        """ Update prefix
+        """
+
+    def default(name):
+        """ Get default value of a property given by name
+        """
+
+    def ready(context):
+        """ For the given context was this property correctly set
+        """
+
+    def get(name, default):
+        """ Get widget configuration by given name or return the default value
+        """
+
+    def translate(message):
+        """ Use zope.i18n to translate message
+        """
+
+    def __call__(args, kwargs):
+        """ Render widget
+        """
+
 
 class IProgressWidgets(Interface):
     """ Utility to get available progressbar widgets

@@ -22,13 +22,43 @@ def test_suite():
             layer=FUNCTIONAL_TESTING),
         layered(
             doctest.DocFileSuite(
-                'README.txt',
+                'content/interfaces.py',
+                optionflags=OPTIONFLAGS,
+                package='eea.progressbar'),
+            layer=FUNCTIONAL_TESTING),
+        layered(
+            doctest.DocFileSuite(
+                'controlpanel/interfaces.py',
+                optionflags=OPTIONFLAGS,
+                package='eea.progressbar'),
+            layer=FUNCTIONAL_TESTING),
+        layered(
+            doctest.DocFileSuite(
+                'widgets/interfaces.py',
+                optionflags=OPTIONFLAGS,
+                package='eea.progressbar'),
+            layer=FUNCTIONAL_TESTING),
+        layered(
+            doctest.DocFileSuite(
+                'storage/interfaces.py',
+                optionflags=OPTIONFLAGS,
+                package='eea.progressbar'),
+            layer=FUNCTIONAL_TESTING),
+        layered(
+            doctest.DocFileSuite(
+                'widgets/simple/interfaces.py',
                 optionflags=OPTIONFLAGS,
                 package='eea.progressbar'),
             layer=FUNCTIONAL_TESTING),
         layered(
             doctest.DocFileSuite(
                 'docs/exportimport.txt',
+                optionflags=OPTIONFLAGS,
+                package='eea.progressbar'),
+            layer=FUNCTIONAL_TESTING),
+        layered(
+            doctest.DocFileSuite(
+                'README.txt',
                 optionflags=OPTIONFLAGS,
                 package='eea.progressbar'),
             layer=FUNCTIONAL_TESTING),
