@@ -45,4 +45,19 @@
     handler="eea.progressbar.exportimport.exportWorkflowProgress"
     />
 
+  <genericsetup:importStep
+    name="progressbar.xml"
+    title="Progress Bar Settings"
+    description="Progress bar settings including editing progress settings"
+    handler="eea.progressbar.exportimport.importProgressTool">
+    <depends name="toolset"/>
+  </genericsetup:importStep>
+
+  <genericsetup:exportStep
+    name="progressbar.xml"
+    title="Progress Bar Settings"
+    description="Progress bar settings including editing progress settings"
+    handler="eea.progressbar.exportimport.exportProgressTool"
+    />
+
 </configure>

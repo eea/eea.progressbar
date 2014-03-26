@@ -7,7 +7,7 @@ from Products.ATContentTypes.content.folder import ATFolder
 from eea.progressbar.content.interfaces import IContentType
 from eea.progressbar.config import EEAMessageFactory as _
 
-EditSchema = ATFolder.schema.copy() + atapi.Schema((
+EditSchema = atapi.Schema((
     atapi.StringField('ctype',
         schemata="default",
         vocabulary_factory='plone.app.vocabularies.ReallyUserFriendlyTypes',
@@ -20,8 +20,6 @@ EditSchema = ATFolder.schema.copy() + atapi.Schema((
     ),
 ))
 
-EditSchema['description'].widget.modes = ()
-
 class ProgressContentType(ATFolder):
     """ Progress node
     """
@@ -29,4 +27,5 @@ class ProgressContentType(ATFolder):
     portal_type = meta_type = 'ProgressContentType'
     archetypes_name = 'EEA ProgressBar Content Type'
     _at_rename_after_creation = True
-    schema = EditSchema
+    schema = ATFolder.schema.copy() + EditSchema.copy()
+    schema['description'].widget.modes = ()

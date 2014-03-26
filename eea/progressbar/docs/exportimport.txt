@@ -1,16 +1,19 @@
+==============================
 EEA Progress Bar Export/Import
 ==============================
 XML Adapters to be used within GenericSetup profiles
 
 ::
 
+    >>> from zope.interface import alsoProvides
     >>> from zope.component import queryMultiAdapter
     >>> from Products.GenericSetup.interfaces import IBody
     >>> from Products.GenericSetup.testing import DummySetupEnviron
     >>> from Products.CMFCore.utils import getToolByName
+    >>> from eea.progressbar.interfaces import IProgressBarLayer
 
-Exporter / Importer
--------------------
+Workflow Exporter / Importer
+============================
 
 ::
 
@@ -132,3 +135,253 @@ You can also remove the progress attribute
       <object name="published" meta_type="Workflow State"/>
     </object>
     ...
+
+
+Progress Bar Settings including editing progress
+================================================
+XML Adapters to be used within GenericSetup profiles.
+
+Exporter
+
+    >>> from zope.component import queryUtility
+    >>> from eea.progressbar.interfaces import IProgressTool
+    >>> tool = queryUtility(IProgressTool)
+    >>> exporter = importer = queryMultiAdapter((tool, DummySetupEnviron()), IBody)
+    >>> exporter
+    <eea.progressbar.exportimport.tool.ProgressToolXMLAdapter object at ...>
+
+See default settings
+
+    >>> print exporter.body
+    <?xml version="1.0" encoding="utf-8"?>
+    <object name="portal_progress" meta_type="ProgressTool">
+     <property name="viewletVisibleFor">
+       <element value="Document"/>
+       <element value="Collection"/>
+       <element value="Folder"/>
+       <element value="News Item"/>
+       <element value="Event"/>
+     </property>
+     <property name="trailViewletVisibleFor">
+       <element value="Document"/>
+       <element value="Collection"/>
+       <element value="Folder"/>
+       <element value="News Item"/>
+       <element value="Event"/>
+     </property>
+     <property name="metadataViewletVisibleFor"/>
+     <property name="hidedStatesPercentage">0</property>
+    </object>
+
+Import some data.
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_progress" meta_type="ProgressTool">
+    ...  <property name="viewletVisibleFor">
+    ...   <element value="Event"/>
+    ...  </property>
+    ...  <property name="trailViewletVisibleFor">
+    ...   <element value="News Item"/>
+    ...  </property>
+    ...  <property name="metadataViewletVisibleFor">
+    ...   <element value="Document"/>
+    ...  </property>
+    ...  <property name="hidedStatesPercentage">10</property>
+    ... </object>
+    ... '''
+
+Setting metadataViewletVisibleFor automatically creates Progress Content Types
+in order to be able to update Editing Progress settings
+
+    >>> print exporter.body
+    <?xml version="1.0" encoding="utf-8"?>
+    <object name="portal_progress" meta_type="ProgressTool">
+     <property name="viewletVisibleFor">
+      <element value="Event"/>
+     </property>
+     <property name="trailViewletVisibleFor">
+      <element value="News Item"/>
+     </property>
+     <property name="metadataViewletVisibleFor">
+      <element value="Document"/>
+     </property>
+     <property name="hidedStatesPercentage">10</property>
+     <object name="document" meta_type="ProgressContentType">
+      <property name="title">Document</property>
+      <property name="ctype">Document</property>
+      <object name=".schema" meta_type="ATDocument"/>
+      <progress/>
+     </object>
+    </object>
+
+Add editing progress content-type without making the viewlet visible
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_progress">
+    ...  <object name="event" meta_type="ProgressContentType">
+    ...   <property name="title">Evento</property>
+    ...   <property name="ctype">Event</property>
+    ...  </object>
+    ... </object>
+    ... '''
+
+    >>> print exporter.body
+    <?xml version="1.0" encoding="utf-8"?>
+    <object name="portal_progress" meta_type="ProgressTool">
+    ...
+     <object name="event" meta_type="ProgressContentType">
+      <property name="title">Evento</property>
+      <property name="ctype">Event</property>
+      <object name=".schema" meta_type="ATEvent"/>
+      <progress/>
+     </object>
+    </object>
+
+
+Editing progress
+----------------
+
+Let's create a document within our sandbox and see editing progress
+
+    >>> sandbox = portal['sandbox']
+    >>> cid = sandbox.invokeFactory('Document', id='page1')
+    >>> page1 = sandbox[cid]
+    >>> request = page1.REQUEST
+    >>> alsoProvides(request, IProgressBarLayer)
+
+    >>
+    >>> progress = queryMultiAdapter((page1, request), name=u'progress.metadata')
+    >>> widgets = [widget.prefix for widget in progress.schema()]
+    >>> widgets
+    ['title', 'description', 'text', ...]
+
+Reorder fields
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_progress">
+    ...  <object name="document">
+    ...   <progress>
+    ...    <property name="order">
+    ...     <element value="description" />
+    ...     <element value="title" />
+    ...    </property>
+    ...   </progress>
+    ...  </object>
+    ... </object>
+    ... '''
+
+    >>> widgets = [widget.prefix for widget in progress.schema()]
+    >>> widgets
+    ['description', 'title', 'text', ...]
+
+    >>> print exporter.body
+    <?xml version="1.0" encoding="utf-8"?>
+    <object name="portal_progress" meta_type="ProgressTool">
+    ...
+     <object name="document" meta_type="ProgressContentType">
+    ...
+      <progress>
+       <property name="order">
+        <element value="description"/>
+        <element value="title"/>
+       </property>
+      </progress>
+     </object>
+    ...
+    </object>
+
+Customize fields
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_progress">
+    ...  <object name="document">
+    ...   <progress>
+    ...    <field name="title">
+    ...      <property name="states">
+    ...        <element value="private"/>
+    ...        <element value="pending"/>
+    ...      </property>
+    ...      <property name="hideReady">True</property>
+    ...    </field>
+    ...   </progress>
+    ...  </object>
+    ... </object>
+    ... '''
+
+    >>> page1.getField('title').getMutator(page1)("Title widget should be hidden")
+    >>> widgets = [widget.prefix for widget in progress.schema()]
+    >>> widgets
+    ['description', 'text', ...]
+
+
+    >>> print exporter.body
+    <?xml version="1.0" encoding="utf-8"?>
+    <object name="portal_progress" meta_type="ProgressTool">
+    ...
+     <object name="document" meta_type="ProgressContentType">
+    ...
+      <progress>
+    ...
+       <field name="title">
+        <property name="states">
+         <element value="private"/>
+         <element value="pending"/>
+        </property>
+        <property name="hideReady">True</property>
+       </field>
+      </progress>
+     </object>
+    ...
+    </object>
+
+
+    >>> importer.body = '''<?xml version="1.0" encoding="utf-8"?>
+    ... <object name="portal_progress">
+    ...  <object name="document">
+    ...   <progress>
+    ...    <field name="title">
+    ...      <property name="states">
+    ...        <element value="private"/>
+    ...        <element value="pending"/>
+    ...      </property>
+    ...      <property name="hideReady">False</property>
+    ...    </field>
+    ...    <field name="description">
+    ...      <property name="states">
+    ...        <element value="published"/>
+    ...      </property>
+    ...    </field>
+    ...   </progress>
+    ...  </object>
+    ... </object>
+    ... '''
+
+    >>> widgets = [widget.prefix for widget in progress.schema()]
+    >>> widgets
+    ['title', 'text', ...]
+
+
+    >>> print exporter.body
+    <?xml version="1.0" encoding="utf-8"?>
+    <object name="portal_progress" meta_type="ProgressTool">
+    ...
+     <object name="document" meta_type="ProgressContentType">
+    ...
+      <progress>
+    ...
+       <field name="description">
+        <property name="states">
+         <element value="published"/>
+        </property>
+       </field>
+       <field name="title">
+        <property name="states">
+         <element value="private"/>
+         <element value="pending"/>
+        </property>
+        <property name="hideReady">False</property>
+       </field>
+      </progress>
+     </object>
+    ...
+    </object>

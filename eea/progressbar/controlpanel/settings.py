@@ -110,6 +110,10 @@ class ControlPanelAdapter(SchemaAdapterBase):
     def hidedStatesPercentage(self, value):
         """ Setter
         """
+        try:
+            value = int(value)
+        except Exception:
+            value = 0
         self.settings.hidedStatesPercentage = value
 
     @property
