@@ -22,6 +22,7 @@ Contents
 Main features
 =============
 
+- Visually display *editing progress (document completion)* of an item.
 - Visually display a workflow *percentage bar/steps trail* in the publishing
   process of a document according with the workflow state in which the
   document is.
@@ -29,7 +30,6 @@ Main features
   according with the children / query results items progress
 - Visually display workflow *percentage bars* for items within Collection
   tabular view
-- Visually display *editing progress (document completion)* of an item.
 - Possibility to hide/exclude certain states in progress bar (by default
   hide all states with defined percentage lower than/equal 0, configurable via
   Site Setup > Progress Bar Settings)
@@ -69,6 +69,11 @@ Source code
 - Latest source code (Plone 4 compatible):
   https://github.com/eea/eea.progressbar
 
+Live demos
+==========
+
+- `Editing progress <http://www.youtube.com/watch?v=awS6zW2Iigo&list=PLVPSQz7ahsBwUHixUt_s0kh-vaik_NCtO&feature=share&index=1>`_
+- `Workflow Steps and Workflow percentage bar <http://www.youtube.com/watch?v=a_U0tmw-4As&list=PLVPSQz7ahsBwUHixUt_s0kh-vaik_NCtO&feature=share>`_
 
 Copyright and license
 =====================
