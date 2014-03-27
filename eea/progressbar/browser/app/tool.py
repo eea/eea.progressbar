@@ -2,6 +2,10 @@
 """
 from zope.component import queryMultiAdapter, queryAdapter
 from Products.Five.browser import BrowserView
+from Products.GenericSetup.interfaces import IBody
+from Products.statusmessages.interfaces import IStatusMessage
+from Products.GenericSetup.context import SnapshotExportContext
+from Products.GenericSetup.context import SnapshotImportContext
 from eea.progressbar.interfaces import IStorage
 from eea.progressbar.config import EEAMessageFactory as _
 
@@ -141,3 +145,68 @@ class ContentType(BrowserView):
         form.update(kwargs)
         self._field = form.get('field', None)
         return self.index()
+
+class ContentTypeImport(ContentType):
+    """ Import settings from XML
+    """
+    def _redirect(self, msg='', to=''):
+        """ Set status message and redirect
+        """
+        if not to:
+            to = self.context.absolute_url()
+        if msg:
+            IStatusMessage(self.request).addStatusMessage(str(msg), type='info')
+        self.request.response.redirect(to)
+
+    def import_xml(self, **kwargs):
+        """ Export
+        """
+        upload_file = kwargs.get('import_file', None)
+        if getattr(upload_file, 'read', None):
+            upload_file = upload_file.read()
+        xml = upload_file or ''
+        if not xml.startswith('<?xml version="1.0"'):
+            return _('Please provide a valid xml file')
+
+        environ = SnapshotImportContext(self.context, 'utf-8')
+        importer = queryMultiAdapter((self.context, environ), IBody,
+                                      name='metadata.progress.xml')
+        importer.body = xml
+        return None
+
+    def __call__(self, *args, **kwargs):
+        if self.request.method != 'POST':
+            return  self.index()
+
+        form = self.request.form
+        form.update(kwargs)
+        error = self.import_xml(**form)
+
+        if error:
+            to = self.__name__
+            msg = error
+        else:
+            to = ''
+            msg = _('Configuration imported sucesfully')
+
+        return self._redirect(msg=msg, to=to)
+
+class ContentTypeExport(ContentType):
+    """ Export settings to XML
+    """
+    def export_xml(self):
+        """ Export
+        """
+        environ = SnapshotExportContext(self.context, 'utf-8')
+        export = queryMultiAdapter((self.context, environ), IBody,
+                                      name='metadata.progress.xml')
+
+        return export.body
+
+    def __call__(self, *args, **kwargs):
+        self.request.response.setHeader(
+            'content-type', 'text/xml; charset=utf-8')
+        self.request.response.addHeader(
+            "content-disposition","attachment; filename=%s.xml" % (
+                self.context.getId(),))
+        return self.export_xml()

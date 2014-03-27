@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/prefs_main_template/macros/master"
+      i18n:domain="eea">
+
+<metal:top fill-slot="top_slot">
+  <link rel="stylesheet" tal:attributes="href string:$portal_url/++resource++eea.progressbar.controlpanel.css" />
+  <script tal:attributes="src string:$portal_url/++resource++eea.progressbar.controlpanel.js"
+    type="text/javascript"></script>
+</metal:top>
+
+
+<body>
+<div id="content" metal:fill-slot="prefs_configlet_main">
+  <div id="eea-progressbar-import">
+    <!-- Import / Export -->
+      <fieldset class="eea-progressbar-import">
+        <legend i18n:translate="">Import configuration</legend>
+        <form method="post" enctype="multipart/form-data"
+          title="Import configuration" i18n:attributes="title"
+          id="progress-importexport-widgets" tal:attributes="
+          action string:${context/absolute_url}/${view/__name__};">
+          <input type="file" name="import_file" />
+          <input class="context" type="submit" value="Import" id="import_button"
+            name="import_button"
+            i18n:attributes="value"/>
+        </form>
+      </fieldset>
+  </div>
+</div>
+</body>
+</html>

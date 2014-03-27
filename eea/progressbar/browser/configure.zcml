@@ -35,6 +35,21 @@
     />
 
   <browser:page
+    name="view.export"
+    for="eea.progressbar.interfaces.IContentType"
+    class=".app.tool.ContentTypeExport"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
+    name="view.import"
+    for="eea.progressbar.interfaces.IContentType"
+    class=".app.tool.ContentTypeImport"
+    template="zpt/metadata.import.pt"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
     name="progress.bar"
     layer="eea.progressbar.interfaces.IProgressBarLayer"
     for="eea.progressbar.interfaces.IBaseObject"
