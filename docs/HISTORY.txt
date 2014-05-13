@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.0-dev - (unreleased)
-----------------------
+3.0 - (2014-05-13)
+------------------
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
   upgrade button available for EEA Progress Bar
   [voineali refs #17713]
