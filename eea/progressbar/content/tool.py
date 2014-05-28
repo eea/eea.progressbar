@@ -1,4 +1,4 @@
-""" Depiction tools
+""" Progress tool
 """
 from zope.interface import implements
 from Products.CMFCore.utils import UniqueObject
