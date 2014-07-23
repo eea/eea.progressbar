@@ -26,11 +26,10 @@ def finalize_schema(schema=SCHEMA):
     """ Update schema
     """
     for field in schema.fields():
+        field.write_permission = 'Manage portal'
         if field.schemata != 'default':
             field.required = False
             field.widget.condition = 'python:False'
-        else:
-            field.write_permission = 'Manage portal'
 
 finalize_schema()
 
