@@ -20,6 +20,20 @@ EditSchema = atapi.Schema((
     ),
 ))
 
+SCHEMA = ATFolder.schema.copy() + EditSchema.copy()
+
+def finalize_schema(schema=SCHEMA):
+    """ Update schema
+    """
+    for field in schema.fields():
+        if field.schemata != 'default':
+            field.required = False
+            field.widget.condition = 'python:False'
+        else:
+            field.write_permission = 'Manage portal'
+
+finalize_schema()
+
 class ProgressContentType(ATFolder):
     """ Progress node
     """
@@ -27,5 +41,5 @@ class ProgressContentType(ATFolder):
     portal_type = meta_type = 'ProgressContentType'
     archetypes_name = 'EEA ProgressBar Content Type'
     _at_rename_after_creation = True
-    schema = ATFolder.schema.copy() + EditSchema.copy()
+    schema = SCHEMA
     schema['description'].widget.modes = ()
