@@ -1,0 +1,9 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="eea">
+
+    <subscriber factory=".marshaller.ProgressLevelSurfModifier"
+        for="eea.progressbar.interfaces.IBaseObject"
+        provides="eea.rdfmarshaller.interfaces.ISurfResourceModifier" />
+
+</configure>
