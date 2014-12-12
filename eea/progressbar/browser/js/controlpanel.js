@@ -20,7 +20,7 @@ EEA.ProgressTool = function(context, options){
 };
 
 EEA.ProgressTool.Events = {
-  reloadWidget: 'eea-progressbar-reloadWidget'
+  reloadWidget: 'eea-progressbar-reloadWidget',
 };
 
 EEA.ProgressTool.prototype = {
@@ -36,7 +36,53 @@ EEA.ProgressTool.prototype = {
       self.context.masonry('layout');
     });
 
+    jQuery("#add-new-widget").click(function(evt){
+      evt.preventDefault();
+      var dialog = jQuery("#add-new-widget-dialog").dialog({
+        modal: true,
+        buttons: {
+          "Add new widget": function() {
+            self.addWidget();
+            dialog.dialog( "close" );
+          },
+          Cancel: function() {
+            dialog.dialog( "close" );
+          }
+        },
+        close: function() {
+          jQuery("#add-new-widget-dialog form")[ 0 ].reset();
+          jQuery("#new-widget-name").removeClass( "ui-state-error" );
+        }
+      });
+ 
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      self.addWidget();
+    });
+    return;
+    });
+
     self.reload();
+  },
+
+  addWidget: function() {
+    var self = this;
+    var new_name = jQuery("#new-widget-name").val();
+    var url = jQuery("#add-new-widget").attr('href');
+
+    if(new_name && url) {
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: { name: new_name },
+        success: function(data) {
+          var widget = jQuery(data);
+          self.context.append(self.reloadWidget(widget));
+          self.context.masonry('reloadItems');
+          self.context.masonry('layout');
+        }
+      });
+    }
   },
 
   reload: function(){

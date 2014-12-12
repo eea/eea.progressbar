@@ -14,7 +14,21 @@
 
 
 <body>
-<div id="content" metal:fill-slot="prefs_configlet_main">
+<div id="progress-content" metal:fill-slot="prefs_configlet_main">
+    <div class="buttons">
+      <a id="add-new-widget" tal:attributes="href string:${context/absolute_url}/@@view.add">
+        <span class="eea-icon eea-icon eea-icon-plus-square-o" />
+      </a>
+    </div>
+    <div id="add-new-widget-dialog" style="display:none">
+      <form>
+        <fieldset>
+          <label for="new-widget-name">Name</label>
+          <input type="text" name="name" id="new-widget-name" value="" class="text ui-widget-content ui-corner-all">
+          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+      </form>
+    </div>
   <div id="eea-progressbar-cpanel" tal:attributes="data-url string:${context/absolute_url}/${view/__name__}">
     <tal:fields tal:repeat="field view/schema">
       <tal:field replace="structure python:view.controlpanel(field)" />

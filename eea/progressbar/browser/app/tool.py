@@ -6,8 +6,23 @@ from Products.GenericSetup.interfaces import IBody
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.GenericSetup.context import SnapshotExportContext
 from Products.GenericSetup.context import SnapshotImportContext
+from eea.progressbar.widgets.view import ExtraFieldWidget
 from eea.progressbar.interfaces import IStorage
 from eea.progressbar.config import EEAMessageFactory as _
+
+
+class ExtraField:
+    widget = None
+
+    def __init__(self, context, request, data=None):
+        self.context = context
+        self.request = request
+        self._data = data
+        self.widget = ExtraFieldWidget(self.context, self.request, data)
+
+    def getName(self):
+        return self._data.get('name')
+
 
 class ContentType(BrowserView):
     """ Configure content-type
@@ -16,12 +31,14 @@ class ContentType(BrowserView):
         super(ContentType, self).__init__(context, request)
         self._field = None
 
-    def reorder(self, fields, order):
-        """ Reorder fields by given order
+    def regen_fields(self, fields, storage):
+        """ Regenerate fields with the given order and the custom fields
         """
+
         yielded = set()
 
         # Yield fields that are in order
+        order = storage.order if storage else []
         for name in order:
             for field in fields:
                 if field.getName() == name:
@@ -32,7 +49,16 @@ class ContentType(BrowserView):
         # Append fields that are not ordered
         for field in fields:
             if field.getName() not in yielded:
+                yielded.add(field.getName())
                 yield field
+
+        if storage:
+            st_fields = storage.fields
+            for field in st_fields.keys():
+                if field not in yielded:
+                    yield ExtraField(self.context,
+                                     self.request,
+                                     st_fields.get(field))
 
     def schema(self):
         """ Schema
@@ -46,8 +72,7 @@ class ContentType(BrowserView):
 
         fields = schema.fields()
         storage = queryAdapter(self.context, IStorage)
-        order = storage.order if storage else []
-        fields = self.reorder(fields, order)
+        fields = self.regen_fields(fields, storage)
 
         if not schema:
             return
@@ -103,6 +128,18 @@ class ContentType(BrowserView):
         widget.setPrefix(self.field.getName())
         widget.field = self.field
         return widget
+
+    def add(self):
+        name = self.request.form.get('name')
+
+        if name:
+            new_field = ExtraField(self.context, self.request, {'name': name})
+            self._field = new_field
+            storage = queryAdapter(self.context, IStorage)
+            storage.add_field(name)
+            cpanel = queryMultiAdapter((self.context, self.request),
+                                       name=u'view.metadata')
+            return cpanel(field=self._field)
 
     def controlpanel(self, field=None):
         """ Widget preview and edit form to be listed within control panel
@@ -176,7 +213,7 @@ class ContentTypeImport(ContentType):
 
     def __call__(self, *args, **kwargs):
         if self.request.method != 'POST':
-            return  self.index()
+            return self.index()
 
         form = self.request.form
         form.update(kwargs)
