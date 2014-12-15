@@ -23,6 +23,8 @@ class ExtraField:
         self.widget = ExtraFieldWidget(self.context, self.request, data)
 
     def getName(self):
+        """ Return field name
+        """
         return self._data.get('name')
 
 
@@ -140,6 +142,8 @@ class ContentType(BrowserView):
         return widget
 
     def add(self):
+        """ Add extra field
+        """
         name = self.request.form.get('name')
 
         if name:
@@ -152,6 +156,8 @@ class ContentType(BrowserView):
             return cpanel(field=self._field)
 
     def remove(self):
+        """ Remove extra field
+        """
         name = self.request.form.get('name')
 
         if name:
