@@ -36,28 +36,29 @@ EEA.ProgressTool.prototype = {
       self.context.masonry('layout');
     });
 
-    jQuery("#add-new-widget").click(function(evt){
+    jQuery('#add-new-widget').click(function(evt){
       evt.preventDefault();
-      var dialog = jQuery("#add-new-widget-dialog").dialog({
+      var dialog = jQuery('#add-new-widget-dialog').dialog({
         modal: true,
         buttons: {
-          "Add new widget": function() {
+          'Add new widget': function() {
             self.addWidget();
-            dialog.dialog( "close" );
+            dialog.dialog( 'close' );
           },
           Cancel: function() {
-            dialog.dialog( "close" );
+            dialog.dialog( 'close' );
           }
         },
         close: function() {
-          jQuery("#add-new-widget-dialog form")[ 0 ].reset();
-          jQuery("#new-widget-name").removeClass( "ui-state-error" );
+          jQuery('#add-new-widget-dialog form')[ 0 ].reset();
+          jQuery('#new-widget-name').removeClass( 'ui-state-error' );
         }
       });
  
-    form = dialog.find( "form" ).on( "submit", function( event ) {
+    form = dialog.find( 'form' ).on( 'submit', function( event ) {
       event.preventDefault();
       self.addWidget();
+      dialog.dialog( 'close' );
     });
     return;
     });
@@ -67,12 +68,12 @@ EEA.ProgressTool.prototype = {
 
   addWidget: function() {
     var self = this;
-    var new_name = jQuery("#new-widget-name").val();
-    var url = jQuery("#add-new-widget").attr('href');
+    var new_name = jQuery('#new-widget-name').val();
+    var url = jQuery('#add-new-widget').attr('href');
 
     if(new_name && url) {
       $.ajax({
-        type: "POST",
+        type: 'POST',
         url: url,
         data: { name: new_name },
         success: function(data) {
