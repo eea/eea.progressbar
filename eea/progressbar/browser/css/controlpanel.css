@@ -175,3 +175,7 @@
   border: 1px solid #CCC;
   border-bottom: 2px solid #CCC;
 }
+
+#add-new-widget-dialog fieldset {
+  padding: 1em 1em 1em;
+}

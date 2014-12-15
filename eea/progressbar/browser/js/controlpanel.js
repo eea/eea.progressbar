@@ -40,6 +40,7 @@ EEA.ProgressTool.prototype = {
       evt.preventDefault();
       var dialog = jQuery('#add-new-widget-dialog').dialog({
         modal: true,
+        title: 'Add new widget',
         buttons: {
           'Add new widget': function() {
             self.addWidget();
