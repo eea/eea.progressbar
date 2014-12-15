@@ -16,7 +16,7 @@ class ExtraField:
     """
     widget = None
 
-    def __init__(self, context, request, data=None):
+    def __init__(self, context, request, data):
         self.context = context
         self.request = request
         self._data = data
@@ -41,7 +41,15 @@ class ContentType(BrowserView):
 
         # Yield fields that are in order
         order = storage.order if storage else []
+        schema_fnames = [field.getName() for field in fields]
+        st_fields = storage.fields
+
         for name in order:
+            if name not in schema_fnames:
+                yielded.add(name)
+                yield ExtraField(self.context,
+                                 self.request,
+                                 st_fields.get(name))
             for field in fields:
                 if field.getName() == name:
                     yielded.add(name)
@@ -56,7 +64,6 @@ class ContentType(BrowserView):
 
         # Append extra fields
         if storage:
-            st_fields = storage.fields
             for field in st_fields.keys():
                 if field not in yielded:
                     yield ExtraField(self.context,
@@ -143,6 +150,20 @@ class ContentType(BrowserView):
             cpanel = queryMultiAdapter((self.context, self.request),
                                        name=u'view.metadata')
             return cpanel(field=self._field)
+
+    def remove(self):
+        name = self.request.form.get('name')
+
+        if name:
+            storage = queryAdapter(self.context, IStorage)
+            if name in storage.fields.keys():
+                storage.delete_field(name)
+                order = storage.order
+                if name in order:
+                    order.pop(order.index(name))
+                    storage.reorder(order)
+
+                return True
 
     def controlpanel(self, field=None):
         """ Widget preview and edit form to be listed within control panel

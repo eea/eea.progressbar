@@ -127,3 +127,8 @@ class ExtraFieldWidget(ViewForm):
     def __init__(self, context, request, field):
         super(ExtraFieldWidget, self).__init__(context, request)
         self.label = field.get('name').capitalize()
+
+    @property
+    def extrafield(self):
+        return True
+    

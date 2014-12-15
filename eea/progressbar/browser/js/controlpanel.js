@@ -205,6 +205,25 @@ EEA.ProgressTool.Widget.prototype = {
       self.form.find('input[type="submit"][name$="actions.reset"]').remove();
     }
 
+    if(self.context.hasClass('extrafield')){
+      self.context.find('.widget-close').click(function(evt){
+        evt.preventDefault();
+        var name = self.context.attr('data-field');
+        var url = $(this).attr('href');
+        $.ajax({
+          type: 'POST',
+          url: url,
+          data: { name: name },
+          success: function(data) {
+            if (data === 'True') {
+              self.context.remove();
+            }
+          }
+        });
+        return false;
+      });
+    }
+
     self.form.find('input[type="submit"]').click(function(evt){
       evt.preventDefault();
       return self.submit(jQuery(this));

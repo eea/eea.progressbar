@@ -3,8 +3,10 @@
     viewform python:view.view();
     editform python:view.edit();
     editname python:editform.__name__;
+    extrafield python: getattr(view.field.widget, 'extrafield', False);
     klass python: 'eea-progressbar-widget custom' if viewform.custom else 'eea-progressbar-widget default';
     klass python: klass + ' hidden' if viewform.hidden else klass;
+    klass python: klass + ' extrafield' if extrafield else klass;
     " tal:attributes="
     id string:progress-schema-$name;
     data-field name;
@@ -21,6 +23,9 @@
   </div>
   <div class="progress-field buttons">
     <a tal:attributes="href string:${context/absolute_url}/.schema/@@$editname" i18n:translate="">Customize</a>
+    <a tal:condition="extrafield" class="widget-close" tal:attributes="href string:${context/absolute_url}/@@view.remove">
+      <span class="eea-icon eea-icon-times"></span>
+    </a>
   </div>
   <form method="post" tal:attributes="action string:${context/absolute_url}/.schema/@@$editname">
     <tal:edit replace="structure editform">Widget body</tal:edit>
