@@ -12,6 +12,8 @@ from eea.progressbar.config import EEAMessageFactory as _
 
 
 class ExtraField:
+    """ ExtraField class
+    """
     widget = None
 
     def __init__(self, context, request, data=None):
@@ -52,6 +54,7 @@ class ContentType(BrowserView):
                 yielded.add(field.getName())
                 yield field
 
+        # Append extra fields
         if storage:
             st_fields = storage.fields
             for field in st_fields.keys():

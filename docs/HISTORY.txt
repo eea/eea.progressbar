@@ -3,8 +3,8 @@ Changelog
 
 3.2-dev - (unreleased)
 ----------------------
-* Feature: WIP: Possibility to add custom cards via eea.progressbar control panel
-  [olimpiurob]
+* Feature: Added possibility to add custom cards via eea.progressbar control panel
+  [olimpiurob refs #20470]
 
 3.1 - (2014-08-12)
 ------------------

@@ -122,6 +122,8 @@ class ViewForm(BrowserView):
 
 
 class ExtraFieldWidget(ViewForm):
+    """Extra field widget view
+    """
     def __init__(self, context, request, field):
         super(ExtraFieldWidget, self).__init__(context, request)
         self.label = field.get('name').capitalize()

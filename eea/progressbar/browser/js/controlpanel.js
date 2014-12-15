@@ -20,7 +20,7 @@ EEA.ProgressTool = function(context, options){
 };
 
 EEA.ProgressTool.Events = {
-  reloadWidget: 'eea-progressbar-reloadWidget',
+  reloadWidget: 'eea-progressbar-reloadWidget'
 };
 
 EEA.ProgressTool.prototype = {
