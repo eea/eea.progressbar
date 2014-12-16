@@ -5,6 +5,7 @@ from zope.component import queryUtility, queryAdapter
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.pagetemplate.engine import TrustedEngine, TrustedZopeContext
+from Acquisition import ImplicitAcquisitionWrapper
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetView
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
@@ -108,7 +109,9 @@ class View(ViewForm):
                 logger.exception(err)
                 result = False
 
-            if callable(result):
+            if callable(result) and \
+                not isinstance(result, ImplicitAcquisitionWrapper):
                 result = result()
+
             self._condition = result
         return self._condition
