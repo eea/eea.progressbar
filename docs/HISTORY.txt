@@ -3,6 +3,9 @@ Changelog
 
 3.2-dev - (unreleased)
 ----------------------
+* Bug fix: Treat case where the widget's condition could not be evaluated. The 
+  widget's default condition has also been changed.
+  [olimpiurob refs #20470]
 * Feature: Added possibility to add custom cards via eea.progressbar control panel
   [olimpiurob refs #20470]
 

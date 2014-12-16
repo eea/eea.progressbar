@@ -10,6 +10,9 @@ from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetView
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
 from eea.progressbar.widgets.view import ViewForm
 from eea.progressbar.interfaces import IStorage
+from logging import getLogger
+logger = getLogger('eea.progressbar')
+
 
 class View(ViewForm):
     """ Widget view
@@ -98,7 +101,13 @@ class View(ViewForm):
                 'value': value
             })
             expression = engine.compile(condition)
-            result = zopeContext.evaluate(expression)
+
+            try:
+                result = zopeContext.evaluate(expression)
+            except Exception, err:
+                logger.exception(err)
+                result = False
+
             if callable(result):
                 result = result()
             self._condition = result
