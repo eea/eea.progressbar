@@ -22,10 +22,8 @@
     </div>
   </div>
   <div class="progress-field buttons">
-    <a tal:attributes="href string:${context/absolute_url}/.schema/@@$editname" i18n:translate="">Customize</a>
-    <a tal:condition="extrafield" class="widget-close" tal:attributes="href string:${context/absolute_url}/@@view.remove">
-      <span class="eea-icon eea-icon-times"></span>
-    </a>
+    <a tal:attributes="href string:${context/absolute_url}/.schema/@@$editname" i18n:translate="">Edit</a>
+    <a tal:condition="extrafield" class="widget-close" tal:attributes="href string:${context/absolute_url}/@@view.remove" i18n:translate="">Delete</a>
   </div>
   <form method="post" tal:attributes="action string:${context/absolute_url}/.schema/@@$editname">
     <tal:edit replace="structure editform">Widget body</tal:edit>

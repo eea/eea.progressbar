@@ -23,7 +23,6 @@
     <div id="add-new-widget-dialog" style="display:none">
       <form>
         <fieldset>
-          <label for="new-widget-name">Name</label>
           <input type="text" name="name" id="new-widget-name" value="" class="text ui-widget-content ui-corner-all">
           <input type="submit" tabindex="-1" style="position:absolute; top:-1000px; left:0px;">
         </fieldset>

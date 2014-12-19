@@ -137,13 +137,19 @@
 }
 
 .progress-field.buttons {
-  text-align: center;
+  text-align: right;
   cursor: pointer;
   color: #427597;
   border-bottom: 2px solid #ccc;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding-top: 0;
+}
+
+.progress-field.buttons a, .progress-field.buttons a:visited
+#content .progress-field.buttons a, #content .progress-field.buttons a:visited {
+  margin-left: 0.5em;
+  border-bottom: none !important;
 }
 
 .progress-field.workflow {
@@ -180,9 +186,21 @@
 
 #add-new-widget-dialog fieldset {
   padding: 1em 1em 1em;
+  margin: 0;
+  border: none;
 }
 
-#content .eea-progressbar-widget .widget-close {
+#add-new-widget-dialog input[type="text"] {
+  width: 100%;
+}
+
+#content .eea-progressbar-widget a.widget-close {
   float: right;
-  border-bottom: none;
+  color: #8b0000 !important;
+}
+
+#add-new-widget, #add-new-widget:visited {
+  padding: 1em 0.5em;
+  border: none !important;
+  display: block;
 }

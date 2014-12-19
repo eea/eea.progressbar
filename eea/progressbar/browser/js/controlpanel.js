@@ -42,7 +42,7 @@ EEA.ProgressTool.prototype = {
         modal: true,
         title: 'Add new widget',
         buttons: {
-          'Add new widget': function() {
+          Add: function() {
             self.addWidget();
             dialog.dialog( 'close' );
           },
@@ -55,7 +55,7 @@ EEA.ProgressTool.prototype = {
           jQuery('#new-widget-name').removeClass( 'ui-state-error' );
         }
       });
- 
+
     form = dialog.find( 'form' ).on( 'submit', function( event ) {
       event.preventDefault();
       self.addWidget();
