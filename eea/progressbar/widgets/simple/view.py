@@ -5,11 +5,15 @@ from zope.component import queryUtility, queryAdapter
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.pagetemplate.engine import TrustedEngine, TrustedZopeContext
+from Acquisition import ImplicitAcquisitionWrapper
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetView
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
 from eea.progressbar.widgets.view import ViewForm
 from eea.progressbar.interfaces import IStorage
+from logging import getLogger
+logger = getLogger('eea.progressbar')
+
 
 class View(ViewForm):
     """ Widget view
@@ -98,8 +102,16 @@ class View(ViewForm):
                 'value': value
             })
             expression = engine.compile(condition)
-            result = zopeContext.evaluate(expression)
-            if callable(result):
+
+            try:
+                result = zopeContext.evaluate(expression)
+            except Exception, err:
+                logger.exception(err)
+                result = False
+
+            if callable(result) and \
+                not isinstance(result, ImplicitAcquisitionWrapper):
                 result = result()
+
             self._condition = result
         return self._condition

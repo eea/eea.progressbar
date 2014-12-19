@@ -67,7 +67,7 @@ class ISimpleWidgetEdit(IProgressWidgetEdit):
         title=_(u'Condition (ready)'),
         description=_(u"Tal condition to mark this as ready"),
         required=False,
-        default=u"python:value not in ('', None, (), [])"
+        default=u"python:value"
     )
 
     hideReady = schema.Bool(

@@ -119,3 +119,12 @@ class ViewForm(BrowserView):
             self._ready = ready
 
         return self.template()
+
+
+class ExtraFieldWidget(ViewForm):
+    """Extra field widget view
+    """
+    def __init__(self, context, request, field):
+        super(ExtraFieldWidget, self).__init__(context, request)
+        self.label = field.get('name').capitalize()
+        self.extrafield = True

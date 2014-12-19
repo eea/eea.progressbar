@@ -64,11 +64,13 @@
   color: #346F83 !important;
 }
 
-.eea-progressbar-widget .buttons a {
+.eea-progressbar-widget .buttons a,
+.eea-progressbar-widget .buttons .widget-close {
   visibility: hidden;
 }
 
-.eea-progressbar-widget:hover .buttons a {
+.eea-progressbar-widget:hover .buttons a,
+.eea-progressbar-widget:hover .widget-close {
   visibility: visible;
 }
 
@@ -174,4 +176,13 @@
   border-radius: 5px;
   border: 1px solid #CCC;
   border-bottom: 2px solid #CCC;
+}
+
+#add-new-widget-dialog fieldset {
+  padding: 1em 1em 1em;
+}
+
+#content .eea-progressbar-widget .widget-close {
+  float: right;
+  border-bottom: none;
 }
