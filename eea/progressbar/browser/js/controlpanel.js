@@ -79,7 +79,7 @@ EEA.ProgressTool.prototype = {
         data: { name: new_name },
         success: function(data) {
           var widget = jQuery(data);
-          self.context.append(self.reloadWidget(widget));
+          self.context.prepend(self.reloadWidget(widget));
           self.context.masonry('reloadItems');
           self.context.masonry('layout');
         }

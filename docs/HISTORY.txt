@@ -3,6 +3,8 @@ Changelog
 
 3.2-dev - (unreleased)
 ----------------------
+* Change: Add the new widgets at the beginning of the list
+  [olimpiurob refs #20470]
 * Bug fix: Treat case where the widget's condition could not be evaluated. The 
   widget's default condition has also been changed.
   [olimpiurob refs #20470]
