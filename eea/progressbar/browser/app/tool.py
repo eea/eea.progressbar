@@ -151,6 +151,9 @@ class ContentType(BrowserView):
             self._field = new_field
             storage = queryAdapter(self.context, IStorage)
             storage.add_field(name)
+            order = storage.order
+            order.insert(0, name)
+            storage.reorder(order)
             cpanel = queryMultiAdapter((self.context, self.request),
                                        name=u'view.metadata')
             return cpanel(field=self._field)
