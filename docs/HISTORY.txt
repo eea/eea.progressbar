@@ -3,6 +3,8 @@ Changelog
 
 3.3-dev - (unreleased)
 ----------------------
+* Feature: added rdfexport of progressLevel if eea.rdfmarshaller is installed
+  [ichim-david refs #21617]
 
 3.2 - (2014-12-23)
 ------------------
