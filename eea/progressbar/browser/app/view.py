@@ -139,7 +139,7 @@ class ProgressMetadataView(BrowserView):
 
         wftool = getToolByName(self.context, 'portal_workflow')
         state = wftool.getInfoFor(self.context, 'review_state')
-
+        self.request.ctx = self.context
         config = queryMultiAdapter((ctype, self.request), name=u'view')
         for field in config.schema():
             widget = config.view(field)
