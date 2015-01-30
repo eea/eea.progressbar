@@ -20,6 +20,8 @@ class ViewForm(BrowserView):
         self.parent = self.context.getParentNode()
         self.field = field
         self.prefix = u''
+        ctx = getattr(request, 'ctx', None)
+        self.ctx_url = ctx.absolute_url() + '/' if ctx else ''
         self._custom = None
         self._ready = None
         self._hidden = None

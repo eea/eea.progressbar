@@ -9,7 +9,7 @@
     </div>
 
     <div class="button">
-      <a tal:attributes="href python:view.get('link', '#')"
+      <a tal:attributes="href python:view.ctx_url + view.get('link', '#')"
          tal:content="python:view.get('linkLabel', 'Edit')" />
     </div>
   </div>

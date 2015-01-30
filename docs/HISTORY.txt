@@ -6,6 +6,8 @@ Changelog
 
 3.3 - (2015-01-22)
 ------------------
+* Bug fix: Fixed anchors links for editing progress
+  [olimpiurob refs #19754]
 * Feature: added rdfexport of progressLevel if eea.rdfmarshaller is installed
   [ichim-david refs #21617]
 
