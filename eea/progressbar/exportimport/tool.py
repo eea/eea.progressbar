@@ -36,7 +36,7 @@ class ProgressToolXMLAdapter(XMLAdapterBase):
                 for item in value:
                     if not value:
                         continue
-                    element =  self._doc.createElement('element')
+                    element = self._doc.createElement('element')
                     element.setAttribute('value', item)
                     child.appendChild(element)
             else:

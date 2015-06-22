@@ -140,7 +140,7 @@ class IWorkflowProgress(Interface):
         title=_(u"% Done"),
         description=_(u"For a folderish item, this can be the sum of all items"
                       "progress / total items possible progress"),
-        readonly = True,
+        readonly=True,
         default=0
     )
 

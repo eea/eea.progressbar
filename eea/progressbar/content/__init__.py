@@ -21,15 +21,15 @@ def initialize(context):
         listTypes(PROJECTNAME),
         PROJECTNAME)
 
-    cmfutils.ToolInit( PROJECTNAME+' Tools',
-                tools = [ProgressTool],
+    cmfutils.ToolInit(PROJECTNAME+' Tools',
+                tools=[ProgressTool],
                 icon='content/tool.png'
-                ).initialize( context )
+                ).initialize(context)
 
     cmfutils.ContentInit(
         PROJECTNAME + ' Content',
-        content_types = content_types,
-        permission = ADD_CONTENT_PERMISSION,
-        extra_constructors = constructors,
-        fti = ftis,
+        content_types=content_types,
+        permission=ADD_CONTENT_PERMISSION,
+        extra_constructors=constructors,
+        fti=ftis,
         ).initialize(context)

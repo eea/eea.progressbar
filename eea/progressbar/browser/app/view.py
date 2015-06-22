@@ -125,7 +125,7 @@ class ProgressMetadataView(BrowserView):
         """ % done
         """
         if self._total:
-            return int((1.0 * self._ready / self._total ) * 100)
+            return int((1.0 * self._ready / self._total) * 100)
         return 100
 
     def schema(self):

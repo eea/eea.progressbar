@@ -100,8 +100,8 @@ class ViewForm(BrowserView):
                 value = translate(message, domain=domain, context=self.request)
                 if value != message:
                     return value
-            else:
-                return message
+                else:
+                    return message
 
     def __call__(self, *args, **kwargs):
         form = self.request.form
