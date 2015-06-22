@@ -11,7 +11,7 @@ from eea.progressbar.interfaces import IStorage
 from eea.progressbar.config import EEAMessageFactory as _
 
 
-class ExtraField:
+class ExtraField(object):
     """ ExtraField class
     """
     widget = None
@@ -277,6 +277,6 @@ class ContentTypeExport(ContentType):
         self.request.response.setHeader(
             'content-type', 'text/xml; charset=utf-8')
         self.request.response.addHeader(
-            "content-disposition","attachment; filename=%s.xml" % (
+            "content-disposition", "attachment; filename=%s.xml" % (
                 self.context.getId(),))
         return self.export_xml()
