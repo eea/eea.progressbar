@@ -31,7 +31,8 @@ class IContentType(Interface):
         ''
 
         >>> form = {'ctype': 'Document'}
-        >>> ctype.processForm(values=form, data=1, metadata=1, REQUEST=portal.REQUEST)
+        >>> ctype.processForm(values=form, data=1,
+        ...                   metadata=1, REQUEST=portal.REQUEST)
         >>> ctype.getField('ctype').getAccessor(ctype)()
         'Document'
 
