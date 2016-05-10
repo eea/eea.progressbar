@@ -1,13 +1,16 @@
 """ Widget views
 """
 import logging
+
 from zope.interface import implements
-from zope.i18n import translate
-from zope.i18nmessageid.message import Message
-from zope.component import queryAdapter
+
 from Products.Five.browser import BrowserView
 from eea.progressbar.interfaces import IStorage
 from eea.progressbar.widgets.interfaces import IProgressWidgetView
+from zope.component import queryAdapter
+from zope.i18n import translate
+from zope.i18nmessageid.message import Message
+
 logger = logging.getLogger('eea.progressbar')
 
 class ViewForm(BrowserView):

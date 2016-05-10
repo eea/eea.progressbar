@@ -1,17 +1,20 @@
 """ View
 """
+from Acquisition import ImplicitAcquisitionWrapper
+from logging import getLogger
+
 from zope.interface import implements
+
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from eea.progressbar.interfaces import IStorage
+from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
+from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetView
+from eea.progressbar.widgets.view import ViewForm
 from zope.component import queryUtility, queryAdapter
+from zope.pagetemplate.engine import TrustedEngine, TrustedZopeContext
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
-from zope.pagetemplate.engine import TrustedEngine, TrustedZopeContext
-from Acquisition import ImplicitAcquisitionWrapper
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetView
-from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
-from eea.progressbar.widgets.view import ViewForm
-from eea.progressbar.interfaces import IStorage
-from logging import getLogger
+
 logger = getLogger('eea.progressbar')
 
 
@@ -39,10 +42,7 @@ class View(ViewForm):
             storage = queryAdapter(self.parent, IStorage)
             field = storage.field(self.prefix, {})
             value = field.get('states', None)
-            if value is not None:
-                self._custom = True
-            else:
-                self._custom = False
+            self._custom = True if value is not None else False
         return self._custom
 
     @property
