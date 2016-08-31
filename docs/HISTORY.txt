@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.6.dev0 - (unreleased)
------------------------
+3.6 - (2016-08-31)
+------------------
 * Bug fix: take into consideration that progress might return None
   in which case progress should be 0
   [ichim-david refs #75314]
