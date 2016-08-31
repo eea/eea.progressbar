@@ -3,6 +3,9 @@ Changelog
 
 3.6.dev0 - (unreleased)
 -----------------------
+* Bug fix: take into consideration that progress might return None
+  in which case progress should be 0
+  [ichim-david refs #75314]
 
 3.5 - (2016-05-19)
 ------------------

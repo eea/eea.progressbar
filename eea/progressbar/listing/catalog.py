@@ -17,7 +17,7 @@ class ProgressCatalogListingObject(CatalogContentListingObject):
         context = self.getObject()
         request = context.REQUEST
         progress = queryMultiAdapter((context, request), name=u'progress.bar')
-        return progress()
+        return progress() if progress else 0
 
     def __getattr__(self, name):
         """ Get progress
