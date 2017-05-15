@@ -1,19 +1,18 @@
 """ View
 """
-from Acquisition import ImplicitAcquisitionWrapper
 from logging import getLogger
+from Acquisition import ImplicitAcquisitionWrapper
 
 from zope.interface import implements
-
+from zope.component import queryUtility, queryAdapter
+from zope.pagetemplate.engine import TrustedEngine, TrustedZopeContext
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.progressbar.interfaces import IStorage
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetEdit
 from eea.progressbar.widgets.simple.interfaces import ISimpleWidgetView
 from eea.progressbar.widgets.view import ViewForm
-from zope.component import queryUtility, queryAdapter
-from zope.pagetemplate.engine import TrustedEngine, TrustedZopeContext
-from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
 
 logger = getLogger('eea.progressbar')
 

@@ -4,8 +4,8 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.component import queryMultiAdapter
 from Products.GenericSetup.interfaces import IBody
-from eea.progressbar.interfaces import IContentType
 from Products.GenericSetup.utils import XMLAdapterBase
+from eea.progressbar.interfaces import IContentType
 from eea.progressbar.content.contenttype import EditSchema
 
 class ContentTypeXMLAdapter(XMLAdapterBase):

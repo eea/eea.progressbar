@@ -2,14 +2,13 @@
 """
 from Products.CMFCore import utils as cmfutils
 from Products.Archetypes.atapi import process_types, listTypes
+from Products.Archetypes.atapi import registerType
+from eea.progressbar.content.tool import ProgressTool
+from eea.progressbar.content.contenttype import ProgressContentType
 from eea.progressbar.config import (
     PROJECTNAME,
     ADD_CONTENT_PERMISSION
 )
-
-from Products.Archetypes.atapi import registerType
-from eea.progressbar.content.tool import ProgressTool
-from eea.progressbar.content.contenttype import ProgressContentType
 
 registerType(ProgressTool, PROJECTNAME)
 registerType(ProgressContentType, PROJECTNAME)

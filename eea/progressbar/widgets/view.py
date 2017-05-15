@@ -3,13 +3,12 @@
 import logging
 
 from zope.interface import implements
-
-from Products.Five.browser import BrowserView
-from eea.progressbar.interfaces import IStorage
-from eea.progressbar.widgets.interfaces import IProgressWidgetView
 from zope.component import queryAdapter
 from zope.i18n import translate
 from zope.i18nmessageid.message import Message
+from Products.Five.browser import BrowserView
+from eea.progressbar.interfaces import IStorage
+from eea.progressbar.widgets.interfaces import IProgressWidgetView
 
 logger = logging.getLogger('eea.progressbar')
 
