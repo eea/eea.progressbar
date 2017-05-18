@@ -10,8 +10,9 @@
 from zope.interface import Interface
 from zope import schema
 from Products.ZCatalog.interfaces import ICatalogBrain as IZCatalogBrain
-from eea.progressbar.config import EEAMessageFactory as _
 from plone.app.collection.interfaces import ICollection as IPloneCollection
+
+from eea.progressbar.config import EEAMessageFactory as _
 
 # Tool
 from eea.progressbar.content.interfaces import IProgressTool

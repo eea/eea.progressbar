@@ -9,6 +9,7 @@ from eea.progressbar.interfaces import IProgressTool
 from eea.progressbar.interfaces import ISettings
 logger = logging.getLogger('eea.progressbar')
 
+
 class ProgressToolXMLAdapter(XMLAdapterBase):
     """ Generic setup export/import xml adapter
     """
@@ -72,11 +73,11 @@ class ProgressToolXMLAdapter(XMLAdapterBase):
                         continue
                     elements.append(element.getAttribute('value'))
                 if elements:
-                    value = (not purge) and elements or []
+                    value = elements if not purge else []
                 else:
                     value = self._getNodeText(child)
                     value = value.decode('utf-8')
-                    value = (not purge) and value or u''
+                    value = value if not purge else u''
                 try:
                     setattr(settings, name, value)
                 except Exception, err:
