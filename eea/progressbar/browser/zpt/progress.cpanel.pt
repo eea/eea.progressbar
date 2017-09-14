@@ -17,7 +17,8 @@
 <div id="progress-content" metal:fill-slot="prefs_configlet_main">
     <div class="buttons">
       <a id="add-new-widget" tal:attributes="href string:${context/absolute_url}/@@view.add">
-        <span class="eea-icon eea-icon eea-icon-plus" />Add new widget
+        <span class="eea-icon eea-icon eea-icon-plus" />
+          <tal:block i18n:translate="">Add new widget</tal:block>
       </a>
     </div>
     <div id="add-new-widget-dialog" style="display:none">

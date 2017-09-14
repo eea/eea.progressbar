@@ -1,8 +1,8 @@
 <h1 tal:replace="structure context/manage_page_header" />
 <h1 tal:replace="structure context/manage_tabs" />
 
-<h2>Workflow progress overview</h2>
-<p>Overview of workflow states progress</p>
+<h2 i18n:translate="">Workflow progress overview</h2>
+<p i18n:translate="">Overview of workflow states progress</p>
 
 <tal:states define="states view/states">
   <div style="border: 1px dotted #ccc; width: 100%">
@@ -35,7 +35,7 @@
             </td>
             <td style="width: 4em">
               <input type="hidden" name="redirect" tal:attributes="value string:${context/absolute_url}/manage_progress" />
-              <input type="submit" name="submit" value="Update" />
+              <input type="submit" name="submit" value="Update" i18n:attributes="value" />
             </td>
           </tr>
         </table>

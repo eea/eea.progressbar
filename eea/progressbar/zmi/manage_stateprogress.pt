@@ -1,17 +1,17 @@
 <h1 tal:replace="structure context/manage_page_header" />
 <h1 tal:replace="structure context/manage_tabs" />
 
-<h2>Workflow state progress</h2>
+<h2 i18n:translate="">Workflow state progress</h2>
 
-<a href="../../manage_progress">Back to progress overview</a>
+<a href="../../manage_progress" i18n:translate="">Back to progress overview</a>
 
-<p>Define how much (in %) in the publishing process is complete if a document is in this state</p>
+<p i18n:translate="">Define how much (in %) in the publishing process is complete if a document is in this state</p>
 
 
 <form action="manage_progress" method="POST">
   <table style="width: 100%">
     <tr>
-      <th align="right" style="width: 5em">% Done</th>
+      <th align="right" style="width: 5em" i18n:translate="">% Done</th>
       <td>
         <table style="width: 100%">
           <tr>
@@ -28,7 +28,7 @@
         <span>%</span>
       </td>
       <td style="width: 4em">
-        <input type="submit" name="submit" value="Update" />
+        <input type="submit" name="submit" value="Update" i18n:attributes="value" />
       </td>
     </tr>
   </table>
