@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../../progressbar/interfaces.py:140
+#: ../../progressbar/interfaces.py:141
 msgid "% Done"
 msgstr ""
 
@@ -26,7 +26,7 @@ msgstr ""
 msgid "A class that provides attributes used by the view."
 msgstr ""
 
-#: ../../progressbar/interfaces.py:149
+#: ../../progressbar/interfaces.py:150
 msgid "A list of workflow steps with percetage"
 msgstr ""
 
@@ -40,6 +40,10 @@ msgstr ""
 
 #: ../../progressbar/portlets/trail.py:41
 msgid "Add Workflow states trail portlet"
+msgstr ""
+
+#: ../../progressbar/browser/zpt/progress.cpanel.pt:21
+msgid "Add new widget"
 msgstr ""
 
 #: ../../progressbar/browser/zpt/error.pt:5
@@ -58,7 +62,7 @@ msgstr ""
 msgid "Condition (ready)"
 msgstr ""
 
-#: ../../progressbar/browser/app/tool.py:190
+#: ../../progressbar/browser/app/tool.py:260
 msgid "Configuration imported sucesfully"
 msgstr ""
 
@@ -76,6 +80,14 @@ msgstr ""
 
 #: ../../progressbar/widgets/interfaces.py:89
 msgid "E.g. prgressbar.widget.title or progressbar.widget.relatedItems"
+msgstr ""
+
+#: ../../progressbar/profiles.zcml:17
+msgid "EEA Progress Bar"
+msgstr ""
+
+#: ../../progressbar/profiles.zcml:25
+msgid "EEA Progress Bar (uninstall)"
 msgstr ""
 
 #: ../../progressbar/widgets/interfaces.py:82
@@ -130,11 +142,11 @@ msgstr ""
 msgid "Error value:"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:141
+#: ../../progressbar/interfaces.py:142
 msgid "For a folderish item, this can be the sum of all itemsprogress / total items possible progress"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:133
+#: ../../progressbar/interfaces.py:134
 msgid "For a folderish item, this can be the sum of all itemswith progress 100% / total items possible progress"
 msgstr ""
 
@@ -210,6 +222,10 @@ msgstr ""
 msgid "Import configuration"
 msgstr ""
 
+#: ../../progressbar/profiles.zcml:17
+msgid "Installs the eea.progressbar package"
+msgstr ""
+
 #: ../../progressbar/widgets/interfaces.py:28
 msgid "Is this widget customized?"
 msgstr ""
@@ -218,7 +234,7 @@ msgstr ""
 msgid "Is this widget hidden?"
 msgstr ""
 
-#: ../../progressbar/browser/app/tool.py:127
+#: ../../progressbar/browser/app/tool.py:197
 msgid "Items reordered"
 msgstr ""
 
@@ -250,7 +266,7 @@ msgstr ""
 msgid "Permission"
 msgstr ""
 
-#: ../../progressbar/browser/app/tool.py:169
+#: ../../progressbar/browser/app/tool.py:239
 msgid "Please provide a valid xml file"
 msgstr ""
 
@@ -268,7 +284,7 @@ msgstr ""
 msgid "Prefix"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:132
+#: ../../progressbar/interfaces.py:133
 msgid "Progress"
 msgstr ""
 
@@ -284,7 +300,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ../../progressbar/browser/app/tool.py:140
+#: ../../progressbar/browser/app/tool.py:210
 msgid "Reset complete"
 msgstr ""
 
@@ -300,7 +316,7 @@ msgstr ""
 msgid "Select workflow states where this will be visible"
 msgstr ""
 
-#: ../../progressbar/interfaces.py:148
+#: ../../progressbar/interfaces.py:149
 msgid "Steps"
 msgstr ""
 
@@ -346,6 +362,10 @@ msgstr ""
 msgid "Total progress"
 msgstr ""
 
+#: ../../progressbar/profiles.zcml:25
+msgid "Uninstalls the eea.progressbar package"
+msgstr ""
+
 #: ../../progressbar/widgets/interfaces.py:23
 msgid "Usually a schema field name"
 msgstr ""
@@ -379,4 +399,3 @@ msgstr ""
 #: ../../progressbar/controlpanel/settings.py:34
 msgid "label_save"
 msgstr ""
-
