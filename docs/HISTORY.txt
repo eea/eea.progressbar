@@ -3,6 +3,8 @@ Changelog
 
 4.0.dev0 - (unreleased)
 -----------------------
+* Change: compatibility with latest eea.rdfmarshaller
+  [tiberich #88194]
 
 3.9 - (2017-05-22)
 ------------------
@@ -34,7 +36,7 @@ Changelog
 ------------------
 * Change: Switched to curl in the jenkins build install script
   [olimpiurob refs #22402]
-* Change: Changed fetch url for jenkins build install script to the install 
+* Change: Changed fetch url for jenkins build install script to the install
   script from the main EEA CPB repository
   [olimpiurob refs #22402]
 
@@ -49,7 +51,7 @@ Changelog
 ------------------
 * Change: Add the new widgets at the beginning of the list
   [olimpiurob refs #20470]
-* Bug fix: Treat case where the widget's condition could not be evaluated. The 
+* Bug fix: Treat case where the widget's condition could not be evaluated. The
   widget's default condition has also been changed.
   [olimpiurob refs #20470]
 * Feature: Added possibility to add custom cards via eea.progressbar control panel

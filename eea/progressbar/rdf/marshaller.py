@@ -31,7 +31,10 @@ class ProgressLevelSurfModifier(object):
         if not progress:
             return output
         session = resource.session
-        store = session.get_default_store()
+        try:
+            store = session.default_store
+        except AttributeError:
+            store = session.get_default_store()
 
         progress_level = progress.progress
         wf_surf = surf.ns.WF
