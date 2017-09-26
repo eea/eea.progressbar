@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.0.dev0 - (unreleased)
------------------------
+4.0 - (2017-09-26)
+------------------
 * Change: compatibility with latest eea.rdfmarshaller
   [tiberich #88194]
 
