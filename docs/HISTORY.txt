@@ -3,6 +3,8 @@ Changelog
 
 4.1.dev0 - (unreleased)
 -----------------------
+* Change: Remove Sphinx generated documentation
+  [petchesi-iulian refs #88212]
 
 4.0 - (2017-09-26)
 ------------------
