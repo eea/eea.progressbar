@@ -70,7 +70,7 @@ pipeline {
                   git url: 'https://github.com/eea/eea.progressbar.git'
                   sh '''docker run -d -p 8080 -e ADDONS=eea.progressbar  --name=$BUILD_TAG-ft-plone4 eeacms/plone-test:4'''
                   sh '''docker port $BUILD_TAG-ft-plone4 8080/tcp > url.file;sed -i -e 's/0.0.0.0/dind/g' url.file'''
-                  sh '''new_url=$(cat url.file);timeout 300  wget --retry-connrefused --tries=60 --waitretry=5 -q http://${new_url}/'''
+                  sh '''new_url=$(cat url.file);timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://${new_url}/'''
                   sh '''new_url=$(cat url.file);casperjs test eea/progressbar/ftests/plone4/*.js --url=${new_url} --xunit=ftestsreport.xml'''
                 }
                 finally {
