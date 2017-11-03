@@ -26,6 +26,7 @@ pipeline {
                 try {
                      checkout scm
                      sh '''ls -ltr'''
+                     sh '''chown -R 500:500 $(pwd)'''
                      sh '''docker run -p 8080 -e ADDONS=eea.progressbar -e DEVELOP=src/eea.progressbar -v $(pwd):/plone/instance/src/eea.progressbar  --name=$BUILD_TAG-ft-plone4 eeacms/plone-test:4'''
                      sh '''docker port $BUILD_TAG-ft-plone4 8080/tcp > url.file;docker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' $BUILD_TAG-ft-plone4); sed -i -e "s/0.0.0.0/${docker_ip}/g" url.file'''
                      sh '''new_url=$(cat url.file);timeout 300  wget --retry-connrefused --tries=60 --waitretry=5 -q http://${new_url}/'''
