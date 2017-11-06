@@ -4,7 +4,7 @@ pipeline {
   environment {
         GIT_NAME = "eea.progressbar"
     }
-
+  
   stages {
        stage('Functional tests') {
       steps {
@@ -17,6 +17,12 @@ pipeline {
 
           "KGS": {
             node(label: 'docker-1.13') {
+               try {
+                  sh '''docker run -i --net=host --name="$BUILD_TAG-kgs" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" eeacms/kgs-devel /debug.sh bin/test --test-path /plone/instance/src/$GIT_NAME -v -vv -s $GIT_NAME'''
+                } finally {
+                  sh '''docker rm -v $BUILD_TAG-kgs'''
+                }
+              
             }
           },
 
