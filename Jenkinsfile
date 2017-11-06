@@ -12,6 +12,13 @@ pipeline {
 
           "WWW": {
             node(label: 'docker-1.13') {
+                script {
+                  try {
+                  sh '''docker run -i --net=host --name="$BUILD_TAG-plone4" -v /plone/instance/parts -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" plone4test -v -vv -s $GIT_NAME'''
+                } finally {
+                  sh '''docker rm -v $BUILD_TAG-plone4'''
+                  }
+                }
             }
           },
 
