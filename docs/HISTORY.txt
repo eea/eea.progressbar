@@ -3,6 +3,8 @@ Changelog
 
 4.1.dev0 - (unreleased)
 -----------------------
+* Change: Remove unused css
+  [petchesi-iulian refs #88382]
 * Change: Remove Sphinx generated documentation
   [petchesi-iulian refs #88212]
 
