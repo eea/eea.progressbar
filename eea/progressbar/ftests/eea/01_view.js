@@ -60,15 +60,7 @@ casper.test.begin('Progressbar test 2', function(test) {
     
    casper.wait(1000);
    casper.then(function() {
-          this.captureSelector("screenshot_plone4.png", "html");
-   });
-   casper.waitForSelector(x("//a[normalize-space(text())='News']"),
-       function success() {
-           test.assertExists(x("//a[normalize-space(text())='News']"));
-           this.click(x("//a[normalize-space(text())='News']"));
-       },
-       function fail() {
-           test.assertExists(x("//a[normalize-space(text())='News']"));
+          this.captureSelector("screenshot_eea.png", "html");
    });
 
    casper.run(function() {test.done();});

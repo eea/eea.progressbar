@@ -3,6 +3,7 @@ pipeline {
 
   environment {
         GIT_NAME = "eea.progressbar"
+        FTEST_DIR = "eea/progressbar/ftests" 
     }
 
   stages {
@@ -50,17 +51,46 @@ pipeline {
       }
     }
  
-    stage('Functional tests') {
+   stage('Functional tests') {
       steps {
         parallel(
-
           "WWW": {
             node(label: 'docker-1.13') {
-            }
+              script {
+                try {
+                  checkout scm
+                  sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/www-devel'''
+                  sh '''docker port $BUILD_TAG-ft-www 8080/tcp > url.file;docker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' $BUILD_TAG-ft-www); sed -i -e "s/0.0.0.0/${docker_ip}/g" url.file'''
+                  sh '''new_url=$(cat url.file);timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://${new_url}/'''
+                  sh '''new_url=$(cat url.file);casperjs test $FTEST_DIR/eea/*.js --url=${new_url} --xunit=ftestsreport.xml'''
+                }
+                finally {
+                  sh '''docker stop $BUILD_TAG-ft-www'''
+                  sh '''docker rm -v $BUILD_TAG-ft-www'''
+                }
+                archiveArtifacts 'screenshot_eea.png'
+                junit 'ftestsreport.xml'
+             }
+           }
           },
 
           "KGS": {
             node(label: 'docker-1.13') {
+              script {
+                try {
+                  checkout scm
+                  sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-kgs eeacms/kgs-devel'''
+                  sh '''docker port $BUILD_TAG-ft-kgs 8080/tcp > url.file;docker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' $BUILD_TAG-ft-kgs); sed -i -e "s/0.0.0.0/${docker_ip}/g" url.file'''
+                  sh '''new_url=$(cat url.file);timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://${new_url}/'''
+                  sh '''new_url=$(cat url.file);casperjs test $FTEST_DIR/kgs/*.js --url=${new_url} --xunit=ftestsreport.xml'''
+                }
+                finally {
+                  sh '''docker stop $BUILD_TAG-ft-kgs'''
+                  sh '''docker rm -v $BUILD_TAG-ft-kgs'''
+                }
+               archiveArtifacts 'screenshot_kgs.png'
+               junit 'ftestsreport.xml'
+             }
             }
           },
 
@@ -69,10 +99,10 @@ pipeline {
               script {
                 try {
                   checkout scm
-                  sh '''docker run -p 8080 -d --name=$BUILD_TAG-ft-plone4  -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" eeacms/plone-test:4'''
+                  sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-plone4 eeacms/plone-test:4'''
                   sh '''docker port $BUILD_TAG-ft-plone4 8080/tcp > url.file;docker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' $BUILD_TAG-ft-plone4); sed -i -e "s/0.0.0.0/${docker_ip}/g" url.file'''
                   sh '''new_url=$(cat url.file);timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://${new_url}/'''
-                  sh '''new_url=$(cat url.file);casperjs test eea/progressbar/ftests/plone4/*.js --url=${new_url} --xunit=ftestsreport.xml'''
+                  sh '''new_url=$(cat url.file);casperjs test $FTEST_DIR/plone4/*.js --url=${new_url} --xunit=ftestsreport.xml'''
                 }
                 finally {
                   sh '''docker stop $BUILD_TAG-ft-plone4'''
@@ -80,15 +110,17 @@ pipeline {
                 }
                }
               junit 'ftestsreport.xml'
-              archiveArtifacts 'screenshot1.png'
-
+              archiveArtifacts 'screenshot_plone4.png'
               }
 
             }
           )
       }
-}
-    stage('Code Analysis') {
+    }
+ 
+
+
+   stage('Code Analysis') {
       steps {
         parallel(
 
