@@ -3,11 +3,11 @@ pipeline {
 
   environment {
         GIT_NAME = "eea.progressbar"
-        FTEST_DIR = "eea/progressbar/ftests" 
+        FTEST_DIR = "eea/progressbar/ftests"
     }
 
   stages {
-    
+
     stage('Tests') {
       steps {
         parallel(
@@ -50,7 +50,7 @@ pipeline {
         )
       }
     }
- 
+
    stage('Functional tests') {
       steps {
         parallel(
@@ -60,9 +60,8 @@ pipeline {
                 try {
                   checkout scm
                   sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/www-devel'''
-                  sh '''docker port $BUILD_TAG-ft-www 8080/tcp > url.file;docker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' $BUILD_TAG-ft-www); sed -i -e "s/0.0.0.0/${docker_ip}/g" url.file'''
-                  sh '''new_url=$(cat url.file);timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://${new_url}/'''
-                  sh '''new_url=$(cat url.file);casperjs test $FTEST_DIR/eea/*.js --url=${new_url} --xunit=ftestsreport.xml'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/'''
+                  sh '''casperjs test $FTEST_DIR/eea/*.js --url=$(docker port $BUILD_TAG-ft-www 8080/tcp) --xunit=ftestsreport.xml'''
                 }
                 finally {
                   sh '''docker stop $BUILD_TAG-ft-www'''
@@ -80,9 +79,8 @@ pipeline {
                 try {
                   checkout scm
                   sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-kgs eeacms/kgs-devel'''
-                  sh '''docker port $BUILD_TAG-ft-kgs 8080/tcp > url.file;docker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' $BUILD_TAG-ft-kgs); sed -i -e "s/0.0.0.0/${docker_ip}/g" url.file'''
-                  sh '''new_url=$(cat url.file);timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://${new_url}/'''
-                  sh '''new_url=$(cat url.file);casperjs test $FTEST_DIR/kgs/*.js --url=${new_url} --xunit=ftestsreport.xml'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/'''
+                  sh '''casperjs test $FTEST_DIR/kgs/*.js --url=$(docker port $BUILD_TAG-ft-www 8080/tcp) --xunit=ftestsreport.xml'''
                 }
                 finally {
                   sh '''docker stop $BUILD_TAG-ft-kgs'''
@@ -100,9 +98,8 @@ pipeline {
                 try {
                   checkout scm
                   sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-plone4 eeacms/plone-test:4'''
-                  sh '''docker port $BUILD_TAG-ft-plone4 8080/tcp > url.file;docker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' $BUILD_TAG-ft-plone4); sed -i -e "s/0.0.0.0/${docker_ip}/g" url.file'''
-                  sh '''new_url=$(cat url.file);timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://${new_url}/'''
-                  sh '''new_url=$(cat url.file);casperjs test $FTEST_DIR/plone4/*.js --url=${new_url} --xunit=ftestsreport.xml'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/'''
+                  sh '''casperjs test $FTEST_DIR/plone4/*.js --url=$(docker port $BUILD_TAG-ft-www 8080/tcp) --xunit=ftestsreport.xml'''
                 }
                 finally {
                   sh '''docker stop $BUILD_TAG-ft-plone4'''
@@ -117,7 +114,7 @@ pipeline {
           )
       }
     }
- 
+
 
 
    stage('Code Analysis') {
