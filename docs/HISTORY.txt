@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.2.dev0 - (unreleased)
------------------------
+4.2 - (2017-11-24)
+------------------
 * Bug fix: Fix functional tests
   [avoinea refs #89563]
 
