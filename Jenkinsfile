@@ -79,8 +79,8 @@ pipeline {
                 try {
                   checkout scm
                   sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-kgs eeacms/kgs-devel'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/'''
-                  sh '''casperjs test $FTEST_DIR/kgs/*.js --url=http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/ --xunit=ftestsreport.xml'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-kgs 8080/tcp)/'''
+                  sh '''casperjs test $FTEST_DIR/kgs/*.js --url=http://$(docker port $BUILD_TAG-ft-kgs 8080/tcp)/ --xunit=ftestsreport.xml'''
                 }
                 finally {
                   sh '''docker stop $BUILD_TAG-ft-kgs'''
@@ -98,8 +98,8 @@ pipeline {
                 try {
                   checkout scm
                   sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-plone4 eeacms/plone-test:4'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/'''
-                  sh '''casperjs test $FTEST_DIR/plone4/*.js --url=http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/ --xunit=ftestsreport.xml'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-plon4 8080/tcp)/'''
+                  sh '''casperjs test $FTEST_DIR/plone4/*.js --url=http://$(docker port $BUILD_TAG-ft-plone4 8080/tcp)/ --xunit=ftestsreport.xml'''
                 }
                 finally {
                   sh '''docker stop $BUILD_TAG-ft-plone4'''
