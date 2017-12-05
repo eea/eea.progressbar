@@ -1,10 +1,15 @@
 Changelog
 =========
 
-4.1.dev0 - (unreleased)
+4.2.dev0 - (unreleased)
 -----------------------
 * Change: Remove unused css
   [petchesi-iulian refs #88382]
+* Bug fix: Fix functional tests
+  [avoinea refs #89563]
+
+4.1 - (2017-11-07)
+------------------
 * Change: Remove Sphinx generated documentation
   [petchesi-iulian refs #88212]
 
