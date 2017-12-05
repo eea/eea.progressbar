@@ -59,11 +59,13 @@ pipeline {
               script {
                 try {
                   checkout scm
-                  sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/www-devel'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/'''
-                  sh '''casperjs test $FTEST_DIR/eea/*.js --url=http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/ --xunit=ftestsreport.xml'''
-                }
-                finally {
+                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/www-devel /debug.sh bin/instance fg'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080/'''
+                  sh '''casperjs test $FTEST_DIR/eea/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080 --xunit=ftestsreport.xml'''
+                } catch (err) {
+                  sh '''docker logs --tail=100 $BUILD_TAG-ft-www'''
+                  throw err
+                } finally {
                   sh '''docker stop $BUILD_TAG-ft-www'''
                   sh '''docker rm -v $BUILD_TAG-ft-www'''
                 }
@@ -78,11 +80,13 @@ pipeline {
               script {
                 try {
                   checkout scm
-                  sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-kgs eeacms/kgs-devel'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/'''
-                  sh '''casperjs test $FTEST_DIR/kgs/*.js --url=http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/ --xunit=ftestsreport.xml'''
-                }
-                finally {
+                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-kgs eeacms/kgs-devel /debug.sh bin/instance fg'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-kgs):8080/'''
+                  sh '''casperjs test $FTEST_DIR/kgs/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-kgs):8080 --xunit=ftestsreport.xml'''
+                } catch (err) {
+                  sh '''docker logs --tail=100 $BUILD_TAG-ft-kgs'''
+                  throw err
+                } finally {
                   sh '''docker stop $BUILD_TAG-ft-kgs'''
                   sh '''docker rm -v $BUILD_TAG-ft-kgs'''
                 }
@@ -97,11 +101,13 @@ pipeline {
               script {
                 try {
                   checkout scm
-                  sh '''docker run -p 8080 -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-plone4 eeacms/plone-test:4'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/'''
-                  sh '''casperjs test $FTEST_DIR/plone4/*.js --url=http://$(docker port $BUILD_TAG-ft-www 8080/tcp)/ --xunit=ftestsreport.xml'''
-                }
-                finally {
+                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-plone4 eeacms/plone-test:4'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-plone4):8080/'''
+                  sh '''casperjs test $FTEST_DIR/plone4/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-plone4):8080 --xunit=ftestsreport.xml'''
+                } catch (err) {
+                  sh '''docker logs --tail=100 $BUILD_TAG-ft-plone4'''
+                  throw err
+                } finally {
                   sh '''docker stop $BUILD_TAG-ft-plone4'''
                   sh '''docker rm -v $BUILD_TAG-ft-plone4'''
                 }
