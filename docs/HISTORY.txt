@@ -3,6 +3,8 @@ Changelog
 
 4.2.dev0 - (unreleased)
 -----------------------
+* Change: Replace eeacms/zptlint with eeacms/plone-test:4 zptlint
+  [avoinea refs #90415]
 * Change: Remove unused css
   [petchesi-iulian refs #88382]
 * Bug fix: Fix functional tests
