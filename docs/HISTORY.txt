@@ -3,6 +3,9 @@ Changelog
 
 4.3.dev0 - (unreleased)
 -----------------------
+* Change: load control panel js resources as part of javascript_head_slot
+  instead of top slot
+  [ichim-david refs #91577]
 
 4.2 - (2017-12-12)
 ------------------
