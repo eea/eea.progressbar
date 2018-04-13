@@ -1,8 +1,12 @@
 ================
 EEA Progress Bar
 ================
-.. image:: http://ci.eionet.europa.eu/job/eea/job/eea.progressbar/job/master/badge/icon
-  :target: http://ci.eionet.europa.eu/job/eea/job/eea.progressbar/job/master/display/redirect
+.. image:: https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.progressbar/develop
+  :target: https://ci.eionet.europa.eu/job/eea/job/eea.progressbar/job/develop/display/redirect
+  :alt: develop
+.. image:: https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.progressbar/master
+  :target: https://ci.eionet.europa.eu/job/eea/job/eea.progressbar/job/master/display/redirect
+  :alt: master
 
 A system that visually display a *workflow percentage bar* or a
 *workflow steps trail* in the publishing process of a document according with
