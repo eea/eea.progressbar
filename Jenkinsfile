@@ -52,8 +52,7 @@ pipeline {
                   def nodeJS = tool 'NodeJS11';
                   withSonarQubeEnv('Sonarqube') {
                     try {
-                      sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh bin/coverage run bin/test -v -vv -s $GIT_NAME'''
-                      sh '''docker exec -i $BUILD_TAG-www bin/report xml --include *$GIT_NAME*'''
+                      sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh "bin/coverage run bin/test -v -vv -s $GIT_NAME && bin/report xml --include *$GIT_NAME*""'''
                       sh '''docker cp $BUILD_TAG-www:/plone/instance/coverage.xml coverage.xml'''
                       sh "${scannerHome}/bin/sonar-scanner -Dsonar.cobertura.reportPath=coverage.xml -Dsonar.nodejs.executable=${nodeJS}/bin/node -Dsonar.sources=./eea -Dsonar.projectKey=$GIT_NAME-$BRANCH_NAME -Dsonar.projectVersion=$BRANCH_NAME-$BUILD_NUMBER"
                     } finally {
