@@ -2,9 +2,9 @@ pipeline {
   agent any
 
   environment {
-        GIT_NAME = "eea.progressbar"
-        FTEST_DIR = "eea/progressbar/ftests"
-    }
+    GIT_NAME = "eea.progressbar"
+    FTEST_DIR = "eea/progressbar/ftests"
+  }
 
   stages {
 
@@ -12,21 +12,6 @@ pipeline {
       steps {
         parallel(
 
-          "SonarQube analysis": {
-   	    node(label: 'swarm'){
-  	      script{
-	        if (env.BRANCH_NAME == "develop" || env.BRANCH_NAME == "master") {
-	  	   checkout scm
-		   def scannerHome = tool 'SonarQubeScanner';
-		   def nodeJS = tool 'NodeJS11';
-		   withSonarQubeEnv('Sonarqube') {
-		      sh "${scannerHome}/bin/sonar-scanner -Dsonar.nodejs.executable=${nodeJS}/bin/node -Dsonar.sources=./eea -Dsonar.projectKey=$GIT_NAME-$BRANCH_NAME -Dsonar.projectVersion=$BRANCH_NAME-$BUILD_NUMBER"
-	           }
-                }
-              }
- 	    }
-	  },
-	
           "ZPT Lint": {
             node(label: 'docker') {
               sh '''docker run -i --rm --name="$BUILD_TAG-zptlint" -e GIT_BRANCH="$BRANCH_NAME" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/plone-test:4 zptlint'''
@@ -58,9 +43,27 @@ pipeline {
       steps {
         parallel(
 
-          "WWW": {
+          "WWW & SonarQube": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh bin/test -v -vv -s $GIT_NAME'''
+              script{
+                if (env.BRANCH_NAME == "develop" || env.BRANCH_NAME == "master") {
+                  checkout scm
+                  def scannerHome = tool 'SonarQubeScanner';
+                  def nodeJS = tool 'NodeJS11';
+                  withSonarQubeEnv('Sonarqube') {
+                    try {
+                      sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh bin/coverage run bin/test -v -vv -s $GIT_NAME'''
+                      sh '''docker exec -i $BUILD_TAG-www bin/report xml --include *$GIT_NAME*'''
+                      sh '''docker cp $BUILD_TAG-www:/plone/instance/coverage.xml coverage.xml'''
+                      sh "${scannerHome}/bin/sonar-scanner -Dsonar.cobertura.reportPath=coverage.xml -Dsonar.nodejs.executable=${nodeJS}/bin/node -Dsonar.sources=./eea -Dsonar.projectKey=$GIT_NAME-$BRANCH_NAME -Dsonar.projectVersion=$BRANCH_NAME-$BUILD_NUMBER"
+                    } finally {
+                      sh '''docker rm -v $BUILD_TAG-www'''
+                    }
+                  }
+                } else {
+                  sh '''docker run -i --rm --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh bin/test -v -vv -s $GIT_NAME'''
+                }
+              }
             }
           },
 
@@ -99,8 +102,8 @@ pipeline {
                 }
                 archiveArtifacts 'screenshot_eea.png'
                 junit 'ftestsreport.xml'
-             }
-           }
+              }
+            }
           },
 
           "KGS": {
@@ -118,9 +121,9 @@ pipeline {
                   sh '''docker stop $BUILD_TAG-ft-kgs'''
                   sh '''docker rm -v $BUILD_TAG-ft-kgs'''
                 }
-               archiveArtifacts 'screenshot_kgs.png'
-               junit 'ftestsreport.xml'
-             }
+                archiveArtifacts 'screenshot_kgs.png'
+                junit 'ftestsreport.xml'
+              }
             }
           },
 
@@ -139,13 +142,13 @@ pipeline {
                   sh '''docker stop $BUILD_TAG-ft-plone4'''
                   sh '''docker rm -v $BUILD_TAG-ft-plone4'''
                 }
-               }
+              }
               junit 'ftestsreport.xml'
               archiveArtifacts 'screenshot_plone4.png'
-              }
-
             }
-          )
+
+          }
+        )
       }
     }
 
@@ -215,12 +218,12 @@ pipeline {
       steps {
         node(label: 'docker') {
           script {
-            if ( env.CHANGE_BRANCH != "develop" &&  !( env.CHANGE_BRANCH.startsWith("hotfix")) ) {
-                error "Pipeline aborted due to PR not made from develop or hotfix branch"
+            if (env.CHANGE_BRANCH != "develop" && !(env.CHANGE_BRANCH.startsWith("hotfix"))) {
+              error "Pipeline aborted due to PR not made from develop or hotfix branch"
             }
-           withCredentials([string(credentialsId: 'eea-jenkins-token', variable: 'GITHUB_TOKEN')]) {
-            sh '''docker run -i --rm --name="$BUILD_TAG-gitflow-pr" -e GIT_CHANGE_BRANCH="$CHANGE_BRANCH" -e GIT_CHANGE_AUTHOR="$CHANGE_AUTHOR" -e GIT_CHANGE_TITLE="$CHANGE_TITLE" -e GIT_TOKEN="$GITHUB_TOKEN" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e GIT_ORG="$GIT_ORG" -e GIT_NAME="$GIT_NAME" eeacms/gitflow'''
-           }
+            withCredentials([string(credentialsId: 'eea-jenkins-token', variable: 'GITHUB_TOKEN')]) {
+              sh '''docker run -i --rm --name="$BUILD_TAG-gitflow-pr" -e GIT_CHANGE_BRANCH="$CHANGE_BRANCH" -e GIT_CHANGE_AUTHOR="$CHANGE_AUTHOR" -e GIT_CHANGE_TITLE="$CHANGE_TITLE" -e GIT_TOKEN="$GITHUB_TOKEN" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e GIT_ORG="$GIT_ORG" -e GIT_NAME="$GIT_NAME" eeacms/gitflow'''
+            }
           }
         }
       }
@@ -235,7 +238,7 @@ pipeline {
       }
       steps {
         node(label: 'docker') {
-          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eea-jenkins', usernameVariable: 'EGGREPO_USERNAME', passwordVariable: 'EGGREPO_PASSWORD'],string(credentialsId: 'eea-jenkins-token', variable: 'GITHUB_TOKEN'),[$class: 'UsernamePasswordMultiBinding', credentialsId: 'pypi-jenkins', usernameVariable: 'PYPI_USERNAME', passwordVariable: 'PYPI_PASSWORD']]) {
+          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eea-jenkins', usernameVariable: 'EGGREPO_USERNAME', passwordVariable: 'EGGREPO_PASSWORD'], string(credentialsId: 'eea-jenkins-token', variable: 'GITHUB_TOKEN'), [$class: 'UsernamePasswordMultiBinding', credentialsId: 'pypi-jenkins', usernameVariable: 'PYPI_USERNAME', passwordVariable: 'PYPI_PASSWORD']]) {
             sh '''docker run -i --rm --name="$BUILD_TAG-gitflow-master" -e GIT_BRANCH="$BRANCH_NAME" -e EGGREPO_USERNAME="$EGGREPO_USERNAME" -e EGGREPO_PASSWORD="$EGGREPO_PASSWORD" -e GIT_NAME="$GIT_NAME"  -e PYPI_USERNAME="$PYPI_USERNAME"  -e PYPI_PASSWORD="$PYPI_PASSWORD" -e GIT_ORG="$GIT_ORG" -e GIT_TOKEN="$GITHUB_TOKEN" eeacms/gitflow'''
           }
         }
@@ -252,8 +255,8 @@ pipeline {
         def subject = "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
         def summary = "${subject} (${url})"
         def details = """<h1>${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${status}</h1>
-                         <p>Check console output at <a href="${url}">${env.JOB_BASE_NAME} - #${env.BUILD_NUMBER}</a></p>
-                      """
+          < p > Check console output at < a href = "${url}" > ${ env.JOB_BASE_NAME } - #${ env.BUILD_NUMBER }</a ></p >
+            """
 
         def color = '#FFFF00'
         if (status == 'SUCCESS') {
@@ -261,8 +264,8 @@ pipeline {
         } else if (status == 'FAILURE') {
           color = '#FF0000'
         }
-        slackSend (color: color, message: summary)
-        emailext (subject: '$DEFAULT_SUBJECT', to: '$DEFAULT_RECIPIENTS', body: details)
+        slackSend(color: color, message: summary)
+        emailext(subject: '$DEFAULT_SUBJECT', to: '$DEFAULT_RECIPIENTS', body: details)
       }
     }
   }
