@@ -57,7 +57,10 @@ pipeline {
                       sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh coverage'''
                       sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
                       sh '''sed -i "s|/plone/instance/src/$GIT_NAME|$(pwd)|g" coverage.xml'''
-                      sh '''export PATH=$PATH:${scannerHome}/bin:${nodeJS}/bin;sonar-scanner -Dsonar.python.coverage.reportPath=coverage.xml -Dsonar.sources=./eea -Dsonar.projectKey=$GIT_NAME-$BRANCH_NAME -Dsonar.projectVersion=$BRANCH_NAME-$BUILD_NUMBER'''
+                      sh '''export PATH=$PATH:${scannerHome}/bin:${nodeJS}/bin'''
+                      sh '''env'''
+                      sh '''node -v'''
+                      sh '''${scannerHome}/bin/sonar-scanner -Dsonar.python.coverage.reportPath=coverage.xml -Dsonar.sources=./eea -Dsonar.projectKey=$GIT_NAME-$BRANCH_NAME -Dsonar.projectVersion=$BRANCH_NAME-$BUILD_NUMBER'''
                     } finally {
                       sh '''docker rm -v $BUILD_TAG-www'''
                     }
