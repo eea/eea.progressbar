@@ -59,6 +59,7 @@ pipeline {
                     } finally {
                       sh '''docker rm -v $BUILD_TAG-www'''
                     }
+                    archiveArtifacts 'coverage.xml'
                   }
                 } else {
                   sh '''docker run -i --rm --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh bin/test -v -vv -s $GIT_NAME'''
