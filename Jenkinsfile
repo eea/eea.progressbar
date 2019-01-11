@@ -10,6 +10,62 @@ pipeline {
 
   stages {
 
+    stage('Cosmetics') {
+      steps {
+        parallel(
+
+          "JS Hint": {
+            node(label: 'docker') {
+              script {
+                try {
+                  sh '''docker run -i --rm --name="$BUILD_TAG-jshint" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/jshint'''
+                } catch (err) {
+                  echo "Unstable: ${err}"
+                }
+              }
+            }
+          },
+
+          "CSS Lint": {
+            node(label: 'docker') {
+              script {
+                try {
+                  sh '''docker run -i --rm --name="$BUILD_TAG-csslint" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/csslint'''
+                } catch (err) {
+                  echo "Unstable: ${err}"
+                }
+              }
+            }
+          },
+
+          "PEP8": {
+            node(label: 'docker') {
+              script {
+                try {
+                  sh '''docker run -i --rm --name="$BUILD_TAG-pep8" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/pep8'''
+                } catch (err) {
+                  echo "Unstable: ${err}"
+                }
+              }
+            }
+          },
+
+          "PyLint": {
+            node(label: 'docker') {
+              script {
+                try {
+                  sh '''docker run -i --rm --name="$BUILD_TAG-pylint" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/pylint'''
+                } catch (err) {
+                  echo "Unstable: ${err}"
+                }
+              }
+            }
+          }
+
+        )
+      }
+    }
+
     stage('Code') {
       steps {
         parallel(
@@ -85,9 +141,11 @@ pipeline {
               script {
                 try {
                   checkout scm
+                  sh '''mkdir -p xunit-functional'''
                   sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/www-devel /debug.sh bin/instance fg'''
                   sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080/'''
-                  sh '''casperjs test $FTEST_DIR/eea/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080 --xunit=ftestsreport.xml'''
+                  sh '''casperjs test $FTEST_DIR/eea/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080 --xunit=xunit-functional/ftestsreport.xml'''
+                  stash name: "xunit-functional", includes: "xunit-functional/*.xml"
                 } catch (err) {
                   sh '''docker logs --tail=100 $BUILD_TAG-ft-www'''
                   throw err
@@ -96,7 +154,7 @@ pipeline {
                   sh '''docker rm -v $BUILD_TAG-ft-www'''
                 }
                 archiveArtifacts 'screenshot_eea.png'
-                junit 'ftestsreport.xml'
+                junit 'xunit-functional/ftestsreport.xml'
               }
             }
           },
@@ -147,62 +205,6 @@ pipeline {
       }
     }
 
-    stage('Cosmetics') {
-      steps {
-        parallel(
-
-          "JS Hint": {
-            node(label: 'docker') {
-              script {
-                try {
-                  sh '''docker run -i --rm --name="$BUILD_TAG-jshint" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/jshint'''
-                } catch (err) {
-                  echo "Unstable: ${err}"
-                }
-              }
-            }
-          },
-
-          "CSS Lint": {
-            node(label: 'docker') {
-              script {
-                try {
-                  sh '''docker run -i --rm --name="$BUILD_TAG-csslint" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/csslint'''
-                } catch (err) {
-                  echo "Unstable: ${err}"
-                }
-              }
-            }
-          },
-
-          "PEP8": {
-            node(label: 'docker') {
-              script {
-                try {
-                  sh '''docker run -i --rm --name="$BUILD_TAG-pep8" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/pep8'''
-                } catch (err) {
-                  echo "Unstable: ${err}"
-                }
-              }
-            }
-          },
-
-          "PyLint": {
-            node(label: 'docker') {
-              script {
-                try {
-                  sh '''docker run -i --rm --name="$BUILD_TAG-pylint" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/pylint'''
-                } catch (err) {
-                  echo "Unstable: ${err}"
-                }
-              }
-            }
-          }
-
-        )
-      }
-    }
-
     stage('Report') {
       when {
         allOf {
@@ -219,10 +221,15 @@ pipeline {
             dir('xunit-coverage') {
               unstash "xunit-coverage"
             }
+            dir('xunit-functional') {
+              unstash "xunit-functional"
+            }
             def scannerHome = tool 'SonarQubeScanner';
             def nodeJS = tool 'NodeJS11';
             withSonarQubeEnv('Sonarqube') {
+                sh '''touch __init__.py'''
                 sh '''sed -i "s|/plone/instance/src/$GIT_NAME|$(pwd)|g" xunit-coverage/coverage.xml'''
+                sh '''mv xunit-functional/*.xml xunit-reports/'''
                 sh "export PATH=$PATH:${scannerHome}/bin:${nodeJS}/bin; sonar-scanner -Dsonar.python.xunit.reportPath=xunit-reports/*.xml -Dsonar.python.coverage.reportPath=xunit-coverage/coverage.xml -Dsonar.sources=. -Dsonar.projectKey=$GIT_NAME-$BRANCH_NAME -Dsonar.projectVersion=$BRANCH_NAME-$BUILD_NUMBER"
             }
           }
