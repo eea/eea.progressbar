@@ -212,7 +212,7 @@ pipeline {
         }
       }
       steps {
-        node(label: 'swarm') {
+        node(label: 'docker') {
           script{
             checkout scm
             dir("xunit-reports") {
