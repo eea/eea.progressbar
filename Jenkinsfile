@@ -4,8 +4,8 @@ pipeline {
   agent any
 
   environment {
-    GIT_NAME = "eea.progressbar"
-    FTEST_DIR = "eea/progressbar/ftests"
+        GIT_NAME = "eea.progressbar"
+        FTEST_DIR = "eea/progressbar/ftests"
   }
 
   stages {
