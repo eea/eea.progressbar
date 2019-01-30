@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.5-dev0 - (unreleased)
+---------------------
+
 4.4 - (2019-01-28)
 ---------------------
 * Jenkins: Add sonarqube step
@@ -187,4 +190,3 @@ Changelog
   - Progress bar portlet for portal objects
   - Progress bar portlet for collections based on children/query results progress
   - Progress column for Collection table view
-
