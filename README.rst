@@ -1,15 +1,19 @@
 ================
 EEA Progress Bar
 ================
-.. image:: http://ci.eionet.europa.eu/job/eea/job/eea.progressbar/job/master/badge/icon
-  :target: http://ci.eionet.europa.eu/job/eea/job/eea.progressbar/job/master/display/redirect
+.. image:: https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.progressbar/develop
+  :target: https://ci.eionet.europa.eu/job/eea/job/eea.progressbar/job/develop/display/redirect
+  :alt: develop
+.. image:: https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.progressbar/master
+  :target: https://ci.eionet.europa.eu/job/eea/job/eea.progressbar/job/master/display/redirect
+  :alt: master
 
 A system that visually display a *workflow percentage bar* or a
 *workflow steps trail* in the publishing process of a document according with
 the workflow state in which the document is. It also define editing progress
 (document completion) of an item with customizable labels per field.
 
-.. image:: http://eea.github.io/_images/eea.progressbar.cover.png
+.. image:: https://eea.github.io/_images/eea.progressbar.cover.png
    :target: http://www.youtube.com/watch?v=a_U0tmw-4As&list=PLVPSQz7ahsBwUHixUt_s0kh-vaik_NCtO&feature=share
 
 Contents
@@ -92,4 +96,4 @@ Funding
 
 EEA_ - European Environment Agency (EU)
 
-.. _EEA: http://www.eea.europa.eu/
+.. _EEA: https://www.eea.europa.eu/

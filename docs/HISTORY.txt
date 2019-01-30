@@ -1,6 +1,13 @@
 Changelog
 =========
 
+4.4 - (2019-01-28)
+---------------------
+* Jenkins: Add sonarqube step
+  [avoinea refs #101552]
+* Change: updated URLs pointing to eea.europa.eu with https://
+  [alecghica refs #95849]
+
 4.3 - (2018-03-14)
 ------------------
 * Change: load control panel js resources as part of javascript_head_slot
