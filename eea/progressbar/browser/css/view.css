@@ -143,6 +143,8 @@
     width: 100%;
     border: 1px dotted #ccc;
     border-radius: 10px;
+    /* #106884 avoid progresstrail making body area larger than browser area */
+    overflow: hidden;
 }
 
 .progressbar-viewlet legend {
