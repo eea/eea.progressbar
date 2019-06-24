@@ -22,6 +22,8 @@
 .progressbar-step::before {
     content: attr(data-tip);
     position:absolute;
+    min-width: 86px;
+    right: 0;
     z-index: 999;
     white-space:nowrap;
     bottom:9999px;
@@ -35,6 +37,12 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 5px 5px 10px #999;
+}
+
+/* #106884 avoid clipping text for first step on mobile devices */
+.progressbar-step:first-child:before {
+    left: 0;
+    right: inherit;
 }
 
 .progressbar-step:hover::before {
@@ -143,8 +151,6 @@
     width: 100%;
     border: 1px dotted #ccc;
     border-radius: 10px;
-    /* #106884 avoid progresstrail making body area larger than browser area */
-    overflow: hidden;
 }
 
 .progressbar-viewlet legend {
@@ -198,7 +204,9 @@
 
 .progresstrail-step::before {
     content: attr(data-description);
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
+    left: 0;
     position:absolute;
     z-index: 999;
     bottom:9999px;

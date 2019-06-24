@@ -3,7 +3,7 @@ Changelog
 
 4.5-dev0 - (unreleased)
 ---------------------
-* Change: hide overflow of progresstrail viewlet in order to avoid enlarging of
+* Change: tweak progressbar-step size in order to avoid enlarging of
   the body area making it larger than the browser width
   [ichim-david refs #106884]
 
