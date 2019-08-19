@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.6-dev0 - (unreleased)
+---------------------------
+
 4.5 - (2019-08-16)
 --------------------------
 * Change: tweak progresstrail-step size in order to avoid enlarging of
