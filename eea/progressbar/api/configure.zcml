@@ -7,18 +7,6 @@
     <implements interface="eea.progressbar.interfaces.IWorkflowTool" />
   </class>
 
-  <class class="Products.DCWorkflow.States.StateDefinition">
-    <implements interface="eea.progressbar.interfaces.IWorkflowState" />
-  </class>
-
-  <class class="Products.DCWorkflow.DCWorkflow.DCWorkflowDefinition">
-    <implements interface="eea.progressbar.interfaces.IWorkflow" />
-  </class>
-
-  <class class="Products.Archetypes.BaseObject.BaseObject">
-    <implements interface="eea.progressbar.interfaces.IBaseObject" />
-  </class>
-
   <class class="plone.dexterity.content.Container"
     zcml:condition="installed plone.dexterity">
     <implements interface="eea.progressbar.interfaces.IBaseObject" />
@@ -33,14 +21,8 @@
   </class>
 
   <adapter
-    for="eea.progressbar.interfaces.IBaseObject"
-    provides="eea.progressbar.interfaces.IWorkflowProgress"
-    factory=".adapters.WorkflowProgress"
-    />
-
-  <adapter
     for="eea.progressbar.interfaces.ICollection"
-    provides="eea.progressbar.interfaces.IWorkflowProgress"
+    provides="eea.progress.workflow.interfaces.IWorkflowProgress"
     factory=".adapters.CollectionWorkflowProgress"
     />
 

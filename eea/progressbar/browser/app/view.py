@@ -3,7 +3,8 @@
 from zope.component import queryAdapter, queryUtility, queryMultiAdapter
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
-from eea.progressbar.interfaces import IWorkflowProgress, IProgressTool
+from eea.progressbar.interfaces import IProgressTool
+from eea.progress.workflow.interfaces import IWorkflowProgress
 from eea.progressbar.config import EEAMessageFactory as _
 
 class ProgressBarView(BrowserView):
