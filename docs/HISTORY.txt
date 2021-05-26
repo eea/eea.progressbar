@@ -3,6 +3,9 @@ Changelog
 
 4.6-dev0 - (unreleased)
 ---------------------------
+* Change: Refactored eea.progresbar so that it uses eea.progress.workflow/
+  eea.progress.editing
+  [iulianpetchesi refs #134214]
 
 4.5 - (2019-08-16)
 --------------------------
