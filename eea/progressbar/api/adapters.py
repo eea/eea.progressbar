@@ -1,13 +1,7 @@
 """ Progress adapters
 """
 from plone.uuid.interfaces import IUUID
-from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.WorkflowCore import WorkflowException
-from Products.CMFPlone.utils import base_hasattr
-from zope.component import queryAdapter, queryUtility
-from zope.interface import implements
-from eea.progressbar.controlpanel.interfaces import ISettings
-from eea.progressbar.interfaces import IProgressTool
+from zope.component import queryAdapter
 from eea.progress.workflow.interfaces import IWorkflowProgress
 from eea.progress.workflow.api.adapters import WorkflowProgress
 

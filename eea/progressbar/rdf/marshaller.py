@@ -2,8 +2,7 @@
 import surf
 from zope.component import adapts, queryAdapter
 from zope.interface import implements
-from eea.progress.workflow.interfaces import IBaseObject
-from eea.progress.workflow.interfaces import IWorkflowProgress
+from eea.progress.workflow.interfaces import IBaseObject, IWorkflowProgress
 from eea.rdfmarshaller.interfaces import ISurfResourceModifier
 
 
