@@ -3,7 +3,7 @@
     i18n_domain="eea">
 
     <subscriber factory=".marshaller.ProgressLevelSurfModifier"
-        for="eea.progressbar.interfaces.IBaseObject"
+        for="eea.progress.workflow.interfaces.IBaseObject"
         provides="eea.rdfmarshaller.interfaces.ISurfResourceModifier" />
 
 </configure>

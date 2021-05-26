@@ -60,7 +60,7 @@
   <browser:page
     name="progress.bar"
     layer="eea.progressbar.interfaces.IProgressBarLayer"
-    for="eea.progressbar.interfaces.IBaseObject"
+    for="eea.progress.workflow.interfaces.IBaseObject"
     class=".app.view.ProgressBarView"
     template="zpt/progress.pt"
     permission="zope2.View"
@@ -78,7 +78,7 @@
   <browser:page
     name="progress.trail"
     layer="eea.progressbar.interfaces.IProgressBarLayer"
-    for="eea.progressbar.interfaces.IBaseObject"
+    for="eea.progress.workflow.interfaces.IBaseObject"
     class=".app.view.ProgressTrailView"
     template="zpt/trail.pt"
     permission="zope2.View"
@@ -87,7 +87,7 @@
   <browser:page
     name="progress.metadata"
     layer="eea.progressbar.interfaces.IProgressBarLayer"
-    for="eea.progressbar.interfaces.IBaseObject"
+    for="eea.progress.workflow.interfaces.IBaseObject"
     class=".app.view.ProgressMetadataView"
     template="zpt/metadata.pt"
     permission="zope2.View"
@@ -95,7 +95,7 @@
 
   <browser:page
     name="progressbar.widget.error"
-    for="eea.progressbar.interfaces.IBaseObject"
+    for="eea.progress.workflow.interfaces.IBaseObject"
     layer="eea.progressbar.interfaces.IProgressBarLayer"
     class=".app.error.Error"
     template="zpt/error.pt"

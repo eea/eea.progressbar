@@ -4,7 +4,7 @@
   i18n_domain="eea">
 
   <adapter name="eea.progressbar"
-    for="eea.progressbar.interfaces.IBaseObject"
+    for="eea.progress.workflow.interfaces.IBaseObject"
     provides="archetypes.schemaextender.interfaces.ISchemaExtender"
     factory=".schema.EEASchemaExtender"
     />
