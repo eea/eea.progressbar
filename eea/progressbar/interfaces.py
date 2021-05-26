@@ -1,7 +1,7 @@
 """ Custom interfaces
 
     >>> from zope.component import queryAdapter
-    >>> from eea.progressbar.interfaces import IWorkflowProgress
+    >>> from eea.progress.workflow.interfaces import IWorkflowProgress
 
     >>> portal = layer['portal']
     >>> sandbox = portal._getOb('sandbox')
