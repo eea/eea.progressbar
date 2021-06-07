@@ -16,7 +16,6 @@ class ProgressCatalogListingObject(CatalogContentListingObject):
         """
         context = self.getObject()
         request = context.REQUEST
-        import pdb; pdb.set_trace()
         progress = queryMultiAdapter((context, request), name=u'progress.bar')
         return progress() if progress else 0
 
