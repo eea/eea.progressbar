@@ -4,9 +4,10 @@ from zope.component import queryMultiAdapter
 from Products.GenericSetup.utils import XMLAdapterBase
 from Products.GenericSetup.interfaces import IBody
 from Products.CMFPlone.utils import base_hasattr
-from eea.progressbar.interfaces import IWorkflowTool
-from eea.progress.workflow.interfaces import IWorkflow, IWorkflowState
+from eea.progress.workflow.interfaces import IWorkflowTool
 from eea.progressbar.config import PROGRESSFILE
+from eea.progress.workflow.interfaces import IWorkflow, IWorkflowState
+
 
 class WorkflowToolXMLAdapter(XMLAdapterBase):
     """ Generic setup import/export xml adapter

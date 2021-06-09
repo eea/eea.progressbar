@@ -4,7 +4,7 @@
 
   <adapter
     factory=".catalog.ProgressCatalogListingObject"
-    for="eea.progressbar.interfaces.ICatalogBrain"
+    for="eea.progress.workflow.interfaces.ICatalogBrain"
     />
 
 </configure>
