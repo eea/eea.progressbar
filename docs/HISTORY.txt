@@ -3,6 +3,10 @@ Changelog
 
 4.6-dev0 - (unreleased)
 ---------------------------
+* Change: in metadata.cpanel.pt set extrafield to True by default in
+  order to allow the deletion of the field added automatically on object
+  creation
+  [ichim-david refs #124587]
 
 4.5 - (2019-08-16)
 --------------------------
