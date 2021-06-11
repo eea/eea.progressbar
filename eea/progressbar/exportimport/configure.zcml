@@ -6,7 +6,7 @@
   <adapter name="workflows.progress.xml"
     factory=".progress.WorkflowToolXMLAdapter"
     provides="Products.GenericSetup.interfaces.IBody"
-    for="eea.progress.workflow.interfaces.IWorkflowTool
+    for="eea.progressbar.interfaces.IWorkflowTool
          Products.GenericSetup.interfaces.ISetupEnviron"
    />
 

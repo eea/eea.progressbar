@@ -7,7 +7,6 @@ from eea.progressbar.interfaces import IProgressTool
 from eea.progress.workflow.interfaces import IWorkflowProgress
 from eea.progressbar.config import EEAMessageFactory as _
 
-
 class ProgressBarView(BrowserView):
     """ Progress bar
     """

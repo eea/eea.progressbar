@@ -10,7 +10,7 @@
     />
 
   <adapter name="eea.progressbar"
-    for="eea.progress.workflow.interfaces.ICollection"
+    for="eea.progressbar.interfaces.ICollection"
     provides="archetypes.schemaextender.interfaces.ISchemaExtender"
     factory=".schema.EEASchemaExtender"
     />

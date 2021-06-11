@@ -3,5 +3,22 @@
   xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
+  <class class="Products.CMFPlone.WorkflowTool.WorkflowTool">
+    <implements interface="eea.progressbar.interfaces.IWorkflowTool" />
+  </class>
+
+  <class class="plone.app.collection.collection.Collection">
+    <implements interface="eea.progressbar.interfaces.ICollection" />
+  </class>
+
+  <class class="Products.ZCatalog.CatalogBrains.AbstractCatalogBrain">
+    <implements interface="eea.progressbar.interfaces.ICatalogBrain" />
+  </class>
+
+  <adapter
+    for="eea.progressbar.interfaces.ICollection"
+    provides="eea.progress.workflow.interfaces.IWorkflowProgress"
+    factory=".adapters.CollectionWorkflowProgress"
+    />
 
 </configure>
