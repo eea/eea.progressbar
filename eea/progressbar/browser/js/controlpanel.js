@@ -1,7 +1,7 @@
 if (!window.EEA) {
   var EEA = {
     who: "eea.progressbar",
-    version: "3.0",
+    version: "3.0"
   };
 }
 
@@ -18,7 +18,7 @@ EEA.ProgressTool = function (context, options) {
 };
 
 EEA.ProgressTool.Events = {
-  reloadWidget: "eea-progressbar-reloadWidget",
+  reloadWidget: "eea-progressbar-reloadWidget"
 };
 
 EEA.ProgressTool.prototype = {
@@ -49,12 +49,12 @@ EEA.ProgressTool.prototype = {
           },
           Cancel: function () {
             dialog.dialog("close");
-          },
+          }
         },
         close: function () {
           jQuery("#add-new-widget-dialog form")[0].reset();
           jQuery("#new-widget-name").removeClass("ui-state-error");
-        },
+        }
       });
 
       form = dialog.find("form").on("submit", function (event) {
@@ -84,7 +84,7 @@ EEA.ProgressTool.prototype = {
           self.context.prepend(self.reloadWidget(widget));
           self.context.masonry("reloadItems");
           self.context.masonry("layout");
-        },
+        }
       });
     }
   },
@@ -101,7 +101,7 @@ EEA.ProgressTool.prototype = {
       itemSelector: ".masonry-widget",
       gutter: 5,
       isResizable: true,
-      isFitWidth: true,
+      isFitWidth: true
     });
 
     self.context.sortable({
@@ -128,7 +128,7 @@ EEA.ProgressTool.prototype = {
       },
       update: function (event, ui) {
         self.reorder(self.context.sortable("toArray"));
-      },
+      }
     });
   },
 
@@ -158,9 +158,9 @@ EEA.ProgressTool.prototype = {
       data: query,
       success: function (data) {
         console.log(data);
-      },
+      }
     });
-  },
+  }
 };
 
 EEA.ProgressTool.Widget = function (context, options) {
@@ -220,7 +220,7 @@ EEA.ProgressTool.Widget.prototype = {
             if (data === "True") {
               self.context.remove();
             }
-          },
+          }
         });
         return false;
       });
@@ -258,7 +258,7 @@ EEA.ProgressTool.Widget.prototype = {
       data: query,
       success: function (data) {
         self.reload(data);
-      },
+      }
     });
   },
 
@@ -272,11 +272,11 @@ EEA.ProgressTool.Widget.prototype = {
         EEA.ProgressTool.Events.reloadWidget,
         {
           widget: self.context,
-          newWidget: $(data),
+          newWidget: $(data)
         }
       );
     });
-  },
+  }
 };
 
 jQuery.fn.EEAProgressTool = function (options) {
