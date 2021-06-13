@@ -6,7 +6,7 @@
     extrafield python: getattr(view.field.widget, 'extrafield', False);
     klass python: 'eea-progressbar-widget custom' if viewform.custom else 'eea-progressbar-widget default';
     klass python: klass + ' hidden' if viewform.hidden else klass;
-    klass python: klass + ' extrafield' if extrafield else klass;
+    klass python: klass + ' custom extrafield' if extrafield else klass;
     " tal:attributes="
     id string:progress-schema-$name;
     data-field name;

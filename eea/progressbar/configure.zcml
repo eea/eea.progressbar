@@ -19,7 +19,6 @@
   <include package=".upgrades" />
   <include package=".vocabulary" />
   <include package=".widgets" />
-  <include package=".zmi" />
 
   <!-- include the specific rdf marshaller for eea.progressbar   -->
   <configure zcml:condition="installed eea.rdfmarshaller">

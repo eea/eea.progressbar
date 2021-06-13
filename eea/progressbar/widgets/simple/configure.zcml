@@ -3,7 +3,7 @@
   i18n_domain="eea">
 
   <progressbar:widget
-    for="eea.progressbar.interfaces.IBaseObject"
+    for="eea.progress.workflow.interfaces.IBaseObject"
     edit=".edit.Edit"
     view=".view.View"
     name="progressbar.widget"
