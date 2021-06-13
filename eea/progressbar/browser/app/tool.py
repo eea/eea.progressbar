@@ -95,13 +95,18 @@ class ContentType(BrowserView):
                 continue
 
             # Skip invisible fields
-            visible = getattr(field.widget, 'hidden', None)
+            visible = getattr(field.widget, 'visible', None)
             if isinstance(visible, (bool, int)):
                 if not visible:
                     continue
             elif isinstance(visible, dict):
-                if visible.get('edit', u'hidden') != u'hidden':
+                if visible.get('edit', u'visible') != u'visible':
                     continue
+                    
+            # Skip hidden fields
+            hidden = getattr(field.widget, 'hidden', False)
+            if hidden:
+                continue
 
             yield field
 
