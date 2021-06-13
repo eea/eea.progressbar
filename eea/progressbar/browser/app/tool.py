@@ -171,8 +171,7 @@ class ContentType(BrowserView):
                 if name in order:
                     order.pop(order.index(name))
                     storage.reorder(order)
-
-        return True
+                return True
 
     def controlpanel(self, field=None):
         """ Widget preview and edit form to be listed within control panel
