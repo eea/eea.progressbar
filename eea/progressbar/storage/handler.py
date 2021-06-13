@@ -58,8 +58,7 @@ class Storage(object):
         """ Add new field
         """
         if self.field(name):
-            self.edit_field(name, **kwargs)
-            return name
+            raise KeyError(name)
 
         config = self._fields()
         kwargs.update({'name': name})

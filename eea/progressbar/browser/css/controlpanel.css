@@ -47,7 +47,7 @@
 }
 
 #content .eea-progressbar-widget.hidden {
-  display: block;
+  display: block !important;
 }
 
 #content .eea-progressbar-widget.hidden form fieldset,
