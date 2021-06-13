@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.6 - (2021-06-11)
+5.0 - (2021-06-11)
 ---------------------------
 * Change: Refactored eea.progresbar so that it uses eea.progress.workflow/
   eea.progress.editing
