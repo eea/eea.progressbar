@@ -3,7 +3,7 @@
     viewform python:view.view();
     editform python:view.edit();
     editname python:editform.__name__;
-    extrafield python: getattr(view.field.widget, 'extrafield', False);
+    extrafield python: getattr(view.field.widget, 'extrafield', True);
     klass python: 'eea-progressbar-widget custom' if viewform.custom else 'eea-progressbar-widget default';
     klass python: klass + ' hidden' if viewform.hidden else klass;
     klass python: klass + ' extrafield' if extrafield else klass;

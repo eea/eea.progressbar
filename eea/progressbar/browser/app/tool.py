@@ -95,12 +95,12 @@ class ContentType(BrowserView):
                 continue
 
             # Skip invisible fields
-            visible = getattr(field.widget, 'visible', None)
+            visible = getattr(field.widget, 'hidden', None)
             if isinstance(visible, (bool, int)):
                 if not visible:
                     continue
             elif isinstance(visible, dict):
-                if visible.get('edit', u'visible') != u'visible':
+                if visible.get('edit', u'hidden') != u'hidden':
                     continue
 
             yield field
@@ -141,10 +141,10 @@ class ContentType(BrowserView):
         widget.field = self.field
         return widget
 
-    def add(self):
+    def add(self, field_name=None):
         """ Add extra field
         """
-        name = self.request.form.get('name')
+        name = field_name or self.request.form.get('name')
 
         if name:
             new_field = ExtraField(self.context, self.request, {'name': name})
@@ -158,10 +158,10 @@ class ContentType(BrowserView):
                                        name=u'view.metadata')
             return cpanel(field=self._field)
 
-    def remove(self):
+    def remove(self, field_name=None):
         """ Remove extra field
         """
-        name = self.request.form.get('name')
+        name = field_name or self.request.form.get('name')
 
         if name:
             storage = queryAdapter(self.context, IStorage)
@@ -172,7 +172,7 @@ class ContentType(BrowserView):
                     order.pop(order.index(name))
                     storage.reorder(order)
 
-                return True
+        return True
 
     def controlpanel(self, field=None):
         """ Widget preview and edit form to be listed within control panel

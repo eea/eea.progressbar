@@ -1,11 +1,18 @@
 Changelog
 =========
 
-4.6-dev0 - (unreleased)
+4.6 - (2021-06-11)
 ---------------------------
 * Change: Refactored eea.progresbar so that it uses eea.progress.workflow/
   eea.progress.editing
   [iulianpetchesi refs #134214]
+* Bug fix: check for hidden field on widget instead of
+  visible when trying to determine if field should be visible
+  [ichim-david refs #131062]
+* Change: in metadata.cpanel.pt set extrafield to True by default in
+  order to allow the deletion of the field added automatically on object
+  creation
+  [ichim-david refs #124587]
 
 4.5 - (2019-08-16)
 --------------------------
