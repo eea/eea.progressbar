@@ -9,7 +9,6 @@ from Products.GenericSetup.context import SnapshotImportContext
 from eea.progressbar.widgets.view import ExtraFieldWidget
 from eea.progressbar.interfaces import IStorage
 from eea.progressbar.config import EEAMessageFactory as _
-from zope.app.content import queryContentType
 from zope.schema import getFieldsInOrder
 from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.interfaces import IDexterityFTI
@@ -103,17 +102,13 @@ class ContentType(BrowserView):
 
         if not schema:
             return
+        
         dexterity_ctype = IDexterityContent.providedBy(ctype)
-
         if dexterity_ctype:
-            schema = queryContentType(ctype)
-            if schema:
-                fields = getFieldsInOrder(schema)
-            else:
-                fields = get_fields(ctype.portal_type)
-
+            fields = get_fields(ctype.portal_type)
         else:
             fields = schema.fields()
+
         storage = queryAdapter(self.context, IStorage)
         fields = self.regen_fields(fields, storage)
 
