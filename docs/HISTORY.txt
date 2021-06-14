@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.2-dev0 - (unreleased)
+---------------------------
+
 5.1 - (2021-06-14)
 ---------------------------
 * Feature: read fields and behaviors from dexterity content
