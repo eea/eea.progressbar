@@ -3,6 +3,9 @@ Changelog
 
 5.1-dev0 - (unreleased)
 ---------------------------
+* Feature: read fields and behaviors from dexterity content
+  types when reading progress metadata and progress fields
+  [ichim-david refs #131062]
 
 5.0 - (2021-06-11)
 ---------------------------

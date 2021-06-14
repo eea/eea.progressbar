@@ -9,6 +9,28 @@ from Products.GenericSetup.context import SnapshotImportContext
 from eea.progressbar.widgets.view import ExtraFieldWidget
 from eea.progressbar.interfaces import IStorage
 from eea.progressbar.config import EEAMessageFactory as _
+from zope.app.content import queryContentType
+from zope.schema import getFieldsInOrder
+from plone.dexterity.interfaces import IDexterityContent
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.behavior.interfaces import IBehavior
+from zope.component import getUtility
+
+
+def get_fields(portal_type):
+    """ get dexterity fields and behaviors
+    """
+    fti = getUtility(IDexterityFTI, name=portal_type)
+    schema = fti.lookupSchema()
+    fields_tuple = getFieldsInOrder(schema)
+    fields = [field[1] for field in fields_tuple]
+    for bname in fti.behaviors:
+        factory = getUtility(IBehavior, bname)
+        behavior = factory.interface
+        behavior_field_tuple = behavior.namesAndDescriptions()
+        if behavior_field_tuple:
+            fields.append(behavior_field_tuple[0][1])
+    return fields
 
 
 class ExtraField(object):
@@ -81,27 +103,34 @@ class ContentType(BrowserView):
 
         if not schema:
             return
+        dexterity_ctype = IDexterityContent.providedBy(ctype)
 
-        fields = schema.fields()
+        if dexterity_ctype:
+            schema = queryContentType(ctype)
+            if schema:
+                fields = getFieldsInOrder(schema)
+            else:
+                fields = get_fields(ctype.portal_type)
+
+        else:
+            fields = schema.fields()
         storage = queryAdapter(self.context, IStorage)
         fields = self.regen_fields(fields, storage)
-
-        if not schema:
-            return
 
         for field in fields:
             # Skip some fields
             if field.getName() == 'id':
                 continue
 
-            # Skip invisible fields
-            visible = getattr(field.widget, 'visible', None)
-            if isinstance(visible, (bool, int)):
-                if not visible:
-                    continue
-            elif isinstance(visible, dict):
-                if visible.get('edit', u'visible') != u'visible':
-                    continue
+            if not dexterity_ctype:
+                # Skip invisible fields
+                visible = getattr(field.widget, 'visible', None)
+                if isinstance(visible, (bool, int)):
+                    if not visible:
+                        continue
+                elif isinstance(visible, dict):
+                    if visible.get('edit', u'visible') != u'visible':
+                        continue
 
             yield field
 
@@ -125,7 +154,11 @@ class ContentType(BrowserView):
         widget = queryMultiAdapter((ctype, self.request),
                                     name=u'progressbar.widget.view')
         widget.setPrefix(self.field.getName())
-        widget.label = self.field.widget.label
+        if getattr(self.field, 'widget', None):
+            label = self.field.widget.label
+        else:
+            label = self.field.getName()
+        widget.label = label
         widget.field = self.field
         return widget
 

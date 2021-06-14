@@ -71,7 +71,9 @@ class ViewForm(BrowserView):
 
         if isinstance(value, (str, unicode)):
             widget = getattr(self.field, 'widget', None)
-            label = getattr(widget, 'label', '')
+            label = getattr(widget, 'label', None) or \
+                    getattr(self.field, 'title', None)
+
             label = self.translate(label)
             value = value.format(
                 label=label,
