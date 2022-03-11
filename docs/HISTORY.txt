@@ -1,6 +1,11 @@
 Changelog
 =========
 
+6.0 - (2022-03-11)
+---------------------------
+* Change: Move workflow.progress.xml generic profile export / import to eea.progress.workflow
+  [avoinea refs #145772]
+
 5.1 - (2021-06-14)
 ---------------------------
 * Feature: read fields and behaviors from dexterity content

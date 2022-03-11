@@ -21,14 +21,10 @@ from eea.progressbar.controlpanel.interfaces import ISettings
 # Storage
 from eea.progressbar.storage.interfaces import IStorage
 
+
 #
 # Marker interfaces
 #
-class IWorkflowTool(Interface):
-    """ Marker interface for portal_workflow
-    """
-
-
 class ICollection(IPloneCollection):
     """ Marker interface for plone.app.collection
     """
