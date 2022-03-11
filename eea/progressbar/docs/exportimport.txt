@@ -22,7 +22,7 @@ Workflow Exporter / Importer
     >>> exporter = importer = queryMultiAdapter((wftool, DummySetupEnviron()),
     ...                                   IBody, name=u'workflows.progress.xml')
     >>> exporter
-    <eea.progressbar.exportimport.progress.WorkflowToolXMLAdapter object at ...>
+    <eea.progress.workflow.exportimport.progress.WorkflowToolXMLAdapter object at ...>
 
 
 By default there is no progress defined for workflow states
