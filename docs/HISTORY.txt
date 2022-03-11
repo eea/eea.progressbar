@@ -1,6 +1,9 @@
 Changelog
 =========
 
+6.1-dev0 - (unreleased)
+---------------------------
+
 6.0 - (2022-03-11)
 ---------------------------
 * Change: Move workflow.progress.xml generic profile export / import to eea.progress.workflow
