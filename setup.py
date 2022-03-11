@@ -40,9 +40,8 @@ setup(name=NAME,
           'setuptools',
           'eea.icons',
           'eea.jquery > 7.6',
-          # -*- Extra requirements: -*-,
           'eea.progress.workflow',
-          'eea.progress.editing'
+          'eea.progress.editing >= 3.0'
       ],
       entry_points="""
       # -*- Entry points: -*-
