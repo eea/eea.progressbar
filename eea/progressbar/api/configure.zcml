@@ -3,10 +3,6 @@
   xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
-  <class class="Products.CMFPlone.WorkflowTool.WorkflowTool">
-    <implements interface="eea.progressbar.interfaces.IWorkflowTool" />
-  </class>
-
   <class class="plone.app.collection.collection.Collection">
     <implements interface="eea.progressbar.interfaces.ICollection" />
   </class>

@@ -33,21 +33,6 @@
   </genericsetup:importStep>
 
   <genericsetup:importStep
-    name="workflow.progress.xml"
-    title="Workflow progress monitoring"
-    description="Progress monitoring based on workflow states"
-    handler="eea.progressbar.exportimport.importWorkflowProgress">
-    <depends name="workflow"/>
-  </genericsetup:importStep>
-
-  <genericsetup:exportStep
-    name="workflow.progress.xml"
-    title="Workflow progress monitoring"
-    description="Progress monitoring based on workflow states"
-    handler="eea.progressbar.exportimport.exportWorkflowProgress"
-    />
-
-  <genericsetup:importStep
     name="progressbar.xml"
     title="Progress Bar Settings"
     description="Progress bar settings including editing progress settings"
